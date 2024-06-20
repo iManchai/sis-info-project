@@ -1,0 +1,80 @@
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.Image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(239, 144, 147);
+  background: linear-gradient(
+    149deg,
+    rgba(239, 144, 147, 1) 0%,
+    rgba(242, 86, 91, 1) 100%
+  );
+  width: 50vw;
+  height: 100vh;
+  margin-left: auto; /* Added property */
+}
+
+.Form {
+  color: #f2565b;
+  width: 50vw;
+  height: 100vh;
+}
+
+.Inputs {
+  flex-direction: column;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+
+  
+}
+
+.Inicio_sesion {
+  margin: 50px;
+  gap: 40px;
+  align-items: center;
+  height: 10vh;
+  display: flex;
+}
+
+.extendedField {
+  width: 80%;
+}
+
+.Button {
+    width: 80%;
+    height: 5%;
+    background: rgb(239, 144, 147);
+    background: linear-gradient(
+      149deg,
+      rgba(239, 144, 147, 1) 0%,
+      rgba(242, 86, 91, 1) 100%
+      
+    );
+    
+  }
+
+  .divider{
+    width: 80%; /* Span the full width */
+    height: 1px; /* Set the line height */
+    background-color: #404040; /* Set the line color */
+    margin: 20px 0; /* Add margin for spacing */
+
+
+  }
