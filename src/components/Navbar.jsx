@@ -1,47 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import logo from '../assets/molokaiLogo.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import molokaiLogo from '../assets/molokaiLogo.png';
 
 const Navbar = ({ setSection }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light navbar fixed-top">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#" onClick={() => setSection('home')}>
-          <img src={logo} alt="Logo" className="logo" />
-        </a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <a className="nav-link" href="#" onClick={() => setSection('home')}>Inicio</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#" onClick={() => setSection('menu')}>Menú</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#" onClick={() => setSection('nosotros')}>Nosotros</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#" onClick={() => setSection('contacto')}>Contacto</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#" onClick={() => setSection('iniciarSesion')}>Iniciar Sesión</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#" onClick={() => setSection('registrarse')}>Registrarse</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <AppBar position="fixed" sx={{ backgroundColor: '#ffffff', color: '#f2565b' }}>
+      <Toolbar sx={{ minHeight: '56px' }}> {/* Ajusta la altura aquí */}
+        <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setSection('home')}>
+          <img src={molokaiLogo} alt="Logo" style={{ height: '40px', width: 'auto' }} /> {/* Ajusta la altura del logo */}
+        </IconButton>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: '#f2565b' }}>
+          {}
+        </Typography>
+        <Button color="inherit" onClick={() => setSection('menu')} sx={{ color: '#f2565b' }}>Menú</Button>
+        <Button color="inherit" onClick={() => setSection('nosotros')} sx={{ color: '#f2565b' }}>Nosotros</Button>
+        <Button color="inherit" onClick={() => setSection('contacto')} sx={{ color: '#f2565b' }}>Contacto</Button>
+        <Button color="inherit" onClick={() => setSection('iniciarSesion')} sx={{ color: '#f2565b' }}>Iniciar Sesión</Button>
+        <Button color="inherit" onClick={() => setSection('registrarse')} sx={{ color: '#f2565b' }}>Registrarse</Button>
+      </Toolbar>
+    </AppBar>
   );
-};
-
-Navbar.propTypes = {
-  setSection: PropTypes.func.isRequired,
 };
 
 export default Navbar;
