@@ -9,9 +9,9 @@ import molokaiLogo from '../assets/molokaiLogo.png';
 const Navbar = ({ setSection }) => {
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#ffffff', color: '#f2565b' }}>
-      <Toolbar sx={{ minHeight: '56px' }}> {/* Ajusta la altura aquí */}
+      <Toolbar sx={{ minHeight: '56px' }}> {}
         <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setSection('home')}>
-          <img src={molokaiLogo} alt="Logo" style={{ height: '40px', width: 'auto' }} /> {/* Ajusta la altura del logo */}
+          <img src={molokaiLogo} alt="Logo" style={{ height: '40px', width: 'auto' }} /> {}
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: '#f2565b' }}>
           {}

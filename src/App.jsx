@@ -3,11 +3,10 @@ import Navbar from './components/Navbar';
 import Menu from './components/Menu';
 import Nosotros from './components/Nosotros';
 import Contacto from './components/Contacto';
-import IniciarSesion from './components/IniciarSesion';
 import Registrarse from './components/Registrarse';
 import Section1 from './components/Section1';
 import Section2 from './components/Section2';
-import LoginForm from './components/LoginForm/LoginForm'; // Importar LoginForm
+import LoginForm from './components/LoginForm/LoginForm';
 import './App.css';
 
 const App = () => {
