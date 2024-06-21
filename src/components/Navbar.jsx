@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import logo from '../assets/molokaiLogo.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Navbar = ({ setSection }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light navbar fixed-top">
       <div className="container-fluid">
         <a className="navbar-brand" href="#" onClick={() => setSection('home')}>
           <img src={logo} alt="Logo" className="logo" />
@@ -12,7 +14,10 @@ const Navbar = ({ setSection }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <a className="nav-link" href="#" onClick={() => setSection('home')}>Inicio</a>
+            </li>
             <li className="nav-item">
               <a className="nav-link" href="#" onClick={() => setSection('menu')}>Menú</a>
             </li>
@@ -22,10 +27,8 @@ const Navbar = ({ setSection }) => {
             <li className="nav-item">
               <a className="nav-link" href="#" onClick={() => setSection('contacto')}>Contacto</a>
             </li>
-          </ul>
-          <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <a className="nav-link" href="#" onClick={() => setSection('iniciarSesion')}>Iniciar sesión</a>
+              <a className="nav-link" href="#" onClick={() => setSection('iniciarSesion')}>Iniciar Sesión</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#" onClick={() => setSection('registrarse')}>Registrarse</a>
@@ -35,6 +38,10 @@ const Navbar = ({ setSection }) => {
       </div>
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  setSection: PropTypes.func.isRequired,
 };
 
 export default Navbar;

@@ -7,6 +7,7 @@ import IniciarSesion from './components/IniciarSesion';
 import Registrarse from './components/Registrarse';
 import Section1 from './components/Section1';
 import Section2 from './components/Section2';
+import LoginForm from "./components/LoginForm/LoginForm";
 import './App.css';
 
 const App = () => {
@@ -24,11 +25,10 @@ const App = () => {
       {section === 'menu' && <Menu />}
       {section === 'nosotros' && <Nosotros />}
       {section === 'contacto' && <Contacto />}
-      {section === 'iniciarSesion' && <IniciarSesion />}
+      {section === 'iniciarSesion' && <LoginForm />}
       {section === 'registrarse' && <Registrarse />}
     </div>
   );
 };
 
 export default App;
-
