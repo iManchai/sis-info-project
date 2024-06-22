@@ -8,12 +8,15 @@ import Section1 from './components/Section1';
 import Section2 from './components/Section2';
 import LoginForm from './pages/LoginForm/LoginForm';
 import './App.css';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
+import { Route, Routes } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 const App = () => {
   const [section, setSection] = useState('home');
 
   return (
-    <div>
+    <Box>
       <Navbar setSection={setSection} />
       {section === 'home' && (
         <>
@@ -26,7 +29,14 @@ const App = () => {
       {section === 'contacto' && <Contacto />}
       {section === 'iniciarSesion' && <LoginForm />}
       {section === 'registrarse' && <Registrarse />}
-    </div>
+      
+      <Routes>
+        <>
+        <Route path="/login" element={<LoginForm />}/>
+        <Route path="/register" element={<RegisterPage />}/>
+        </>
+      </Routes>
+    </Box>
   );
 };
 
