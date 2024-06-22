@@ -1,8 +1,14 @@
-import { Box } from "@mui/material";
+import { Box } from '@mui/material';
 
 export default function RegisterPage() {
-    return (<Box>
+  return (
+    <Box>
+      <Box className="">
+        
+      </Box>
+      <Box>
 
+      </Box>
     </Box>
-    )
+  );
 }
