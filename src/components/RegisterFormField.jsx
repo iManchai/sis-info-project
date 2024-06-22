@@ -11,14 +11,21 @@ export default function RegisterFormField() {
       <Button 
       variant="contained" 
       sx={{
-        width: '100%'
+        marginTop: '16px',
+        marginBottom: '0.5rem',
+        width: '100%',
+        fontSize: '1.25rem',
+        letterSpacing: '0.2rem',
+        fontWeight: 'bold',
+        height: '4rem',
+        borderRadius: '12px',
       }}
       >
         Registrarse
       </Button>
 
       <Typography>
-        Ya tienes cuenta?
+        {"Ya tienes cuenta?" + " "}
         <Link href="/login">Haz click aqui para iniciar sesión</Link>
       </Typography>
 

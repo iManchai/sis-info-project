@@ -3,6 +3,7 @@ import RegisterFormField from '../../components/RegisterFormField';
 import Logo from '../../assets/Logo.svg';
 import BackIcon from '../../assets/Vector.svg';
 import { useTheme } from '@emotion/react';
+import RegisterButtonsSection from '../../components/RegisterButtonsSection';
 
 export default function RegisterPage() {
 
@@ -43,7 +44,12 @@ export default function RegisterPage() {
           </Typography>
         </Box>
         <RegisterFormField />
-        <Divider />
+        <Divider 
+        sx={{
+          margin: '2rem 0 2rem 0',
+        }}/>
+        
+        <RegisterButtonsSection />
       </Box>
     </Box>
   );
