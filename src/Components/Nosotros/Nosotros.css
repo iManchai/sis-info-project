@@ -1,0 +1,62 @@
+body {
+    width: 100%;
+    height: 100%;
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+.container{
+    display:flex;
+    flex-direction:column; /*This gives the display a */
+    box-sizing:border-box;
+    width: 1284px;
+    height:934px;
+    border: 1px;
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+
+}
+
+.seccionMolokai{
+    text-align: left;
+    float:left
+}
+
+
+.Imagen1{
+    max-width: 624px;
+    max-height: 377px;
+    border-radius: 5px;
+    display:block;
+    border:none;
+    object-fit:contain;
+    border-radius: 5px;
+    float:right;
+
+
+}
+
+
+
+.seccionMolokai2{
+    text-align: right;
+}
+
+.Imagen3{
+    margin-left: 20px;
+}
+
+.imageContainer{
+    max-width: 624px;
+    max-height: 377px;
+    border-radius: 5px;
+    display:block;
+    border:none;
+    object-fit:contain;
+    border-radius: 5px;
+    float:left;
+}
+
+
