@@ -1,0 +1,56 @@
+.navbar {
+    background-color: #ffffff !important;
+    color: #f2565b !important;
+    box-shadow: none;
+  }
+  
+  .toolbar {
+    min-height: 56px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    height: 35px;
+    width: auto;
+  }
+  
+  .left-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .flex-grow {
+    flex-grow: 1;
+  }
+  
+  .nav-button {
+    color: #f2565b !important;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-left: 16px !important;
+  }
+  
+  .login-button {
+    border: 2px solid #f2565b !important;
+    color: #f2565b !important;
+    background-color: #ffffff !important;
+    border-radius: 4px;
+    padding: 6px 16px;
+    margin-left: 20px;
+  }
+  
+  .register-button {
+    border: 2px solid #f2565b !important;
+    color: #ffffff !important;
+    background-color: #f2565b !important;
+    border-radius: 4px;
+    padding: 6px 16px;
+  }
+
+  .login-button:hover {
+    background-color: #ffe9f0 !important;
+  }
+  .register-button:hover {
+    background-color: #e72e69 !important;
+  }

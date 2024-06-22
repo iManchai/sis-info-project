@@ -6,7 +6,7 @@ import Contacto from './components/Contacto';
 import Registrarse from './components/Registrarse';
 import Section1 from './components/Section1';
 import Section2 from './components/Section2';
-import LoginForm from './Components/LoginForm/LoginForm';
+import LoginForm from './components/LoginForm/LoginForm';
 import './App.css';
 
 const App = () => {

@@ -5,30 +5,23 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import molokaiLogo from '../assets/molokaiLogo.png';
+import './Navbar.css';
 
 const Navbar = ({ setSection }) => {
   return (
-    <AppBar position="fixed"  sx={{ backgroundColor: '#ffffff', color: '#f2565b' }}>
-      <Toolbar sx={{ minHeight: '56px' }}> {}
+    <AppBar position="fixed" sx={{ backgroundColor: '#ffffff', color: '#f2565b' }} className="navbar">
+      <Toolbar sx={{ minHeight: '56px' }} className="toolbar">
         <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setSection('home')}>
-          <img src={molokaiLogo} alt="Logo" style={{ height: '40px', width: 'auto' }} /> {}
+          <img src={molokaiLogo} alt="Logo" className="logo" />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: '#f2565b' }}>
-          {}
-        </Typography>
-
-        <div className='Menu_NavBar'>
-        <Button color="inherit" onClick={() => setSection('menu')} sx={{ color: '#f2565b' }}>Menú</Button>
-        <Button color="inherit" onClick={() => setSection('nosotros')} sx={{ color: '#f2565b' }}>Nosotros</Button>
-        <Button color="inherit" onClick={() => setSection('contacto')} sx={{ color: '#f2565b' }}>Contacto</Button>
+        <div className="left-buttons">
+          <Button color="inherit" onClick={() => setSection('menu')} className="nav-button">Menú</Button>
+          <Button color="inherit" onClick={() => setSection('nosotros')} className="nav-button">Nosotros</Button>
+          <Button color="inherit" onClick={() => setSection('contacto')} className="nav-button">Contacto</Button>
         </div>
-        
-        <div className='Register_Login'>
-        <Button color="inherit" onClick={() => setSection('iniciarSesion')} sx={{ color: '#f2565b' }}>Iniciar Sesión</Button>
-        <Button color="inherit" onClick={() => setSection('registrarse')} sx={{ color: '#f2565b' }}>Registrarse</Button>
-        </div>
-
-
+        <Typography variant="h6" component="div" className="flex-grow"></Typography>
+        <Button color="inherit" onClick={() => setSection('iniciarSesion')} className="nav-button login-button">Iniciar Sesión</Button>
+        <Button color="inherit" onClick={() => setSection('registrarse')} className="nav-button register-button">Registrarse</Button>
       </Toolbar>
     </AppBar>
   );
