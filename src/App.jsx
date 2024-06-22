@@ -6,14 +6,14 @@ import Contacto from './components/Contacto';
 import Registrarse from './components/Registrarse';
 import Section1 from './components/Section1';
 import Section2 from './components/Section2';
+import LoginForm from './components/LoginForm/LoginForm';
 import './App.css';
-import LoginForm from "./components/LoginForm/LoginForm";
 
 const App = () => {
   const [section, setSection] = useState('home');
 
   return (
-    <div>
+    <div className='page'>
       <Navbar setSection={setSection} />
       {section === 'home' && (
         <>

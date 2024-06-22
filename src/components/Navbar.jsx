@@ -9,8 +9,8 @@ import './Navbar.css';
 
 const Navbar = ({ setSection }) => {
   return (
-    <AppBar position="fixed" className="navbar">
-      <Toolbar className="toolbar">
+    <AppBar position="fixed" sx={{ backgroundColor: '#ffffff', color: '#f2565b' }} className="navbar">
+      <Toolbar sx={{ minHeight: '56px' }} className="toolbar">
         <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setSection('home')}>
           <img src={molokaiLogo} alt="Logo" className="logo" />
         </IconButton>
@@ -19,9 +19,7 @@ const Navbar = ({ setSection }) => {
           <Button color="inherit" onClick={() => setSection('nosotros')} className="nav-button">Nosotros</Button>
           <Button color="inherit" onClick={() => setSection('contacto')} className="nav-button">Contacto</Button>
         </div>
-        <Typography variant="h6" component="div" className="flex-grow">
-          {}
-        </Typography>
+        <Typography variant="h6" component="div" className="flex-grow"></Typography>
         <Button color="inherit" onClick={() => setSection('iniciarSesion')} className="nav-button login-button">Iniciar Sesión</Button>
         <Button color="inherit" onClick={() => setSection('registrarse')} className="nav-button register-button">Registrarse</Button>
       </Toolbar>
