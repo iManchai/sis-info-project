@@ -6,11 +6,8 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import molokaiLogo from '../../assets/molokaiLogo.png';
 import './Navbar.css';
-import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ setSection }) => {
-
-  const navigate = useNavigate();
+const Navbar = ({ navigate }) => {
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#ffffff', color: '#f2565b' }} className="navbar">

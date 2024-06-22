@@ -3,7 +3,7 @@ import pokeBowlImage from '../../assets/pokeBowls.png';
 import pokeBurritoImage from '../../assets/pokeBurritos.png';
 import entradasImage from '../../assets/pokeEntradas.png';
 
-const Section2 = () => {
+const Section2 = ({ navigate }) => {
   return (
     <div className="section2">
       <h2>QUE OFRECEMOS</h2>
@@ -24,7 +24,7 @@ const Section2 = () => {
           <p>Antes de comer nuestros Poke Bowls y Poke Burritos, prueba nuestras entradas.</p>
         </div>
       </div>
-      <button className="menu-button">DESCUBRE NUESTRO MENÚ</button>
+      <button className="menu-button" onClick={() => navigate('/menu')}>DESCUBRE NUESTRO MENÚ</button>
     </div>
   );
 };

@@ -4,8 +4,9 @@ import Logo from '../../assets/Logo.svg';
 import BackIcon from '../../assets/Vector.svg';
 import { useTheme } from '@emotion/react';
 import RegisterButtonsSection from '../../components/RegisterButtonsSection';
+import { useNavigate } from 'react-router-dom';
 
-export default function RegisterPage() {
+export default function RegisterPage({ navigate }) {
 
   const theme = useTheme()
 
@@ -17,7 +18,7 @@ export default function RegisterPage() {
 
       [theme.breakpoints.up('md')]: {
         flexDirection: 'row',
-        minHeight: 'calc(100vh - 56px)',
+        minHeight: '100vh',
         width: '100%',
         flexBasis: '50%'
       }
@@ -38,8 +39,12 @@ export default function RegisterPage() {
 
       {/* Right Section */}
       <Box sx={{
-        padding: '3rem',
-        flexBasis: '50%'
+        padding: '2rem',
+        flexBasis: '50%',
+      
+        [theme.breakpoints.up('md')]: {
+          padding: '3rem',
+        },
       }}>
 
         <Box sx={{
@@ -47,7 +52,7 @@ export default function RegisterPage() {
           alignItems: 'center',
           gap: '1rem',
         }}>
-          <IconButton>
+          <IconButton onClick={() => navigate('/')}>
             <img src={BackIcon} alt="" />
           </IconButton>
           <Typography sx={{
