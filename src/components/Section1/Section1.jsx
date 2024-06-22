@@ -1,5 +1,5 @@
 import React from 'react';
-import pokeImage from '../assets/pokeImage1.png';
+import pokeImage from '../../assets/pokeImage1.png';
 import './Section1.css';
 
 const Section1 = () => {
