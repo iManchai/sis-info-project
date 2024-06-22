@@ -10,22 +10,38 @@ export default function RegisterPage() {
   const theme = useTheme()
 
   return (
+    // Left Section
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
+
+      [theme.breakpoints.up('md')]: {
+        flexDirection: 'row',
+        minHeight: 'calc(100vh - 56px)',
+        width: '100%',
+        flexBasis: '50%'
+      }
     }}>
       <Box sx={{
         display: 'none',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: theme.palette.primary.main,
-        flexBasis: '50%',
+
+        [theme.breakpoints.up('md')]: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: theme.palette.primary.main,
+          flexBasis: '50%',
+        }
       }}>
         <img src={Logo} alt />
       </Box>
+
+      {/* Right Section */}
       <Box sx={{
         padding: '3rem',
+        flexBasis: '50%'
       }}>
+
         <Box sx={{
           display: 'flex',
           alignItems: 'center',
@@ -43,6 +59,7 @@ export default function RegisterPage() {
             Registrarse
           </Typography>
         </Box>
+
         <RegisterFormField />
         <Divider 
         sx={{
