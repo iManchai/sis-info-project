@@ -15,7 +15,7 @@ const Navbar = ({ setSection }) => {
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#ffffff', color: '#f2565b' }} className="navbar">
       <Toolbar sx={{ minHeight: '56px' }} className="toolbar">
-        <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setSection('home')}>
+        <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => navigate('/')}>
           <img src={molokaiLogo} alt="Logo" className="logo" />
         </IconButton>
         <div className="left-buttons">

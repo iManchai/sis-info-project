@@ -4,8 +4,12 @@ import IconButton from "@mui/material/IconButton";
 import Back from "../../assets/Vector.svg";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+
+  const navigate = useNavigate()
+
   return (
     <div className="container">
       <aside className="Image">
@@ -14,7 +18,7 @@ const LoginForm = () => {
 
       <aside className="Form">
         <div className="Inicio_sesion">
-          <IconButton>
+          <IconButton onClick={() => navigate('/')}>
             <img src={Back} alt="" />
           </IconButton>
           <h1>Iniciar sesion</h1>
