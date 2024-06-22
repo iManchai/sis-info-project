@@ -10,6 +10,7 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 import { Route, Routes } from 'react-router-dom';
 import { Box, ThemeProvider, createTheme } from '@mui/material';
 import './App.css';
+import LandingPage from './pages/LandingPage/LandingPage';
 
 const theme = createTheme({
   palette: {
@@ -28,20 +29,12 @@ const theme = createTheme({
 })
 
 const App = () => {
-  const [section, setSection] = useState('home');
 
   return (
     <ThemeProvider theme={theme}>
       <Box className='page'>
-        <Navbar setSection={setSection} />
-        {section === 'home' && (
-          <>
-            <Section1 />
-            <Section2 />
-          </>
-        )}
-        
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginForm />}/>
           <Route path="/register" element={<RegisterPage />}/>
           <Route path="/about" element={<Nosotros />}/>
