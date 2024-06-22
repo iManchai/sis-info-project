@@ -1,34 +1,49 @@
-import { Box, Divider, IconButton, Typography, Container } from '@mui/material'; // Ensure Container is imported
+import { Box, Divider, IconButton, Typography, Container } from '@mui/material';
 import RegisterFormField from '../../components/RegisterFormField';
+import Logo from '../../assets/Logo.svg';
+import BackIcon from '../../assets/Vector.svg';
+import { useTheme } from '@emotion/react';
 
 export default function RegisterPage() {
-  return (
-    // <Box>
-    //   <Box sx={{
-    //     color: 'black'
-    //   }}>
-    //     <p>Hello World</p>
-    //   </Box>
-    //   <Box>
-    //     <Container>
 
-    //       <Typography>Registrarse</Typography>
-    //     </Container>
-        
-    //     <RegisterFormField />
-    //     <Divider />
-    //   </Box>
-    // </Box>
-    <Box>
-      <Box>
-        <p>Hello World</p>
+  const theme = useTheme()
+
+  return (
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
+      <Box sx={{
+        display: 'none',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: theme.palette.primary.main,
+        flexBasis: '50%',
+      }}>
+        <img src={Logo} alt />
       </Box>
-      <Box>
-        <Container>
-          <Typography>Registrarse</Typography>
-        </Container>
-        <Divider />
+      <Box sx={{
+        padding: '3rem',
+      }}>
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem',
+        }}>
+          <IconButton>
+            <img src={BackIcon} alt="" />
+          </IconButton>
+          <Typography sx={{
+            color: theme.palette.primary.main,
+            fontWeight: 'bold',
+          }}
+          variant="h2"
+          >
+            Registrarse
+          </Typography>
+        </Box>
         <RegisterFormField />
+        <Divider />
       </Box>
     </Box>
   );

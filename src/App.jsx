@@ -7,7 +7,6 @@ import Registrarse from './components/Registrarse';
 import Section1 from './components/Section1';
 import Section2 from './components/Section2';
 import LoginForm from './pages/LoginForm/LoginForm';
-import './App.css';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import { Route, Routes } from 'react-router-dom';
 import { Box, ThemeProvider, createTheme } from '@mui/material';
