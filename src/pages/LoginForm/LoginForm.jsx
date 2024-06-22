@@ -1,7 +1,7 @@
 import "./LoginForm.css";
-import Mysvg from "../assets/Logo.svg";
+import Mysvg from "../../assets/Logo.svg";
 import IconButton from "@mui/material/IconButton";
-import Back from "../assets/Vector.svg";
+import Back from "../../assets/Vector.svg";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
