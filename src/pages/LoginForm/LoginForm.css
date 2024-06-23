@@ -18,19 +18,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(239, 144, 147);
-  background: linear-gradient(
-    149deg,
-    rgba(239, 144, 147, 1) 0%,
-    rgba(242, 86, 91, 1) 100%
-  );
+  background: #f2565b;
+
   width: 50vw;
   height: 100vh;
   margin-left: auto; /* Added property */
 }
 
-.Form {
+h1 {
   color: #f2565b;
+}
+
+.Form {
+  color: black;
   width: 50vw;
   height: 100vh;
 }
@@ -38,11 +38,9 @@ body {
 .Inputs {
   flex-direction: column;
   display: flex;
-  gap: 50px;
+  gap: 30px;
   justify-content: center;
   align-items: center;
-
-  
 }
 
 .Inicio_sesion {
@@ -58,23 +56,41 @@ body {
 }
 
 .Button {
-    width: 80%;
-    height: 5%;
-    background: rgb(239, 144, 147);
-    background: linear-gradient(
-      149deg,
-      rgba(239, 144, 147, 1) 0%,
-      rgba(242, 86, 91, 1) 100%
-      
-    );
-    
-  }
+  width: 80%;
+  height: 60px;
+  background: rgb(239, 144, 147);
+  background: linear-gradient(149deg, rgba(239, 144, 147, 1) 0%, rgba(242, 86, 91, 1) 100%);
+}
 
-  .divider{
-    width: 80%; /* Span the full width */
-    height: 1px; /* Set the line height */
-    background-color: #404040; /* Set the line color */
-    margin: 20px 0; /* Add margin for spacing */
+.divider {
+  width: 80%; /* Span the full width */
+  height: 1px; /* Set the line height */
+  background-color: #404040; /* Set the line color */
+  margin: 20px 0; /* Add margin for spacing */
+}
 
 
-  }
+/* Media queries*/
+
+@media (width < 880px){
+
+
+.Image {
+ display: none;
+}
+
+.Form{
+
+  width: 100vw;
+}
+
+
+
+  
+}
+
+
+
+
+
+

@@ -37,7 +37,7 @@ const App = () => {
       <Box className='page'>
         <Routes>
           <Route path="/" element={<LandingPage navigate={navigate}/>} />
-          <Route path="/login" element={<LoginForm />}/>
+          <Route path="/login" element={<LoginForm navigate={navigate} />}/>
           <Route path="/register" element={<RegisterPage navigate={navigate}/>}/>
           <Route path="/about" element={<Nosotros />}/>
           <Route path="/contact" element={<Contacto />}/>
