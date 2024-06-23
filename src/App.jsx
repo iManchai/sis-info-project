@@ -8,6 +8,7 @@ import Section1 from './components/Section1';
 import Section2 from './components/Section2';
 import LoginForm from './components/LoginForm/LoginForm';
 import './App.css';
+import Perfil from './components/Perfil/Perfil';
 
 const App = () => {
   const [section, setSection] = useState('home');
@@ -26,6 +27,7 @@ const App = () => {
       {section === 'contacto' && <Contacto />}
       {section === 'iniciarSesion' && <LoginForm />}
       {section === 'registrarse' && <Registrarse />}
+      <Perfil />
     </div>
   );
 };
