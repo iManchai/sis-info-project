@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import Menu from './components/Menu';
-import Nosotros from './components/Nosotros';
-import Contacto from './components/Contacto';
-import Registrarse from './components/Registrarse';
-import Section1 from './components/Section1';
-import Section2 from './components/Section2';
-import LoginForm from './components/LoginForm/LoginForm';
+import Navbar from './Components/Navbar.jsx';
+import Menu from './Components/Menu.jsx';
+import Nosotros from './Components/Nosotros.jsx';
+import Contacto from './Components/Contacto.jsx';
+import Registrarse from './Components/Registrarse.jsx';
+import Section1 from './Components/Section1.jsx';
+import Section2 from './Components/Section2.jsx';
+import Section3 from './Components/Section3.jsx';
+import LoginForm from './Components/LoginForm/LoginForm.jsx';
+import Footer from './Components/Footer/Footer.jsx';
 import './App.css';
 
 const App = () => {
@@ -19,6 +21,7 @@ const App = () => {
         <>
           <Section1 />
           <Section2 />
+          <Section3 />
         </>
       )}
       {section === 'menu' && <Menu />}
@@ -26,6 +29,7 @@ const App = () => {
       {section === 'contacto' && <Contacto />}
       {section === 'iniciarSesion' && <LoginForm />}
       {section === 'registrarse' && <Registrarse />}
+      <Footer setSection={setSection}/>
     </div>
   );
 };
