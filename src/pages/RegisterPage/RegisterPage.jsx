@@ -4,7 +4,6 @@ import Logo from '../../assets/Logo.svg';
 import BackIcon from '../../assets/Vector.svg';
 import { useTheme } from '@emotion/react';
 import RegisterButtonsSection from '../../components/RegisterButtonsSection';
-import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage({ navigate }) {
 
@@ -58,6 +57,7 @@ export default function RegisterPage({ navigate }) {
           <Typography sx={{
             color: theme.palette.primary.main,
             fontWeight: 'bold',
+            fontSize: '3rem',
           }}
           variant="h2"
           >
@@ -71,7 +71,7 @@ export default function RegisterPage({ navigate }) {
           margin: '2rem 0 2rem 0',
         }}/>
         
-        <RegisterButtonsSection />
+        <RegisterButtonsSection/>
       </Box>
     </Box>
   );
