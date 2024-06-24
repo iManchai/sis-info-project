@@ -8,6 +8,8 @@ import { Box, ThemeProvider, createTheme } from '@mui/material';
 import './App.css';
 import LandingPage from './pages/LandingPage/LandingPage';
 import { useUser } from './context/user';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import Perfil from './pages/ProfilePage/Perfil';
 
 const theme = createTheme({
   palette: {
@@ -35,7 +37,7 @@ const App = () => {
       <Box className='page'>
         <Routes>
           {user ? <>
-            <Route path="/profile" element={<h1>Profile</h1>} />
+            <Route path="/profile" element={<Perfil />} />
             <Route path="/login" element={<Navigate replace to="/"/>} />
             <Route path="/register" element={<Navigate replace to="/"/>} />
           </> :
@@ -48,6 +50,7 @@ const App = () => {
           <Route path="/about" element={<Nosotros />}/>
           <Route path="/contact" element={<Contacto />}/>
           <Route path="/menu" element={<Menu />}/>
+          <Route path="*" element={<NotFoundPage/>} />
         </Routes>
       </Box>
     </ThemeProvider>
