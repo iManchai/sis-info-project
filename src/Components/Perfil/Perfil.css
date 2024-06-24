@@ -6,107 +6,104 @@ body {
     box-sizing: border-box;
   }
 
-.container{
+.ContainerGeneral{
   display: flex;
-  justify-content: center;
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  margin: 50px 10px;
 }
 
-.user-profile-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
+
+.User-profile-info{
+  margin-right: 20px;
+  margin-left: 20px;
   flex: 1;
-  width: 50%;
-  height: 650px;
-  margin: 60px;
+  background-color: white;
+  height: max-content;
 }
 
-.profileAvatar {
-  margin-bottom: 60px;
-}
-
-.user-name{
+.userName{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
   text-align: center;
 }
 
-.User_profile_form{
-  display: flex;
-  justify-content: space-between;
-  width: 760px;
-  height: 650px;
-  padding: 10px;
-  align-items: center;
+.UserEmail{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  text-align: center;
+}
+
+.ProfileAvatar{
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .Inputs-container{
-  width: 760px;
-  height: 650px; 
-  padding: 20px;
+  flex:1;
   background: linear-gradient(
     160deg,
     rgba(47, 106, 159, 0.6)0%,
     rgba(241, 241, 241, 0.6)50%,
     rgba(242, 86, 91, 0.6)100%
   );
-  border-radius: 10px;
+  box-shadow: rgba(0.16,0.16,0.16,0.16) 4px 4px 4px;
+  border-radius: 5px;
+  height: max-content;
+  width: max-content;
+  margin-right: 100px;
+}
+
+.all-Content-Inside{
   display: flex;
+  justify-content: space-between;
+  margin: 15px 15px 15px 15px;
   flex-direction: column;
 }
 
-
-
-.textName, .textLastName{
-justify-content: space-between; 
-display: flex;
-width: 50%;
-height: 40px;
-flex:1;
-gap: 20px;
+.textName{
+  background-color: #768499;
+  width: 100%;
 }
 
-
-.textEmail, .textPhoneNumber {
-  justify-content: space-between; 
-  display: flex;
-  width: 315px;
-  height: 40px;
-  gap: 20px;
-  flex: 1
+.textLastName{
+  background-color: #768499;
+  width: 100%;
 }
 
+.textEmail{
+  background-color: #768499;
+  width: 100%;
+}
+
+.textPhoneNumber{
+  background-color: #768499;
+  width: 100%;
+}
 
 .textLocation{
-  display: flex;
-  width: 708px;
-  height: 40px;
-  gap: 20px;
-  flex: 1
+  background-color: #768499;
+  width: 100%;
 }
 
 .textLikes{
-  display: flex;
-  width: 708px;
-  height: 159px;
-  gap: 20px;
-  flex:1
+  background-color: #768499;
+  width: 100%;
 }
 
 .Button {
-  display: flex;
-  width: 80%;
-  height: 5%;
-  gap: 40px;
-  background: rgb(75, 189, 53);
+  width: 15em;
+  height: 3em;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: rgb(75, 189, 53);
   background: linear-gradient(
     149deg,
-    rgb(51, 206, 59) 0%,
-    rgb(117, 242, 86) 100%
-  
+    rgb(49, 158, 55) 0%,
+    rgb(49, 158, 55) 100%
   );
-  
 }
 
+.ActualizarPerfilButton{
+  align-self: self-end;
+}
+
+  
