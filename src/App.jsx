@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 import { Navigate, Route, Routes, redirect, useNavigate } from 'react-router-dom';
 import { Box, ThemeProvider, createTheme } from '@mui/material';
 import './App.css';
+import Perfil from './components/Perfil/Perfil';
 import LandingPage from './pages/LandingPage/LandingPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { useUser } from './context/user';
@@ -44,7 +45,7 @@ const App = () => {
             <Route path="/login" element={<Navigate replace to="/"/>}/>
           </> : 
           <>
-            <Route path="/login" element={<LoginForm />}/>
+            <Route path="/login" element={<LoginForm navigate={navigate}/>}/>
             <Route path="/register" element={<RegisterPage navigate={navigate}/>}/>
           </>
           }
