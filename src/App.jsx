@@ -1,3 +1,4 @@
+
 import Menu from './components/Menu';
 import Nosotros from './components/Nosotros';
 import Contacto from './components/Contacto';
@@ -33,6 +34,11 @@ const App = () => {
   const user = useUser()
 
   return (
+    <div>
+      <LoginForm></LoginForm>
+      <Nosotros></Nosotros>
+    </div>
+
 
     <ThemeProvider theme={theme}>
       <Box className='page'>
