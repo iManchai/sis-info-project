@@ -1,7 +1,7 @@
 import { Box, Button, Link, Typography } from "@mui/material"
 import FormTextField from "./FormTextField"
 import { useState } from "react"
-import { registerWithCredentials, signInWithFacebook } from "../controllers/auth"
+import { registerWithCredentials } from "../controllers/auth"
 
 export default function RegisterFormField() {
 
@@ -69,7 +69,7 @@ export default function RegisterFormField() {
 
         <FormTextField 
         title="Correo" 
-        type="text" 
+        type="email" 
         required={true} 
         value={email} 
         setValue={setEmail} 

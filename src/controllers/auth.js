@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { auth, db, facebookProvider, googleProvider } from '../firebase'
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 // Login with Credentials
 export async function loginWithCredentials(email, password) {
@@ -9,7 +9,7 @@ export async function loginWithCredentials(email, password) {
     return user
   } catch (e) {
     console.error(e);
-    return null
+    return {error: e.message }
   }
 }
 
@@ -44,7 +44,7 @@ export async function signInWithGoogle() {
   console.log(additionalInfo)
 
     const usersCollection = collection(db, 'users')
-    await setDoc(doc(usersCollection, result.user.uid), {
+    await setDoc(doc(usersCollection, result.user.uid, "ASD"), {
       firstName: additionalInfo.profile.givenName,
       lastName: additionalInfo.profile.familyName,
       email: result.user.email,
