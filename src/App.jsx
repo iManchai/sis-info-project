@@ -1,5 +1,5 @@
+
 import Menu from './components/Menu';
-import Nosotros from './components/Nosotros';
 import Contacto from './components/Contacto';
 import LoginForm from './pages/LoginForm/LoginForm';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
@@ -10,6 +10,7 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import { useUser } from './context/user';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import Perfil from './pages/ProfilePage/Perfil';
+import Nosotros from './pages/AboutUsPage/Nosotros';
 
 const theme = createTheme({
   palette: {
@@ -32,7 +33,6 @@ const App = () => {
   const user = useUser()
 
   return (
-
     <ThemeProvider theme={theme}>
       <Box className='page'>
         <Routes>
@@ -54,7 +54,6 @@ const App = () => {
         </Routes>
       </Box>
     </ThemeProvider>
-
   );
 };
 

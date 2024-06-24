@@ -28,7 +28,8 @@ const Perfil = () => {
         <Typography variant="h2" sx={{
           color: theme.palette.secondary.main,
           fontWeight: 'bold',
-          margin: 0
+          margin: 0,
+          textTransform: 'uppercase'
         }}>
           Perfil
         </Typography>
