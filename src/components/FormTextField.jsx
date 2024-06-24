@@ -1,4 +1,4 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 
 export default function FormTextField({ title, type, required, value, setValue, helperText, isValid, setIsValid }) {
   return (

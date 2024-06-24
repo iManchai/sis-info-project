@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, TextField, Avatar, Typography, Container, Box } from '@mui/material';
+import { Button, TextField, Avatar, Typography, Box } from '@mui/material';
 import './Perfil.css';
 
 const Perfil = () => {

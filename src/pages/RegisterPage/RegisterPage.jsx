@@ -4,14 +4,12 @@ import Logo from '../../assets/Logo.svg';
 import BackIcon from '../../assets/Vector.svg';
 import { useTheme } from '@emotion/react';
 import RegisterButtonsSection from '../../components/RegisterButtonsSection';
-import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage({ navigate }) {
 
   const theme = useTheme()
 
   return (
-    // Left Section
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
@@ -23,6 +21,7 @@ export default function RegisterPage({ navigate }) {
         flexBasis: '50%'
       }
     }}>
+      {/* Left Section */}
       <Box sx={{
         display: 'none',
 

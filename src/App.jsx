@@ -40,7 +40,7 @@ const App = () => {
         <Routes>
           {user ? 
           <>
-            <Route path="/profile" element={<></>}/>
+            <Route path="/profile" element={<Perfil />}/>
             <Route path="/register" element={<Navigate replace to="/"/>}/>
             <Route path="/login" element={<Navigate replace to="/"/>}/>
           </> : 

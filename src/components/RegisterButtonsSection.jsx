@@ -2,7 +2,6 @@ import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { Box, Button } from '@mui/material';
 import { signInWithFacebook, signInWithGoogle } from '../controllers/auth';
-import { useNavigate } from 'react-router-dom';
 
 export default function RegisterButtonsSection() {
 
