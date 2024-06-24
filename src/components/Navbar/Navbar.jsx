@@ -9,6 +9,7 @@ import './Navbar.css';
 import { useUser } from '../../context/user';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Avatar, Box } from '@mui/material';
+import { logOut } from '../../controllers/auth';
 
 const Navbar = ({ navigate }) => {
 
@@ -37,6 +38,7 @@ const Navbar = ({ navigate }) => {
         }}>
         <IconButton color="inherit" onClick={() => navigate('/order')} className="nav-button order-button"><ShoppingCartIcon /></IconButton>
         <Avatar src={user.photoURL} onClick={() => navigate('/profile')} />
+        <Button onClick={async () => await logOut()}>Log out</Button>
         </Box>
         </> :
         <>
@@ -45,9 +47,6 @@ const Navbar = ({ navigate }) => {
         <Button color="inherit" onClick={() => navigate('/register')} className="nav-button register-button">Registrarse</Button>
         </>
         }
-        {/* <Typography variant="h6" component="div" className="flex-grow"></Typography>
-        <Button color="inherit" onClick={() => navigate('/login')} className="nav-button login-button">Iniciar Sesión</Button>
-        <Button color="inherit" onClick={() => navigate('/register')} className="nav-button register-button">Registrarse</Button> */}
       </Toolbar>
     </AppBar>
   );

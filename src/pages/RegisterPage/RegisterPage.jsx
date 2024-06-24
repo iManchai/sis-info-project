@@ -4,6 +4,7 @@ import Logo from '../../assets/Logo.svg';
 import BackIcon from '../../assets/Vector.svg';
 import { useTheme } from '@emotion/react';
 import RegisterButtonsSection from '../../components/RegisterButtonsSection';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage({ navigate }) {
 

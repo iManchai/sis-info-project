@@ -1,8 +1,6 @@
-import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { auth, db, googleProvider } from '../firebase'
-import { useNavigate } from "react-router-dom";
-
-// const navigate = useNavigate()
+import { doc, setDoc } from "firebase/firestore";
 
 // Login with Credentials
 export async function loginWithCredentials(email, password) {
@@ -16,10 +14,20 @@ export async function loginWithCredentials(email, password) {
 }
 
 // Register with credentials
-export async function registerWithCredentials(email, password) {
+export async function registerWithCredentials(email, password, name) {
   try {
-    console.log(email, password);
     const { user } = await createUserWithEmailAndPassword(auth, email, password)
+
+    const usersCollection = collection(db, 'users')
+    await setDoc(doc(usersCollection, user.uid), {
+      firstName: name,
+      lastName: "", 
+      email: user.email,
+      picture: "",
+      telephone: "",
+      userTastes: ""
+    })
+
     return user
   } catch (e) {
     console.error(e)
@@ -27,7 +35,7 @@ export async function registerWithCredentials(email, password) {
   }
 }
 
-  // Sign in with Google
+// Sign in with Google
 export async function signInWithGoogle() {
   const result = await signInWithPopup(auth, googleProvider)
   const additionalInfo = getAdditionalUserInfo(result)
@@ -44,8 +52,27 @@ export async function signInWithGoogle() {
       telephone: result.user.phoneNumber,
       userTastes: ""
     })
+
     return result.user
   }
+
+// Sign in with Facebook
+export async function signInWithFacebook() {
+  const result = await signInWithPopup(auth, facebookProvider)
+  const additionalInfo = getAdditionalUserInfo(result)
+
+  const usersCollection = collection(db, 'users')
+  await setDoc(doc(usersCollection, result.user.uid), {
+    firstName: additionalInfo.profile.first_name,
+    lastName: additionalInfo.profile.last_name,
+    email: result.user.email,
+    picture: result.user.photoURL,
+    telephone: result.user.phoneNumber,
+    userTastes: ""
+  })
+
+  return result.user
+}
 
 // Log Out
 export async function logOut() {

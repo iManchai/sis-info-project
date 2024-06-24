@@ -5,7 +5,7 @@ import Nosotros from './components/Nosotros';
 import Contacto from './components/Contacto';
 import LoginForm from './pages/LoginForm/LoginForm';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, redirect, useNavigate } from 'react-router-dom';
 import { Box, ThemeProvider, createTheme } from '@mui/material';
 import './App.css';
 import LandingPage from './pages/LandingPage/LandingPage';
@@ -40,6 +40,8 @@ const App = () => {
           {user ? 
           <>
             <Route path="/profile" element={<></>}/>
+            <Route path="/register" element={<Navigate replace to="/"/>}/>
+            <Route path="/login" element={<Navigate replace to="/"/>}/>
           </> : 
           <>
             <Route path="/login" element={<LoginForm />}/>

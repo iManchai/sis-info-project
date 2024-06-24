@@ -1,7 +1,8 @@
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { Box, Button } from '@mui/material';
-import { signInWithGoogle } from '../controllers/auth';
+import { signInWithFacebook, signInWithGoogle } from '../controllers/auth';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterButtonsSection() {
 
@@ -47,6 +48,9 @@ export default function RegisterButtonsSection() {
         '&:hover': {
           backgroundColor: '#2F6A9F'
         }
+      }}
+      onClick={async () => {
+        await signInWithFacebook()
       }}
       >
         Registrarse con Facebook
