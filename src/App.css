@@ -126,6 +126,8 @@
   background-color: #e3cfd0;
 }
 
+/* Section 3 */ 
+
 /* Responsiveness */
 @media (max-width: 768px) {
   .card {
@@ -144,4 +146,23 @@
   .text-container {
     margin-bottom: 1rem;
   }
+
+  .about_board{ 
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about_text_board{ 
+    text-align: center;
+    margin-bottom: 20px;
+    height: auto;
+    width: 100%;
+  }
+
+  .about_board img{ 
+    height: auto;
+    width: 100%;
+
+  } 
+  
 }

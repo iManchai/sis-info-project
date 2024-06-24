@@ -6,7 +6,7 @@ import entradasImage from '../../assets/pokeEntradas.png';
 const Section2 = ({ navigate }) => {
   return (
     <div className="section2">
-      <h2>QUE OFRECEMOS</h2>
+      <h2>QUÉ OFRECEMOS</h2>
       <div className="cards">
         <div className="card">
           <img src={pokeBowlImage} alt="Poke Bowls" />

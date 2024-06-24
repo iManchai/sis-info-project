@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import {Link, Typography } from "@mui/material"
-import LogginButtons from "../../components/LoginButtons";
+import LogginButtons from "../../Components/LoginButtons";
 
 export default function LoginForm({ navigate }) {
 

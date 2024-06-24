@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import Navbar from './components/Navbar/Navbar';
-import Menu from './components/Menu';
-import Nosotros from './components/Nosotros';
-import Contacto from './components/Contacto';
-import Section1 from './components/Section1/Section1';
-import Section2 from './components/Section2/Section2';
+import Navbar from './Components/Navbar/Navbar';
+import Menu from './Components/Menu';
+import Nosotros from './Components/Nosotros';
+import Contacto from './Components/Contacto';
+import Section1 from './Components/Section1/Section1';
+import Section2 from './Components/Section2/Section2';
+import Section3 from './Components/Section3/Section3'; 
 import LoginForm from './pages/LoginForm/LoginForm';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
+import Footer from './Components/Footer/Footer.jsx';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Box, ThemeProvider, createTheme } from '@mui/material';
 import './App.css';
@@ -34,6 +36,7 @@ const App = () => {
   const navigate = useNavigate();
 
   return (
+
     <ThemeProvider theme={theme}>
       <Box className='page'>
         <Navbar setSection={setSection} />
@@ -59,6 +62,7 @@ const App = () => {
         </Routes>
       </Box>
     </ThemeProvider>
+
   );
 };
 

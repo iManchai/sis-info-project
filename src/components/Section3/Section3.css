@@ -1,0 +1,60 @@
+.section3 { 
+    padding: 1.5rem;
+    display: flex;
+}
+
+.about_board {
+    width: 100%;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around ;
+}
+
+.about_board img{ 
+    max-width: 710px;
+    max-height: 555px;
+    height: auto; 
+    width: 100%; 
+}
+
+.about_text_board { 
+    font-size: 1.25em;
+    color: #2F6A9F;
+    height: fit-content;
+    width: 600px;
+    margin-right: 30px;
+}
+
+.about_text_board h1{ 
+    color: #2F6A9F;
+}
+
+.about_text_board button{ 
+    font-size: 1.0em;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    width: 250px;
+    background-color: #2F6A9F;
+    color: white;
+    cursor: pointer; 
+    
+}
+
+.about_text_board button:hover{ 
+    background-color: #1C456B;
+    
+}
+
+.know_more_button { 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+.conoce-button{ 
+    font-weight: bold;
+}
+
