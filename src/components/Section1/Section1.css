@@ -1,0 +1,38 @@
+.section1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    background: linear-gradient(to bottom, #e39396, #ffffff);
+    margin-top: 2rem;
+  }
+  
+  .text-container {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .title {
+    font-size: 3em;
+    color: #f2565b;
+  }
+  
+  .subtitle {
+    font-size: 1.5em;
+    color: #2f6a9f;
+  }
+  
+  .image-container {
+    flex: 1;
+    padding: 20px;
+    text-align: right;
+  }
+  
+  .image-container img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    height: auto;
+  }
+  
