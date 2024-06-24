@@ -1,11 +1,16 @@
 import "./LoginForm.css";
-import Mysvg from "../assets/Logo.svg";
+import Mysvg from "../../assets/Logo.svg";
 import IconButton from "@mui/material/IconButton";
-import Back from "../assets/Vector.svg";
+import Back from "../../assets/Vector.svg";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import {Link, Typography } from "@mui/material"
+import LogginButtons from "../../Components/LoginButtons";
 
-const LoginForm = () => {
+export default function LoginForm({ navigate }) {
+
+
   return (
     <div className="container">
       <aside className="Image">
@@ -14,7 +19,7 @@ const LoginForm = () => {
 
       <aside className="Form">
         <div className="Inicio_sesion">
-          <IconButton>
+          <IconButton onClick={() => navigate('/')}>
             <img src={Back} alt="" />
           </IconButton>
           <h1>Iniciar sesion</h1>
@@ -36,16 +41,31 @@ const LoginForm = () => {
           />
 
           <Button className="Button" variant="contained">
-            Iniciar sesion
+            <h2>Iniciar sesión</h2>
           </Button>
 
-          <a href="">Create An Account</a>
+          <Typography>
+          {"Aun no tienes cuenta?" + " "}
+          <Link href="/register">Haz click aqui para registrase</Link>
+          </Typography>
+         
+        
 
           <div className="divider"></div>
+
+          
+          <LogginButtons></LogginButtons>
+
+      
+
         </div>
+
+
+        
       </aside>
+      
     </div>
   );
 };
 
-export default LoginForm;
+

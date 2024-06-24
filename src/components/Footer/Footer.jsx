@@ -4,10 +4,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { Button } from '@mui/material';
-import Logo from '../assets/Logo.svg'; 
-import facebook from '../assets/whitebook.svg'
-import instagram from '../assets/whitetagram.svg'
-import '../Footer/Footer.css'
+import Logo from '../../assets/Logo.svg'; 
+import facebook from '../../assets/whitebook.svg'
+import instagram from '../../assets/whitetagram.svg'
+import './Footer.css'
 
 function Copyright() {
   return (
@@ -22,18 +22,19 @@ function Copyright() {
   );
 }
 
-export default function Footer() {
-  return (
+
+const Footer = ({ navigate }) => {
+    return (
         <Box
-          component="footer"
-          sx={{  
+        component="footer"
+        sx={{  
             py: 2, 
             px: 3,  
             mt: 'auto', 
-            backgroundColor: '#F2565B', 
-          }}
+            backgroundColor: '#F2565B',  
+        }}
         >
-          <Container maxWidth="lg" sx={{ display: 'flex', flexDirection: 'row' , justifyContent: 'space-between'}}>
+        <Container maxWidth="vw" sx={{ display: 'flex', flexDirection: 'row' , justifyContent: 'space-between'}}>
                 <Box component= 'div1' sx={{  display: 'flex', flexDirection: 'column'}} > 
                     <div class = 'container_footer_1'>
                     <img src={Logo} alt='' width='50' height='50' />
@@ -50,9 +51,9 @@ export default function Footer() {
                 </Box>
                 <Box component= 'div2' sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
                     <div class = 'container_footer_2'> 
-                        <Button color="inherit" onClick={() => setSection('menu')} sx={{ color: '#ffffff', fontSize: '12px', fontFamily: 'Kulim Park' }}>Menú</Button>
-                        <Button color="inherit" onClick={() => setSection('nosotros')} sx={{ color: '#ffffff', fontSize: '12px', fontFamily: 'Kulim Park' }}>Nosotros</Button>
-                        <Button color="inherit" onClick={() => setSection('contacto')} sx={{ color: '#ffffff', fontSize: '12px', fontFamily: 'Kulim Park' }}>Contacto</Button>
+                        <Button color="inherit" onClick={() => navigate('/menu')} className="footer-button">Menú</Button>
+                        <Button color="inherit" onClick={() => navigate('/about')} className="footer-button">Nosotros</Button>
+                        <Button color="inherit" onClick={() => navigate('/contact')} className="footer-button">Contacto</Button>
                     </div>
                     <div class = 'container_footer_2'>
                         <Copyright />
@@ -60,5 +61,7 @@ export default function Footer() {
                 </Box> 
             </Container>
         </Box>
-  );
-}
+    );
+};  
+
+export default Footer; 
