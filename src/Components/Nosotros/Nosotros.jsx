@@ -10,26 +10,36 @@ return(
         
 
         <div className="seccion1">
+        
         <div><h1 className="TituloPrincipal">
             ACERCA DE NOSOTROS
         </h1>
         </div>
-   
+
         <section className="seccionMolokai">
-        <aside>
-            <img src={foto1} alt="" className="Imagen1"></img>
-        </aside>
+        
+        <div className="introduccionSeccion">
+        
         <h2 className="introduccionHeading">
             Molokai: Nace la pasión por el Poke en Caracas
             </h2>
-            <p>En el corazón de Caracas, en el año 2020, nació Molokai, un restaurante con una misión simple: democratizar el poke y llevar su frescura y sabor a todos los rincones de la ciudad.
+            <div  className="introduccionTexto">
+            <p>En el corazón de Caracas, en el año 2020, nació Molokai, un restaurante con una misión simple: democratizar el poke y llevar su frescura y sabor a todos los rincones de la ciudad.</p>
             
-            Más que un restaurante, somos una comunidad de amantes del poke que busca compartir su pasión por este plato vibrante y versátil. En nuestro local, encontrarás un ambiente cálido y acogedor, donde podrás disfrutar de tu poke favorito mientras te relajas y conectas con amigos y familiares.
+            <p>Más que un restaurante, somos una comunidad de amantes del poke que busca compartir su pasión por este plato vibrante y versátil. En nuestro local, encontrarás un ambiente cálido y acogedor, donde podrás disfrutar de tu poke favorito mientras te relajas y conectas con amigos y familiares.</p>
             
-            Ofrecemos tanto bowls de Poke como Burritos de Poke, elaborados con ingredientes frescos, de la más alta calidad y provenientes de proveedores locales. Creemos que la comida sana y deliciosa no tiene que ser un lujo, por eso nos esforzamos por ofrecer precios justos y accesibles para que todos puedan disfrutar de la experiencia poke
-            </p>
+            <p>Ofrecemos tanto bowls de Poke como Burritos de Poke, elaborados con ingredientes frescos, de la más alta calidad y provenientes de proveedores locales. Creemos que la comida sana y deliciosa no tiene que ser un lujo, por eso nos esforzamos por ofrecer precios justos y accesibles para que todos puedan disfrutar de la experiencia poke</p>
+            
+            </div>
+            
+        </div>
+        <aside>
+            <img src={foto1} alt="" className="Imagen1"></img>
+        </aside>
         </section>
         
+        
+
         </div>
 
         <div className="seccion2">
@@ -43,10 +53,11 @@ return(
         <img src={foto3} className="Imagen3"></img>
         </aside>
         </div>
-            <p className="dondeTexto">Desde nuestra inauguración en el año 2020, ya nos encontramos actualmente con la presencia de dos sucursales. Siendo las siguientes:
-            1. C.C. San Luis, en el Cafetal, te espera un ambiente cálido y acogedor para que saborees tu poke favorito. ¡Abierto todos los días de 11:00 am a 10:00 pm!
-            2. Universidad Metropolitana: ¿Estudias o trabajas en la Universidad Metropolitana? ¡No te pierdas nuestro stand en la feria! De lunes a viernes, de 10:00 am a 5:00 pm, tu dosis de poke perfecta te espera.
-            </p>
+            <div className="dondeTexto">
+            <p>Desde nuestra inauguración en el año 2020, ya nos encontramos actualmente con la presencia de dos sucursales. Siendo las siguientes:</p>
+            <p>1. C.C. San Luis, en el Cafetal, te espera un ambiente cálido y acogedor para que saborees tu poke favorito. ¡Abierto todos los días de 11:00 am a 10:00 pm!</p>
+            <p>2. Universidad Metropolitana: ¿Estudias o trabajas en la Universidad Metropolitana? ¡No te pierdas nuestro stand en la feria! De lunes a viernes, de 10:00 am a 5:00 pm, tu dosis de poke perfecta te espera.</p>
+            </div>
         </section>
         </div>
 
@@ -60,7 +71,7 @@ return(
 };
 
 
-export default Nosotros
+export default Nosotros;
 
 {/*SVG es el formato en que vamos a mostrar las imágenes.
     Necesito tener el svg de la flechita y su estilo con css
