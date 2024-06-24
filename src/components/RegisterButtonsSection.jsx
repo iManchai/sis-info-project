@@ -1,6 +1,7 @@
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { Box, Button } from '@mui/material';
+import { signInWithFacebook, signInWithGoogle } from '../controllers/auth';
 
 export default function RegisterButtonsSection() {
 
@@ -27,6 +28,7 @@ export default function RegisterButtonsSection() {
           backgroundColor: '#d33f2f'
         }
       }}
+      onClick={async () => await signInWithGoogle()}
       >
         Registrarse con Google
       </Button>
@@ -45,6 +47,9 @@ export default function RegisterButtonsSection() {
         '&:hover': {
           backgroundColor: '#2F6A9F'
         }
+      }}
+      onClick={async () => {
+        await signInWithFacebook()
       }}
       >
         Registrarse con Facebook

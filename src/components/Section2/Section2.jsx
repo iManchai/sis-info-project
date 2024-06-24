@@ -2,6 +2,7 @@ import React from 'react';
 import pokeBowlImage from '../../assets/pokeBowls.png';
 import pokeBurritoImage from '../../assets/pokeBurritos.png';
 import entradasImage from '../../assets/pokeEntradas.png';
+import './Section2.css';
 
 const Section2 = ({ navigate }) => {
   return (

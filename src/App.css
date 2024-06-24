@@ -101,12 +101,12 @@
 }
 
 .card h3 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #2f6a9f;
 }
 
 .card p {
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: #2f6a9f;
 }
 
@@ -147,22 +147,4 @@
     margin-bottom: 1rem;
   }
 
-  .about_board{ 
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .about_text_board{ 
-    text-align: center;
-    margin-bottom: 20px;
-    height: auto;
-    width: 100%;
-  }
-
-  .about_board img{ 
-    height: auto;
-    width: 100%;
-
-  } 
-  
 }

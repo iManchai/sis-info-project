@@ -1,58 +1,17 @@
 .section2 {
-    padding: 40px;
+    padding: 2rem;
     background: linear-gradient(to right, #f2565b, #8f607d);
     text-align: center;
   }
   
-  .section-title {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #e54b4b;
-  }
-  
-  .offers-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .offer-card {
-    width: 30%;
-    margin: 10px;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  }
-  
-  .offer-card img {
-    width: 100%;
-    border-radius: 10px;
-  }
-  
-  .offer-card h3 {
-    font-size: 1.5em;
-    color: #e54b4b;
-    margin: 10px 0;
-  }
-  
-  .offer-card p {
-    font-size: 1em;
-    color: #666;
-  }
-  
   .menu-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: #e54b4b;
-    color: white;
+    font-family: 'Kulim Park';
+    margin-top: 40px;
+    padding: 15px 40px;
+    border-radius: 100px;
+    background: white;
+    font-weight: bold;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .menu-button:hover {
-    background: #ffffff;
   }
   

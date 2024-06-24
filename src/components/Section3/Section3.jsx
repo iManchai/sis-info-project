@@ -6,7 +6,6 @@ import './Section3.css'
 const Section3 = ({navigate}) => {
   return (
     <div className="section3">
-      <div className="about_board">
         <div className='about_text_board'>
           <h1>NOSOTROS</h1>
           <p>En el vibrante corazón de Caracas, en el año 2020, nació Moloka’i Poke, un restaurante con una misión simple: democratizar el poke y llevar su frescura y sabor a todos los rincones de la ciudad.</p> 
@@ -18,7 +17,6 @@ const Section3 = ({navigate}) => {
         <div className='image'>
           <img src={pokeCompartir} alt="pokeCompartir" />
         </div>
-      </div>
     </div>
   );
 };

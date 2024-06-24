@@ -1,17 +1,15 @@
 import { Box, Divider, IconButton, Typography, Container } from '@mui/material';
-import RegisterFormField from '../../Components/RegisterFormField';
+import RegisterFormField from '../../components/RegisterFormField';
 import Logo from '../../assets/Logo.svg';
 import BackIcon from '../../assets/Vector.svg';
 import { useTheme } from '@emotion/react';
-import RegisterButtonsSection from '../../Components/RegisterButtonsSection';
-import { useNavigate } from 'react-router-dom';
+import RegisterButtonsSection from '../../components/RegisterButtonsSection';
 
 export default function RegisterPage({ navigate }) {
 
   const theme = useTheme()
 
   return (
-    // Left Section
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
@@ -23,6 +21,7 @@ export default function RegisterPage({ navigate }) {
         flexBasis: '50%'
       }
     }}>
+      {/* Left Section */}
       <Box sx={{
         display: 'none',
 
@@ -58,6 +57,7 @@ export default function RegisterPage({ navigate }) {
           <Typography sx={{
             color: theme.palette.primary.main,
             fontWeight: 'bold',
+            fontSize: '3rem',
           }}
           variant="h2"
           >
@@ -71,7 +71,7 @@ export default function RegisterPage({ navigate }) {
           margin: '2rem 0 2rem 0',
         }}/>
         
-        <RegisterButtonsSection />
+        <RegisterButtonsSection/>
       </Box>
     </Box>
   );
