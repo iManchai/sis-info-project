@@ -9,7 +9,7 @@ import LogginButtons from "../../components/LoginButtons";
 import { useState } from "react";
 import { loginWithCredentials } from "../../controllers/auth";
 
-export default function LoginForm({navigate}) {
+export default function LoginForm({ navigate }) {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
