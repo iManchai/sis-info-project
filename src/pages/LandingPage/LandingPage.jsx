@@ -9,11 +9,11 @@ export default function LandingPage({navigate}) {
 
   return (
     <Box>
-      <Navbar navigate={navigate}/>
+      <Navbar/>
       <Section1 />
       <Section2 navigate={navigate}/>
       <Section3 navigate={navigate}/> 
-      <Footer navigate={navigate}/>
+      <Footer />
     </Box>
   );
 }

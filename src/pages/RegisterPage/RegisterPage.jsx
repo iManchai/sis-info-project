@@ -1,4 +1,4 @@
-import { Box, Divider, IconButton, Typography, Container } from '@mui/material';
+import { Box, Divider, IconButton, Typography } from '@mui/material';
 import RegisterFormField from '../../components/RegisterFormField';
 import Logo from '../../assets/Logo.svg';
 import BackIcon from '../../assets/Vector.svg';

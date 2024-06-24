@@ -8,6 +8,7 @@ import Logo from '../../assets/Logo.svg';
 import facebook from '../../assets/whitebook.svg'
 import instagram from '../../assets/whitetagram.svg'
 import './Footer.css'
+import { useNavigate } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -23,7 +24,10 @@ function Copyright() {
 }
 
 
-const Footer = ({ navigate }) => {
+const Footer = () => {
+
+    const navigate = useNavigate()
+
     return (
         <Box
         component="footer"

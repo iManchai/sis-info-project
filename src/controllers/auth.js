@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { auth, db, facebookProvider, googleProvider } from '../firebase'
-import { collection, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 // Login with Credentials
 export async function loginWithCredentials(email, password) {
@@ -20,6 +20,7 @@ export async function registerWithCredentials(email, password, name) {
 
     const usersCollection = collection(db, 'users')
     await setDoc(doc(usersCollection, user.uid), {
+      id: user.uid,
       firstName: name,
       lastName: "", 
       email: user.email,
@@ -37,24 +38,29 @@ export async function registerWithCredentials(email, password, name) {
 
 // Sign in with Google
 export async function signInWithGoogle() {
-  const result = await signInWithPopup(auth, googleProvider)
-  const additionalInfo = getAdditionalUserInfo(result)
-
-  console.log(result)
-  console.log(additionalInfo)
-
+  try {
+    const result = await signInWithPopup(auth, googleProvider)
+    const additionalInfo = getAdditionalUserInfo(result)
+  
+    console.log(result)
+    console.log(additionalInfo)
+  
     const usersCollection = collection(db, 'users')
-    await setDoc(doc(usersCollection, result.user.uid, "ASD"), {
-      firstName: additionalInfo.profile.givenName,
-      lastName: additionalInfo.profile.familyName,
+
+    await setDoc(doc(usersCollection, result.user.uid), {
+      firstName: additionalInfo.profile.given_name,
+      lastName: additionalInfo.profile.family_name,
       email: result.user.email,
       picture: result.user.photoURL,
       telephone: result.user.phoneNumber,
       userTastes: ""
     })
-
-    return result.user
-  }
+  
+      return result.user
+  } catch (e) {
+    console.error(e)
+    return null
+  }}
 
 // Sign in with Facebook
 export async function signInWithFacebook() {

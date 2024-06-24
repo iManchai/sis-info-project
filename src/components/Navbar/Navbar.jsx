@@ -10,11 +10,12 @@ import { useUser } from '../../context/user';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Avatar, Box } from '@mui/material';
 import { logOut } from '../../controllers/auth';
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ navigate }) => {
+const Navbar = () => {
 
   const user = useUser()
-  console.log(user)
+  const navigate = useNavigate()
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#ffffff', color: '#f2565b' }} className="navbar">
