@@ -126,6 +126,8 @@
   background-color: #e3cfd0;
 }
 
+/* Section 3 */ 
+
 /* Responsiveness */
 @media (max-width: 768px) {
   .card {
@@ -144,4 +146,5 @@
   .text-container {
     margin-bottom: 1rem;
   }
+
 }

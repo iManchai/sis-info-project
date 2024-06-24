@@ -1,5 +1,3 @@
-import { useContext, useState } from 'react';
-import Navbar from './components/Navbar/Navbar';
 import Menu from './components/Menu';
 import Nosotros from './components/Nosotros';
 import Contacto from './components/Contacto';
@@ -35,6 +33,7 @@ const App = () => {
   const user = useUser()
 
   return (
+
     <ThemeProvider theme={theme}>
       <Box className='page'>
         <Routes>
@@ -57,6 +56,7 @@ const App = () => {
         </Routes>
       </Box>
     </ThemeProvider>
+
   );
 };
 
