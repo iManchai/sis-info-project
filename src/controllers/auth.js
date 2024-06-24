@@ -1,5 +1,8 @@
 import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth } from '../firebase'
+import { auth, db, googleProvider } from '../firebase'
+import { useNavigate } from "react-router-dom";
+
+// const navigate = useNavigate()
 
 // Login with Credentials
 export async function loginWithCredentials(email, password) {
