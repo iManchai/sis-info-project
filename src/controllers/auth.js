@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import { auth, db, googleProvider } from '../firebase'
+import { auth, db, facebookProvider, googleProvider } from '../firebase'
 import { doc, setDoc } from "firebase/firestore";
 
 // Login with Credentials

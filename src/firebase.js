@@ -27,4 +27,3 @@ googleProvider.addScope('email')
 export const facebookProvider = new FacebookAuthProvider();
 facebookProvider.setCustomParameters({ prompt: 'popup' })
 facebookProvider.addScope('email')
-facebookProvider.addScope('user_location')
