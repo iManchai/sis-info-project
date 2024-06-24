@@ -13,7 +13,11 @@ return(
         
         <div><h1 className="TituloPrincipal">
             ACERCA DE NOSOTROS
+
         </h1>
+        <style type="text/css">
+        
+        </style>
         </div>
 
         <section className="seccionMolokai">
