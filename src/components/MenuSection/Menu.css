@@ -1,0 +1,17 @@
+.menu {
+    padding: 20px;
+  }
+  
+  .menu h2 {
+    text-align: center;
+    color: #f2565b;
+    margin-bottom: 20px;
+  }
+  
+  .menu-items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
