@@ -11,6 +11,7 @@ import { useUser } from './context/user';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import Perfil from './pages/ProfilePage/Perfil';
 import Nosotros from './pages/AboutUsPage/Nosotros';
+import Paypage from './pages/PayPage/Paypage';
 
 const theme = createTheme({
   palette: {
@@ -44,6 +45,7 @@ const App = () => {
           <>
             <Route path="/login" element={<LoginForm navigate={navigate}/>} />
             <Route path="/register" element={<RegisterPage navigate={navigate}/>} />
+            <Route path='/Pay' element={<Paypage navigate={navigate}/>}/>
           </>
           }
           <Route path="/" element={<LandingPage navigate={navigate}/>} />
