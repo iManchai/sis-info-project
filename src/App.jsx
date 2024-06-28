@@ -11,6 +11,7 @@ import { useUser } from './context/user';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import Perfil from './pages/ProfilePage/Perfil';
 import Nosotros from './pages/AboutUsPage/Nosotros';
+import getUser from './controllers/users';
 
 const theme = createTheme({
   palette: {
