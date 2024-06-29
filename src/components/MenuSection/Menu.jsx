@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase'; // Ruta por definir
 import MenuItem from './MenuItem';
 import './Menu.css';
+import BuildYourOwn from './BuildYourOwn';
 
 const mockMenuItems = [
   {
@@ -30,20 +33,22 @@ const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
-    // Simulando la obtención de datos de Firestore
+    // Datos de prueba
     setMenuItems(mockMenuItems);
   }, []);
 
   return (
     <div className="menu">
-      <h2>Nuestro Menú</h2>
+      <h2>NUESTRO MENÚ</h2>
       <div className="menu-items">
         {menuItems.map(item => (
           <MenuItem key={item.id} item={item} />
         ))}
       </div>
+      <BuildYourOwn />
     </div>
   );
 };
 
 export default Menu;
+

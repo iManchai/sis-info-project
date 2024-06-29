@@ -3,6 +3,7 @@ import Menu from './components/MenuSection/Menu';
 import Contacto from './components/Contacto';
 import LoginForm from './pages/LoginForm/LoginForm';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
+import CreateYourOwn from './pages/CreateYourOwn/CreateYourOwn';
 import { Navigate, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { Box, ThemeProvider, createTheme } from '@mui/material';
 import './App.css';
@@ -16,17 +17,15 @@ import Navbar from './components/Navbar/Navbar';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#F2565B'
+      main: '#F2565B',
     },
     secondary: {
-      main: '#2F6A9F'
-    }
+      main: '#2F6A9F',
+    },
   },
   typography: {
-    fontFamily: [
-      'Kulim Park'
-    ]
-  }
+    fontFamily: ['Kulim Park'],
+  },
 });
 
 const App = () => {
@@ -38,7 +37,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box className='page'>
+      <Box className="page">
         {!hideNavbarRoutes.includes(location.pathname) && <Navbar setSection={() => {}} />}
         <Routes>
           {user ? (
@@ -57,6 +56,7 @@ const App = () => {
           <Route path="/about" element={<Nosotros />} />
           <Route path="/contact" element={<Contacto />} />
           <Route path="/menu" element={<Menu />} />
+          <Route path="/create-your-own" element={<CreateYourOwn />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Box>

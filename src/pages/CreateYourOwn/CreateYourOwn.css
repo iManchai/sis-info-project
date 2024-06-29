@@ -1,0 +1,28 @@
+.create-your-own {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .create-your-own-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .create-your-own-text {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .create-your-own-images {
+    flex: 1;
+    text-align: right;
+  }
+  
+  .create-your-own-images img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  
+  
