@@ -12,6 +12,8 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import Perfil from './pages/ProfilePage/Perfil';
 import Nosotros from './pages/AboutUsPage/Nosotros';
 import getUser from './controllers/users';
+import { useEffect, useState } from 'react';
+import AdminPage from './pages/AdminPage/AdminPage';
 
 const theme = createTheme({
   palette: {
@@ -32,6 +34,17 @@ const theme = createTheme({
 const App = () => {
   const navigate = useNavigate();
   const user = useUser()
+  const [currentUser, setCurrentUser] = useState(null)
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        const userData = await getUser(user.uid)
+        setCurrentUser(userData)
+      }
+    }
+    fetchUserData()
+  }, [user])
 
   return (
     <ThemeProvider theme={theme}>
@@ -41,6 +54,7 @@ const App = () => {
             <Route path="/profile" element={<Perfil />} />
             <Route path="/login" element={<Navigate replace to="/"/>} />
             <Route path="/register" element={<Navigate replace to="/"/>} />
+            {currentUser && currentUser.isAdmin && <Route path="/admin" element={<AdminPage />} />}
           </> :
           <>
             <Route path="/login" element={<LoginForm navigate={navigate}/>} />
