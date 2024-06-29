@@ -36,6 +36,34 @@ const mockOrderItems = [
     price: 12,
     quantity: 10,
   },
+  {
+    id: 4,
+    name: 'Salmon Roll',
+    description: 'Sushi Roll',
+    price: 12,
+    quantity: 10,
+  },
+  {
+    id: 4,
+    name: 'Salmon Roll',
+    description: 'Sushi Roll',
+    price: 12,
+    quantity: 10,
+  },
+  {
+    id: 4,
+    name: 'Salmon Roll',
+    description: 'Sushi Roll',
+    price: 12,
+    quantity: 10,
+  },
+  {
+    id: 4,
+    name: 'Salmon Roll',
+    description: 'Sushi Roll',
+    price: 12,
+    quantity: 10,
+  },
 ];
 
 export default function Paypage({ initialOrderItems = mockOrderItems }) {
@@ -53,7 +81,7 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
   const total = subtotal + delivery;
 
   return (
-    <Box>
+    <Box className="Box">
       <Navbar />
       <section className="pedido_section">
         <div className="pedido">
@@ -81,7 +109,10 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
         </div>
       </section>
 
+      <Footer className="Footer" />
+
       
+
     </Box>
   );
 }
