@@ -5,7 +5,10 @@ export async function getPlates() {
   const plateCollections = collection(db, 'plates');
 
   const plateDocs = await getDocs(plateCollections);
-  const plates = plateDocs.docs.map(doc => doc.data())
+  const plates = plateDocs.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }))
 
   return plates
 }
