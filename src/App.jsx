@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from './components/MenuSection/Menu';
+import Menu from './pages/Menu/Menu';
 import Contacto from './components/Contacto';
 import LoginForm from './pages/LoginForm/LoginForm';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
@@ -15,6 +15,7 @@ import Nosotros from './pages/AboutUsPage/Nosotros';
 import Navbar from './components/Navbar/Navbar';
 import Paypage from './pages/PayPage/Paypage';
 import SeePlate from './pages/SeePlate/SeePlate';
+
 
 
 const theme = createTheme({
