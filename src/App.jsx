@@ -14,6 +14,9 @@ import Perfil from './pages/ProfilePage/Perfil';
 import Nosotros from './pages/AboutUsPage/Nosotros';
 import Navbar from './components/Navbar/Navbar';
 import Paypage from './pages/PayPage/Paypage';
+import SeePlate from './pages/SeePlate/SeePlate';
+
+
 
 const theme = createTheme({
   palette: {
@@ -47,13 +50,19 @@ const App = () => {
               <Route path="/profile" element={<Perfil />} />
               <Route path="/login" element={<Navigate replace to="/" />} />
               <Route path="/register" element={<Navigate replace to="/" />} />
-              <Route path='/order' element={<Paypage navigate={navigate}/>}/>
+              <Route path='/order' element={<Paypage navigate={navigate}/>}/ >
+              <Route path='/SeePLate' element={<SeePlate navigate={navigate} />} />
+  
+
+
 
             </>
           ) : (
             <>
               <Route path="/login" element={<LoginForm navigate={navigate} />} />
-              <Route path="/register" element={<RegisterPage navigate={navigate} />} />
+              <Route path="/register" element={<RegisterPage navigate={navigate} />}
+               />
+
             </>
           )}
           <Route path="/" element={<LandingPage navigate={navigate} />} />
@@ -62,6 +71,7 @@ const App = () => {
           <Route path="/menu" element={<Menu />} />
           <Route path="/create-your-own" element={<CreateYourOwn />} />
           <Route path="*" element={<NotFoundPage />} />
+
 
         </Routes>
       </Box>
