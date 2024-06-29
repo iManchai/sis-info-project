@@ -41,11 +41,11 @@ const App = () => {
             <Route path="/profile" element={<Perfil />} />
             <Route path="/login" element={<Navigate replace to="/"/>} />
             <Route path="/register" element={<Navigate replace to="/"/>} />
+            <Route path='/order' element={<Paypage navigate={navigate}/>}/>
           </> :
           <>
             <Route path="/login" element={<LoginForm navigate={navigate}/>} />
             <Route path="/register" element={<RegisterPage navigate={navigate}/>} />
-            <Route path='/Pay' element={<Paypage navigate={navigate}/>}/>
           </>
           }
           <Route path="/" element={<LandingPage navigate={navigate}/>} />

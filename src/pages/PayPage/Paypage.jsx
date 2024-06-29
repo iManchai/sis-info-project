@@ -1,8 +1,9 @@
 import './Paypage.css';
 import Navbar from '../../components/Navbar/Navbar';
 import { Box } from '@mui/material';
-import Resume from '../../components/Resume/Resume';
+import Order_item from '../../components/Order/Order_item';
 import Paybutton from '../../components/Paypalbutton';
+import Footer from '../../components/Footer/Footer';
 
 export default function Paypage({ navigate }) {
   return (
@@ -11,12 +12,15 @@ export default function Paypage({ navigate }) {
 
       <section>
         <div className="pedido">
-            <h1>PEDIDO</h1>
-            <div className="divider"></div>
+            <h1 className='pedi'>PEDIDO</h1>
+            <div className="divider" style={{paddingRight:'5rem'}}></div>
 
+            <Order_item />
+            <Order_item />
 
-            <Resume></Resume>
+            
 
+            
 
 
 
@@ -42,6 +46,7 @@ export default function Paypage({ navigate }) {
                 </div>
 
                 <Paybutton />
+                
 
 
                 
@@ -54,6 +59,9 @@ export default function Paypage({ navigate }) {
 
         </div>
       </section>
+      <Footer></Footer>
+
     </Box>
+
   );
 }

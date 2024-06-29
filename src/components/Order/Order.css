@@ -1,0 +1,39 @@
+.FoodItem{
+    display: flex;
+}
+
+.content{
+    margin-left: 1rem;
+    width: 30%;
+    height: 100%;
+}
+
+.name_food{
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #2f6a9f;
+    height: auto;
+}
+
+.description{
+    margin-top: 0;
+}
+
+.price{
+    display:flex;
+    flex-direction: column;
+    margin-right: 3rem;
+    align-items: center;
+    
+
+
+}
+
+.amount_counter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
