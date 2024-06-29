@@ -1,0 +1,68 @@
+
+
+
+.pedido{
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    padding-top: 4rem;
+    flex-direction: column;
+    padding-left: 4rem  ;
+    gap: 3rem;
+}
+
+.resume{
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 4rem;
+}
+
+
+section{
+    display: flex;
+    flex-wrap: nowrap;
+
+}
+
+.pedi{
+    padding-top: 4rem;
+    margin: 0;
+    font-size: 5rem;
+    font-weight: 700;
+    color: #2f6a9f;
+}
+
+.square{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+    height: 30rem;
+    width: 40rem;
+    border: solid 3px;
+    border-radius: 15px;
+    align-items: center;
+
+    
+    
+}
+h2{
+    font-size: 2.5rem;
+    margin-left: 3rem;
+}
+
+.total{
+    font-size: 1.2rem;
+    font-weight: 700;
+    gap: 20rem;
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   
+
+}
+
+
+
+

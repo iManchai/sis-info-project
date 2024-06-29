@@ -40,11 +40,14 @@ const App = () => {
       <Box className="page">
         {!hideNavbarRoutes.includes(location.pathname) && <Navbar setSection={() => {}} />}
         <Routes>
+
           {user ? (
             <>
               <Route path="/profile" element={<Perfil />} />
               <Route path="/login" element={<Navigate replace to="/" />} />
               <Route path="/register" element={<Navigate replace to="/" />} />
+              <Route path='/order' element={<Paypage navigate={navigate}/>}/>
+
             </>
           ) : (
             <>
@@ -58,6 +61,7 @@ const App = () => {
           <Route path="/menu" element={<Menu />} />
           <Route path="/create-your-own" element={<CreateYourOwn />} />
           <Route path="*" element={<NotFoundPage />} />
+
         </Routes>
       </Box>
     </ThemeProvider>
