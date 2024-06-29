@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -11,11 +11,25 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Avatar, Box } from '@mui/material';
 import { logOut } from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
+import getUser from '../../controllers/users';
 
 const Navbar = () => {
 
   const user = useUser()
   const navigate = useNavigate()
+
+  const [currentUser, setCurrentUser] = useState(null)
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        const userData = await getUser(user.uid)
+        setCurrentUser(userData)
+      }
+    }
+    fetchUserData()
+  }, [user])
+
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#ffffff', color: '#f2565b' }} className="navbar">
@@ -37,7 +51,8 @@ const Navbar = () => {
           alignItems: 'center'
         
         }}>
-        <IconButton color="inherit" onClick={() => navigate('/order')} className="nav-button order-button"><ShoppingCartIcon /></IconButton>
+        {currentUser && currentUser.isAdmin && <Button color="inherit" onClick={() => navigate('/admin')}>Admin</Button>}
+        <IconButton color="inherit" onClick={() => navigate('/order')} className="order-button"><ShoppingCartIcon /></IconButton>
         <Avatar src={user.photoURL} onClick={() => navigate('/profile')} />
         <Button onClick={async () => await logOut()}>Log out</Button>
         </Box>
