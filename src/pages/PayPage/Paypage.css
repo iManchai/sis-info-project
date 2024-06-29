@@ -20,7 +20,7 @@
 }
 
 
-section{
+.pedido_section{
     display: flex;
     flex-wrap: nowrap;
 
@@ -64,5 +64,35 @@ h2{
 }
 
 
+@media (width < 1600px){
+    .pedido_section{
+        flex-direction: column;
+
+    }
+    .pedido{
+        width: 100vw;
+        height: 50vh;
+    }
+
+    .resume{
+        width: 100vw;
+        height: 50vh;
+        padding: 0;
+    }
+
+    .square{
+        margin: 0;
+    }
+
+    
+
+
+
+    
+    
+      
+    }
+    
+    
 
 

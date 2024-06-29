@@ -4,6 +4,8 @@ import TextField from '@mui/material/TextField';
 import './Order.css';
 
 export default function Amount() {
+  
+
   return (
     <div className="amount_counter">
       <Button
