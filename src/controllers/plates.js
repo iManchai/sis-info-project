@@ -1,4 +1,4 @@
-import { addDoc, collection, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 export async function getPlates() {
@@ -50,6 +50,8 @@ export async function updatePlate(id, { title, type, description, price, image} 
   });
 }
 
-export async function deletePlate() {
+export async function deletePlate(id) {
+  const plateCollections = collection(db, 'plates');
 
+  await deleteDoc(doc(plateCollections, id));
 }

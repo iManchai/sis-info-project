@@ -1,15 +1,31 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, TextField, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, MenuItem, TextField, Typography } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { useTheme } from "@emotion/react";
 import { DataGrid } from "@mui/x-data-grid";
 import { getPlates } from "../../controllers/plates";
 import { useEffect, useState } from "react";
+import { set } from "firebase/database";
 
 export default function AdminPage() {
 
   const theme = useTheme()
   const [plates, setPlates] = useState([])
+
+  const plateTypes = [
+    {
+      value: 'bowl',
+      label: 'Poke Bowl'
+    },
+    {
+      value: 'burrito',
+      label: 'Poke Burrito'
+    },
+    {
+      value: 'entrada',
+      label: 'Entrada'
+    }
+  ]
 
   useEffect(() => {
     const fetchPlates = async () => {
@@ -21,7 +37,14 @@ export default function AdminPage() {
 
   // Modal for adding/modifying a new plate'
   const [open, setOpen] = useState(false)
+  const [selectedPlate, setSelectedPlate] = useState(undefined)
 
+  const [name, setName] = useState('')
+  const [type, setType] = useState('')
+  const [price, setPrice] = useState(0)
+  const [description, setDescription] = useState('')
+  const [image, setImage] = useState(null)
+  const [urlImage, setUrlImage] = useState('')
 
   // Datagrid
   const columns = [
@@ -49,11 +72,11 @@ export default function AdminPage() {
 
   const rows = plates.map(plate => {
     return {
-      id: plate.id,
-      name: plate.name,
-      type: plate.type,
-      price: plate.price,
-      description: plate.description
+      id: plate.id || '-',
+      name: plate.name || '-',
+      type: plate.type || '-',
+      price: plate.price || '-',
+      description: plate.description || '-',
     }
   }
 )
@@ -89,9 +112,17 @@ console.log(plates)
             Panel de Administrador
           </Typography>
           <Divider />
-          <DataGrid rows={rows} columns={columns} pageSize={5} sx={{
+          <DataGrid rows={rows} columns={columns} pageSize={5} 
+          sx={{
             marginTop: '2rem'
-          }} />
+          }} 
+          onRowClick={(row) => {
+            const plateId = row.id
+            const plate = plates.find(({ id }) => id === plateId)
+            setSelectedPlate(plate)
+            setOpen(true)
+          }}
+          />
           <Button variant="contained" color="primary" sx={{
             marginTop: '2rem',
             width: '200px',
@@ -102,7 +133,8 @@ console.log(plates)
       </Box>
       <Footer />
 
-      <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby="form-dialog-title" sx={{
+      {/* Form to create, modify or delete plate */}
+      <Dialog open={open} onClose={() => {setOpen(false); setSelectedPlate(undefined)}} aria-labelledby="form-dialog-title" sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -133,6 +165,8 @@ console.log(plates)
           }
         }}>
           <TextField required id="name-textfield" label="Nombre" type="text" fullWidth
+            onChange={(e) => setName(e.target.value)}
+            value={selectedPlate ? selectedPlate.name : name}
             sx={{
               flexBasis: '100%',
               [theme.breakpoints.up('lg')]: {
@@ -141,6 +175,8 @@ console.log(plates)
             }}
           />
           <TextField required id="description-textfield" label="Precio" type="number" fullWidth
+            onChange={(e) => setPrice(e.target.value)}
+            value={selectedPlate ? selectedPlate.price : price}
             sx={{
               flexBasis: '100%',
               [theme.breakpoints.up('lg')]: {
@@ -148,7 +184,24 @@ console.log(plates)
               }
             }}
           />
+          <TextField required id="description-textfield" label="Tipo" select fullWidth
+            onChange={(e) => setType(e.target.value)}
+            value={selectedPlate ? selectedPlate.type : type}
+            sx={{
+              flexBasis: '100%',
+            }}
+          >
+            {plateTypes.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField required id="description-textfield" label="Descripción" type="text" fullWidth
+            onChange={(e) => setDescription(e.target.value)}
+            value={selectedPlate ? selectedPlate.description : description}
+            multiline
+            rows={4}
             sx={{
               flexBasis: '100%',
             }}
@@ -160,10 +213,10 @@ console.log(plates)
             multiple
             type="file"
           />
-          <label htmlFor="raised-button-file">
+          <label htmlFor="raised-button-file" style={{ width: '100%'}}>
           <Button variant="raised" component="span" sx={{ 
             backgroundColor: theme.palette.primary.main,
-            flexBasis: '100%',
+            width: '100%',
             color: 'white',
             textTransform: 'uppercase',
             fontWeight: 'bold',
