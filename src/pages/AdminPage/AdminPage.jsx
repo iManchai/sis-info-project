@@ -6,6 +6,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import { createPlate, deletePlate, getPlates, updatePlate } from "../../controllers/plates";
 import { useEffect, useState } from "react";
 import { uploadImage } from "../../controllers/files";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function AdminPage() {
 
@@ -63,6 +66,21 @@ export default function AdminPage() {
       setImage(null)
     }
   }, [selectedPlate])
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(errorMessage, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => setError(false)
+      });
+    }
+  }, [isError, errorMessage]);
 
   // Datagrid
   const columns = [
@@ -155,15 +173,14 @@ async function handleSubmit() {
     }
   } catch (error) {
     // Handle error (e.g., show an error message)
-    console.error("An error occurred:", error);
     setErrorMessage(error.message);
+    setError(true);
+    console.error("An error occurred:", error);
   } finally {
     setIsLoading(false); // Stop loading regardless of outcome
     setOpen(false);
   }
 }
-
-console.log(errorMessage)
 
 async function handleDelete() {
   setIsLoading(true); // Start loading
@@ -172,8 +189,9 @@ async function handleDelete() {
     // Handle success (e.g., show a success message or update the UI)
   } catch (error) {
     // Handle error (e.g., show an error message)
-    console.error("An error occurred:", error);
     setErrorMessage(error.message);
+    setError(true)
+    console.error("An error occurred:", error);
   } finally {
     setIsLoading(false); // Stop loading regardless of outcome
     setOpen(false);
@@ -335,9 +353,6 @@ async function handleDelete() {
           <Typography>
             {image ? (image.name || image) : 'No se ha seleccionado una imagen'}
           </Typography>
-          <Typography>
-            {errorMessage}
-          </Typography>
         </DialogContent>
         <DialogActions>
           {isLoading ? <Button disabled>Agregando...</Button> : <Button onClick={handleSubmit}>{selectedPlate ? "Modificar Plato" : "Agregar plato"}</Button>}
@@ -346,6 +361,8 @@ async function handleDelete() {
           : null}
         </DialogActions>
       </Dialog>
+
+      <ToastContainer />
   </Box>
   )
 }
