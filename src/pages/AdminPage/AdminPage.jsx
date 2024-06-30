@@ -44,6 +44,25 @@ export default function AdminPage() {
   const [price, setPrice] = useState(0)
   const [description, setDescription] = useState('')
   const [image, setImage] = useState(null)
+  const [isError, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if (selectedPlate) {
+      setName(selectedPlate.name)
+      setType(selectedPlate.type)
+      setPrice(selectedPlate.price)
+      setDescription(selectedPlate.description)
+      setImage(selectedPlate.image)
+    } else {
+      setName('')
+      setType('')
+      setPrice(0)
+      setDescription('')
+      setImage(null)
+    }
+  }, [selectedPlate])
 
   // Datagrid
   const columns = [
@@ -80,47 +99,85 @@ export default function AdminPage() {
   }
 )
 
-// Submit
-const handleSubmit = async () => {
-  if (selectedPlate !== undefined) {
-    if (image) {
-      const result = await uploadImage(image)
-      console.log(result)
-      await updatePlate(selectedPlate.id, {
-        name,
-        type,
-        price,
-        description,
-        image: result
-      })
-    } else {
-      await updatePlate(selectedPlate.id, {
-        name,
-        type,
-        price,
-        description,
-        image: selectedPlate.image
-      })
-    }
-  } else {
-    const result = await uploadImage(image)
-    console.log(result)
-    await createPlate({
-      name,
-      type,
-      price,
-      description,
-      image: result
-    })
+function validateInputs({ price, name, type, image, description }) {
+  if (price === 0) {
+    throw new Error('El precio no puede ser 0');
   }
-  setOpen(false)
-  window.location.reload()
+  if (!name.trim()) {
+    throw new Error('El nombre no puede estar vacío');
+  }
+  if (!type) {
+    throw new Error('Debe seleccionar un tipo');
+  }
+  if (!image) {
+    throw new Error('Debe seleccionar una imagen');
+  }
+  if (!description.trim()) {
+    throw new Error('La descripción no puede estar vacía');
+  }
 }
 
-const handleDelete = async () => {
-  await deletePlate(selectedPlate.id)
-  setOpen(false)
-  window.location.reload()
+// Submit
+async function handleSubmit() {
+  setIsLoading(true);
+  try {
+    validateInputs({ price, name, type, image, description })
+
+    if (selectedPlate !== undefined) {
+      let result;
+      if (image.name) {
+        result = await uploadImage(image);
+        await updatePlate(selectedPlate.id, {
+          name: name,
+          type: type,
+          description: description,
+          price: price,
+          image: result
+        });
+      } else {
+        await updatePlate(selectedPlate.id, {
+          name: name,
+          type: type,
+          description: description,
+          price: price,
+          image: selectedPlate.image
+        });
+      }
+    } else {
+      const result = await uploadImage(image);
+      await createPlate({
+        name: name,
+        type: type,
+        description: description,
+        price: price,
+        image: result
+      });
+    }
+  } catch (error) {
+    // Handle error (e.g., show an error message)
+    console.error("An error occurred:", error);
+    setErrorMessage(error.message);
+  } finally {
+    setIsLoading(false); // Stop loading regardless of outcome
+    setOpen(false);
+  }
+}
+
+console.log(errorMessage)
+
+async function handleDelete() {
+  setIsLoading(true); // Start loading
+  try {
+    await deletePlate(selectedPlate.id);
+    // Handle success (e.g., show a success message or update the UI)
+  } catch (error) {
+    // Handle error (e.g., show an error message)
+    console.error("An error occurred:", error);
+    setErrorMessage(error.message);
+  } finally {
+    setIsLoading(false); // Stop loading regardless of outcome
+    setOpen(false);
+  }
 }
 
   return (
@@ -174,7 +231,13 @@ const handleDelete = async () => {
       <Footer />
 
       {/* Form to create, modify or delete plate */}
-      <Dialog open={open} onClose={() => {setOpen(false); setSelectedPlate(undefined)}} aria-labelledby="form-dialog-title" sx={{
+      <Dialog open={open} 
+      onClose={() => {
+        setOpen(false); 
+        setSelectedPlate(undefined); 
+      }} 
+      aria-labelledby="form-dialog-title" 
+      sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -206,7 +269,7 @@ const handleDelete = async () => {
         }}>
           <TextField required id="name-textfield" label="Nombre" type="text" fullWidth
             onChange={(e) => setName(e.target.value)}
-            value={selectedPlate ? selectedPlate.name : name}
+            value={name}
             sx={{
               flexBasis: '100%',
               [theme.breakpoints.up('lg')]: {
@@ -216,7 +279,7 @@ const handleDelete = async () => {
           />
           <TextField required id="description-textfield" label="Precio" type="number" fullWidth
             onChange={(e) => setPrice(e.target.value)}
-            value={selectedPlate ? selectedPlate.price : price}
+            value={price}
             sx={{
               flexBasis: '100%',
               [theme.breakpoints.up('lg')]: {
@@ -226,7 +289,7 @@ const handleDelete = async () => {
           />
           <TextField required id="description-textfield" label="Tipo" select fullWidth
             onChange={(e) => setType(e.target.value)}
-            value={selectedPlate ? selectedPlate.type : type}
+            value={type}
             sx={{
               flexBasis: '100%',
             }}
@@ -239,7 +302,7 @@ const handleDelete = async () => {
           </TextField>
           <TextField required id="description-textfield" label="Descripción" type="text" fullWidth
             onChange={(e) => setDescription(e.target.value)}
-            value={selectedPlate ? selectedPlate.description : description}
+            value={description}
             multiline
             rows={4}
             sx={{
@@ -270,12 +333,17 @@ const handleDelete = async () => {
           </Button> 
           </label> 
           <Typography>
-            {image ? image.name : 'No se ha seleccionado una imagen'}
+            {image ? (image.name || image) : 'No se ha seleccionado una imagen'}
+          </Typography>
+          <Typography>
+            {errorMessage}
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSubmit}>{selectedPlate ? "Modificar Plato" : "Agregar plato"}</Button>
-          {selectedPlate ? <Button onClick={handleDelete}>Borrar plato</Button> : null}
+          {isLoading ? <Button disabled>Agregando...</Button> : <Button onClick={handleSubmit}>{selectedPlate ? "Modificar Plato" : "Agregar plato"}</Button>}
+          {selectedPlate ? 
+          (isLoading ?  <Button disabled>Borrando...</Button>:  <Button onClick={handleDelete}>Borrar plato</Button> )
+          : null}
         </DialogActions>
       </Dialog>
   </Box>

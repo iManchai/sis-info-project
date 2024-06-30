@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 export async function getPlates() {
@@ -22,11 +22,11 @@ export async function getPlate(id) {
   return plate
 }
 
-export async function createPlate({title, type, description, price, image} ) {
+export async function createPlate({name, type, description, price, image} ) {
   const plateCollections = collection(db, 'plates');
 
   const plateDoc = await addDoc(plateCollections, {
-    title,
+    name,
     type,
     description,
     price,
@@ -38,11 +38,11 @@ export async function createPlate({title, type, description, price, image} ) {
   return id
 }
 
-export async function updatePlate(id, { title, type, description, price, image} ) {
+export async function updatePlate(id, { name, type, description, price, image} ) {
   const plateCollections = collection(db, 'plates');
 
   await updateDoc(doc(plateCollections, id), {
-    title,
+    name,
     type,
     description,
     price,
