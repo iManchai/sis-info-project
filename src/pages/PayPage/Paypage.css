@@ -77,54 +77,58 @@ h2 {
     }
 
     .pedido {
-        width: 100vw;
-        height: auto; /* Deja que la altura se ajuste automáticamente */
-        padding: 0; /* Ajusta el relleno para pantallas más pequeñas */
+        justify-content:center ;
+        align-items: center;
+        width: 80vw;
+        
+        height: auto;
+        padding: 0;
     }
 
     .resume {
         width: 50vw;
-        height: auto; /* Deja que la altura se ajuste automáticamente */
-        padding: 1rem; /* Ajusta el relleno para pantallas más pequeñas */
+        height: auto;
+        padding: 1rem;
         font-size: 0.2rem;
         padding: 0;
     }
 
     .square {
         margin: 0;
-        width: 50%; /* Ajusta el ancho para pantallas más pequeñas */
-        height: 50%; /* Deja que la altura se ajuste automáticamente */
-        margin-top: 2rem; /* Añade un margen superior para el espaciado */
+        width: 50%;
+        height: 50%;
+        margin-top: 2rem;
     }
 
     .total {
-        flex-direction: column; /* Cambia la dirección del flex para pantallas más pequeñas */
-        gap: 1rem; /* Ajusta el espacio entre los elementos */
+        flex-direction: column;
+        gap: 1rem;
     }
 }
 
-
-
 @media (max-width: 768px) {
     .pedi {
-        font-size: 3rem; /
+        font-size: 3rem;
     }
 
     h2 {
-        font-size: 0.8rem; 
+        font-size: 0.8rem;
         margin: 0;
-      
-    }
-    .total {
-        font-size: 1rem; /
     }
 
-    .square{
+    .resume {
+        width: 80%;
+    }
+    .total {
+        font-size: 1rem;
+    }
+
+    .square {
         width: 100%;
     }
 
     .resume img, .pedido img {
-        max-width: 100%; 
-        height: auto; 
+        max-width: 100%;
+        height: auto;
     }
 }

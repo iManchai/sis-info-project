@@ -17,9 +17,22 @@ export default function Amount({ initialAmount, onAmountChange }) {
 
   return (
     <Box className="quantity-selector">
-      <Button variant="outlined" onClick={() => handleQuantityChange(-1)}>-</Button>
+      <Button variant="outlined" onClick={() => handleQuantityChange(-1)}
+      sx={{
+
+        minWidth:"0.1rem",
+        borderRadius:"150px",
+      }}
+      
+      >-</Button>
       <Box className="quantity-display">{quantity}</Box>
-      <Button variant="outlined" onClick={() => handleQuantityChange(1)}>+</Button>
+      <Button variant="outlined" onClick={() => handleQuantityChange(1)} 
+        sx={{
+
+          minWidth:"0.1rem",
+          borderRadius:"150px",
+        }}
+      >+</Button>
     </Box>
   );
 }

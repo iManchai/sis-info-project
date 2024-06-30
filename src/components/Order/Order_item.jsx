@@ -14,29 +14,19 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
 
   return (
     <div className="FoodItem">
-      <img src={IMG} alt={name} />
+      <img src={IMG} alt={name} className='image_fooditem'/>
       <div className="content">
         <p className='name_food'>{name}</p>
         <p className='description'>{description}</p>
         <Button
           variant="contained"
-          sx={{
-            backgroundColor: '#2F699F',
-            color: 'white',
-            boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-            borderRadius: '25px',
-            height: '4rem',
-            padding: '0.7rem',
-            letterSpacing: '0.3rem',
-            fontSize: '1.2rem',
-            fontWeight: '800',
-          }}
+          className="remove-button"
           onClick={() => onRemoveItem(id)}
         >
           Eliminar
         </Button>
       </div>
-
+      <div className='price_container'>
       <div className='price'>
         <p>Precio</p>
         <div>{`$${price}`}</div>
@@ -50,6 +40,7 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
       <div className="price">
         <p>Total</p>
         <div>{`$${price * quantity}`}</div>
+      </div>
       </div>
     </div>
   );

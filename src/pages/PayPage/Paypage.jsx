@@ -17,14 +17,14 @@ const mockOrderItems = [
   },
   {
     id: 2,
-    name: 'Salmon Roll',
+    name: 'Salmon',
     description: 'Sushi Roll',
     price: 12,
     quantity: 10,
   },
   {
     id: 3,
-    name: 'Salmon Roll',
+    name: 'Salmon ',
     description: 'Sushi Roll',
     price: 12,
     quantity: 10,
@@ -48,7 +48,7 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
     return orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [orderItems]);
 
-  const delivery = 50; // Costo de entrega fijo, puedes cambiar esto según sea necesario
+  const delivery = 50;
   const total = subtotal + delivery;
 
   return (
