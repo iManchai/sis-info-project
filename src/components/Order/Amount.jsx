@@ -1,26 +1,30 @@
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-
+import { Box } from '@mui/material';
+import PropTypes from 'prop-types';
 import './Order.css';
 
-export default function Amount() {
-  
+export default function Amount({ initialAmount, onAmountChange }) {
+  const [quantity, setQuantity] = useState(initialAmount);
+
+  useEffect(() => {
+    onAmountChange(quantity);
+  }, [quantity, onAmountChange]);
+
+  const handleQuantityChange = (amount) => {
+    setQuantity(prevQuantity => Math.max(prevQuantity + amount, 0));
+  };
 
   return (
-    <div className="amount_counter">
-      <Button
-        variant="contained"
-        sx={{ borderRadius: '500px', marginRight: '5px', padding: '0', maxHeight: '30px', minWidth: '30px' }}
-      >
-        -
-      </Button>
-      <TextField id="outlined-basic" label="" variant="outlined" sx={{maxWidth:"3rem"}}/>
-      <Button
-        variant="contained"
-        sx={{ borderRadius: '500px', marginLeft: '5px', padding: '0', maxHeight: '30px', minWidth: '30px' }}
-      >
-        +
-      </Button>
-    </div>
+    <Box className="quantity-selector">
+      <Button variant="outlined" onClick={() => handleQuantityChange(-1)}>-</Button>
+      <Box className="quantity-display">{quantity}</Box>
+      <Button variant="outlined" onClick={() => handleQuantityChange(1)}>+</Button>
+    </Box>
   );
 }
+
+Amount.propTypes = {
+  initialAmount: PropTypes.number.isRequired,
+  onAmountChange: PropTypes.func.isRequired,
+};

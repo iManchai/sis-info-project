@@ -20,7 +20,7 @@ export default function Paybutton(){
           letterSpacing: '0.2rem',
           fontSize: '1rem',
           fontWeight: 'bold',
-          padding:"1rem 8rem ",
+          padding:" 0% 10%",
           marginBottom:'2rem',
 
           '&:hover': {

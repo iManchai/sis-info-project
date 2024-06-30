@@ -28,42 +28,7 @@ const mockOrderItems = [
     description: 'Sushi Roll',
     price: 12,
     quantity: 10,
-  },
-  {
-    id: 4,
-    name: 'Salmon Roll',
-    description: 'Sushi Roll',
-    price: 12,
-    quantity: 10,
-  },
-  {
-    id: 4,
-    name: 'Salmon Roll',
-    description: 'Sushi Roll',
-    price: 12,
-    quantity: 10,
-  },
-  {
-    id: 4,
-    name: 'Salmon Roll',
-    description: 'Sushi Roll',
-    price: 12,
-    quantity: 10,
-  },
-  {
-    id: 4,
-    name: 'Salmon Roll',
-    description: 'Sushi Roll',
-    price: 12,
-    quantity: 10,
-  },
-  {
-    id: 4,
-    name: 'Salmon Roll',
-    description: 'Sushi Roll',
-    price: 12,
-    quantity: 10,
-  },
+  }
 ];
 
 export default function Paypage({ initialOrderItems = mockOrderItems }) {
@@ -71,6 +36,12 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
 
   const handleRemoveItem = (itemId) => {
     setOrderItems(orderItems.filter(item => item.id !== itemId));
+  };
+
+  const handleUpdateQuantity = (itemId, newQuantity) => {
+    setOrderItems(orderItems.map(item => 
+      item.id === itemId ? { ...item, quantity: newQuantity } : item
+    ));
   };
 
   const subtotal = useMemo(() => {
@@ -87,8 +58,13 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
         <div className="pedido">
           <h1 className="pedi">PEDIDO</h1>
           <div className="divider" style={{ paddingRight: '5rem' }}></div>
-          {orderItems && orderItems.map((item, index) => (
-            <OrderItem key={index} item={item} onRemoveItem={handleRemoveItem} />
+          {orderItems && orderItems.map((item) => (
+            <OrderItem
+              key={item.id}
+              item={item}
+              onRemoveItem={handleRemoveItem}
+              onUpdateQuantity={handleUpdateQuantity}
+            />
           ))}
         </div>
         <div className="resume">
@@ -110,9 +86,6 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
       </section>
 
       <Footer className="Footer" />
-
-      
-
     </Box>
   );
 }
@@ -120,4 +93,3 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
 Paypage.propTypes = {
   initialOrderItems: PropTypes.array,
 };
-

@@ -5,8 +5,12 @@ import Button from '@mui/material/Button';
 import Amount from './Amount';
 import PropTypes from 'prop-types';
 
-export default function OrderItem({ item, onRemoveItem }) {
+export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
   const { id, name, description, price, quantity } = item;
+
+  const handleQuantityChange = (newQuantity) => {
+    onUpdateQuantity(id, newQuantity);
+  };
 
   return (
     <div className="FoodItem">
@@ -40,7 +44,7 @@ export default function OrderItem({ item, onRemoveItem }) {
 
       <div className="price">
         <p>Cantidad</p>
-        <Amount initialAmount={quantity} />
+        <Amount initialAmount={quantity} onAmountChange={handleQuantityChange} />
       </div>
 
       <div className="price">
@@ -60,4 +64,5 @@ OrderItem.propTypes = {
     quantity: PropTypes.number.isRequired,
   }).isRequired,
   onRemoveItem: PropTypes.func.isRequired,
+  onUpdateQuantity: PropTypes.func.isRequired,
 };

@@ -1,15 +1,15 @@
 .Box {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Asegura que ocupe al menos toda la altura visible */
+    min-height: 100vh; 
 }
 
 .pedido_section {
-    flex: 1; /* Ocupa el espacio restante entre el header y el footer */
+    flex: 1; 
     display: flex;
-    justify-content: space-between; /* Distribuye el espacio correctamente */
+    justify-content: space-between;
     padding: 4rem;
-    flex-direction: row; /* Asegura que los hijos estén en fila */
+    flex-direction: row; 
 }
 
 .pedido {
@@ -25,8 +25,8 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Alinea los elementos centralmente */
-    justify-content: flex-start; /* Ajusta la alineación según necesites */
+    align-items: center; 
+    justify-content: flex-start; 
     padding-top: 4rem;
 }
 
@@ -42,7 +42,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 10rem;
-    height: auto; /* Ajusta automáticamente la altura según el contenido */
+    height: auto; 
     width: 40rem;
     border: solid 3px;
     border-radius: 15px;
@@ -72,29 +72,59 @@ h2 {
 @media (max-width: 1600px) {
     .pedido_section {
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .pedido {
         width: 100vw;
         height: auto; /* Deja que la altura se ajuste automáticamente */
-        padding: 1rem; /* Ajusta el relleno para pantallas más pequeñas */
+        padding: 0; /* Ajusta el relleno para pantallas más pequeñas */
     }
 
     .resume {
-        width: 100vw;
+        width: 50vw;
         height: auto; /* Deja que la altura se ajuste automáticamente */
         padding: 1rem; /* Ajusta el relleno para pantallas más pequeñas */
+        font-size: 0.2rem;
+        padding: 0;
     }
 
     .square {
         margin: 0;
-        width: 90vw; /* Ajusta el ancho para pantallas más pequeñas */
-        height: auto; /* Deja que la altura se ajuste automáticamente */
+        width: 50%; /* Ajusta el ancho para pantallas más pequeñas */
+        height: 50%; /* Deja que la altura se ajuste automáticamente */
         margin-top: 2rem; /* Añade un margen superior para el espaciado */
     }
 
     .total {
         flex-direction: column; /* Cambia la dirección del flex para pantallas más pequeñas */
         gap: 1rem; /* Ajusta el espacio entre los elementos */
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .pedi {
+        font-size: 3rem; /
+    }
+
+    h2 {
+        font-size: 0.8rem; 
+        margin: 0;
+      
+    }
+    .total {
+        font-size: 1rem; /
+    }
+
+    .square{
+        width: 100%;
+    }
+
+    .resume img, .pedido img {
+        max-width: 100%; 
+        height: auto; 
     }
 }
