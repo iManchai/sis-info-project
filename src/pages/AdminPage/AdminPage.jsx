@@ -3,9 +3,9 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { useTheme } from "@emotion/react";
 import { DataGrid } from "@mui/x-data-grid";
-import { getPlates } from "../../controllers/plates";
+import { createPlate, deletePlate, getPlates, updatePlate } from "../../controllers/plates";
 import { useEffect, useState } from "react";
-import { set } from "firebase/database";
+import { uploadImage } from "../../controllers/files";
 
 export default function AdminPage() {
 
@@ -44,7 +44,6 @@ export default function AdminPage() {
   const [price, setPrice] = useState(0)
   const [description, setDescription] = useState('')
   const [image, setImage] = useState(null)
-  const [urlImage, setUrlImage] = useState('')
 
   // Datagrid
   const columns = [
@@ -81,7 +80,49 @@ export default function AdminPage() {
   }
 )
 
-console.log(plates)
+// Submit
+const handleSubmit = async () => {
+  if (selectedPlate !== undefined) {
+    if (image) {
+      const result = await uploadImage(image)
+      console.log(result)
+      await updatePlate(selectedPlate.id, {
+        name,
+        type,
+        price,
+        description,
+        image: result
+      })
+    } else {
+      await updatePlate(selectedPlate.id, {
+        name,
+        type,
+        price,
+        description,
+        image: selectedPlate.image
+      })
+    }
+  } else {
+    const result = await uploadImage(image)
+    console.log(result)
+    await createPlate({
+      name,
+      type,
+      price,
+      description,
+      image: result
+    })
+  }
+  setOpen(false)
+  window.location.reload()
+}
+
+const handleDelete = async () => {
+  await deletePlate(selectedPlate.id)
+  setOpen(false)
+  window.location.reload()
+}
+
   return (
     <Box sx={{
       display: 'flex',
@@ -96,7 +137,6 @@ console.log(plates)
         padding: '3rem',
         marginTop: '64px',
         flexGrow: 1,
-      
       }}>
         <Typography variant="h2" sx={{
             color: theme.palette.secondary.main,
@@ -210,8 +250,8 @@ console.log(plates)
             accept="image/*"
             style={{ display: 'none' }}
             id="raised-button-file"
-            multiple
             type="file"
+            onChange={(e) => setImage(e.target.files[0])}
           />
           <label htmlFor="raised-button-file" style={{ width: '100%'}}>
           <Button variant="raised" component="span" sx={{ 
@@ -227,12 +267,15 @@ console.log(plates)
           }}
           >
             Subir foto
-          </Button>
+          </Button> 
           </label> 
+          <Typography>
+            {image ? image.name : 'No se ha seleccionado una imagen'}
+          </Typography>
         </DialogContent>
         <DialogActions>
-          <Button>Agregar nuevo plato</Button>
-          <Button>Borrar plato</Button>
+          <Button onClick={handleSubmit}>{selectedPlate ? "Modificar Plato" : "Agregar plato"}</Button>
+          {selectedPlate ? <Button onClick={handleDelete}>Borrar plato</Button> : null}
         </DialogActions>
       </Dialog>
   </Box>

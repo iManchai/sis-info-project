@@ -43,9 +43,6 @@ export async function signInWithGoogle() {
     const result = await signInWithPopup(auth, googleProvider)
     const additionalInfo = getAdditionalUserInfo(result)
   
-    console.log(result)
-    console.log(additionalInfo)
-  
     const usersCollection = collection(db, 'users')
 
     if (additionalInfo.isNewUser === true) {

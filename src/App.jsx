@@ -46,8 +46,6 @@ const App = () => {
     fetchUserData()
   }, [user])
 
-  console.log(currentUser)
-
   return (
     <ThemeProvider theme={theme}>
       <Box className='page'>
