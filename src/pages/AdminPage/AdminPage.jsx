@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, TextField, Typography } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { useTheme } from "@emotion/react";
@@ -18,6 +18,9 @@ export default function AdminPage() {
     }
     fetchPlates()
   }, [])
+
+  // Modal for adding/modifying a new plate'
+  const [open, setOpen] = useState(false)
 
 
   // Datagrid
@@ -93,10 +96,92 @@ console.log(plates)
             marginTop: '2rem',
             width: '200px',
             alignSelf: 'center'
-          }}>Agregar Plato
+          }}
+          onClick={() => setOpen(true)}>Agregar Plato
           </Button>
       </Box>
       <Footer />
+
+      <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby="form-dialog-title" sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem'
+      }}>
+        <DialogTitle id="alert-dialog-title">
+          <Typography variant="h4" sx={{
+            color: theme.palette.secondary.main,
+            fontWeight: 'bold',
+            margin: 0,
+            textTransform: 'uppercase',
+            textAlign: 'center',
+          }}>
+            Agregar Plato
+          </Typography>
+        </DialogTitle>
+        <Divider />
+        <DialogContent sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          padding: '2rem',
+          flexWrap: 'wrap',
+
+          [theme.breakpoints.up('lg')]: {
+            flexDirection: 'row',
+          }
+        }}>
+          <TextField required id="name-textfield" label="Nombre" type="text" fullWidth
+            sx={{
+              flexBasis: '100%',
+              [theme.breakpoints.up('lg')]: {
+                flexBasis: 'calc(50% - 0.5rem)'
+              }
+            }}
+          />
+          <TextField required id="description-textfield" label="Precio" type="number" fullWidth
+            sx={{
+              flexBasis: '100%',
+              [theme.breakpoints.up('lg')]: {
+                flexBasis: 'calc(50% - 0.5rem)'
+              }
+            }}
+          />
+          <TextField required id="description-textfield" label="Descripción" type="text" fullWidth
+            sx={{
+              flexBasis: '100%',
+            }}
+          />
+          <input
+            accept="image/*"
+            style={{ display: 'none' }}
+            id="raised-button-file"
+            multiple
+            type="file"
+          />
+          <label htmlFor="raised-button-file">
+          <Button variant="raised" component="span" sx={{ 
+            backgroundColor: theme.palette.primary.main,
+            flexBasis: '100%',
+            color: 'white',
+            textTransform: 'uppercase',
+            fontWeight: 'bold',
+
+            '&:hover': {
+              backgroundColor: '#f2565b'
+            }
+          }}
+          >
+            Subir foto
+          </Button>
+          </label> 
+        </DialogContent>
+        <DialogActions>
+          <Button>Agregar nuevo plato</Button>
+          <Button>Borrar plato</Button>
+        </DialogActions>
+      </Dialog>
   </Box>
   )
 }
