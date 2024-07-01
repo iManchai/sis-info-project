@@ -1,0 +1,134 @@
+.Box {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+.pedido_section {
+    flex: 1; 
+    display: flex;
+    justify-content: space-between;
+    padding: 4rem;
+    flex-direction: row; 
+}
+
+.pedido {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-top: 4rem;
+    padding-left: 4rem;
+}
+
+.resume {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start; 
+    padding-top: 4rem;
+}
+
+.pedi {
+    padding-top: 4rem;
+    margin: 0;
+    font-size: 5rem;
+    font-weight: 700;
+    color: #2f6a9f;
+}
+
+.square {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+    height: auto; 
+    width: 40rem;
+    border: solid 3px;
+    border-radius: 15px;
+    align-items: center;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-left: 3rem;
+}
+
+.total {
+    font-size: 1.2rem;
+    font-weight: 700;
+    gap: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Footer {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    text-align: center;
+}
+
+@media (max-width: 1600px) {
+    .pedido_section {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pedido {
+        justify-content:center ;
+        align-items: center;
+        width: 80vw;
+        
+        height: auto;
+        padding: 0;
+    }
+
+    .resume {
+        width: 50vw;
+        height: auto;
+        padding: 1rem;
+        font-size: 0.2rem;
+        padding: 0;
+    }
+
+    .square {
+        margin: 0;
+        width: 50%;
+        height: 50%;
+        margin-top: 2rem;
+    }
+
+    .total {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .pedi {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 0.8rem;
+        margin: 0;
+    }
+
+    .resume {
+        width: 80%;
+    }
+    .total {
+        font-size: 1rem;
+    }
+
+    .square {
+        width: 100%;
+    }
+
+    .resume img, .pedido img {
+        max-width: 100%;
+        height: auto;
+    }
+}
