@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Footer from '../../Components/Footer/Footer';
 import Navbar from '../../Components/Navbar/Navbar';
-import { Box, Divider, Typography, TextField, FormGroup, Button } from "@mui/material"
+import { Box, Divider, Typography, TextField, FormGroup, Button, Hidden } from "@mui/material"
 import { useTheme } from '@emotion/react';
 import { db } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
@@ -14,23 +14,13 @@ const [nombre, setNombre] = useState("");
 const [email, setEmail] = useState("");
 const [feedback, setFeedback] = useState("");
 
-const form = document.querySelector('form');
-
-form.addEventListener('keypress', function (event) {
-  if (KeyboardEvent.code === 13 && feedback ) {
-    event.preventDefault();
-    form.submit();
-  }
-});
-
 const handleSubmit = (e) => {
   e.preventDefault()
 
   const commentsCollection = collection(db,'feedback')
   addDoc(commentsCollection, {name: nombre, email: email, feedback: feedback})
-  alert("added...")
+  alert("sended...")
 
-  setNombre("")
   setEmail("")
   setFeedback("")
 }
@@ -40,7 +30,7 @@ return (
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        width: '100%'
+        width: '100%',
       }}> 
         <Navbar/>
         <Box sx={{ 
@@ -48,6 +38,7 @@ return (
           flexDirection: 'column', 
           padding: '3rem',
           marginTop: '64px',
+          marginBottom: '16px', 
           flexGrow: 1, 
         }}> 
           <Typography variant='h2' sx={{
@@ -143,7 +134,7 @@ return (
               flexDirection: 'column',
               height: '217px',
               marginTop: '3rem',
-              marginBottom: '3rem'
+              gap: '1rem',
               }}>
               <TextField 
                 required
@@ -158,6 +149,23 @@ return (
                 onChange={(e)=>
                   setFeedback(e.target.value)}
               /> 
+            </Box>
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'row', 
+              marginTop: '4rem',
+              justifyContent: 'flex-end',
+              }}
+              > 
+              <Button
+                type='submit'
+                variant='outlined'
+                sx={{
+                  width: '150px',
+                  borderRadius: '20px',
+                  fontWeight: 'bold',
+                }}
+                >Send</Button>
             </Box>
           </form>
         </Box>
