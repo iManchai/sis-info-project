@@ -1,6 +1,6 @@
 
-import Menu from './components/Menu';
-import Contacto from './components/Contacto';
+import Menu from './Components/Menu';
+import Contacto from './pages/ContactPage/Contacto';
 import LoginForm from './pages/LoginForm/LoginForm';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
