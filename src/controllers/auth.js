@@ -26,6 +26,7 @@ export async function registerWithCredentials(email, password, name) {
       email: user.email,
       picture: "",
       telephone: "",
+
       userTastes: "",
       isAdmin: false
     })
@@ -41,6 +42,7 @@ export async function registerWithCredentials(email, password, name) {
 export async function signInWithGoogle() {
   try {
     const result = await signInWithPopup(auth, googleProvider)
+
     const additionalInfo = getAdditionalUserInfo(result)
   
     const usersCollection = collection(db, 'users')
@@ -77,6 +79,7 @@ export async function signInWithFacebook() {
   const additionalInfo = getAdditionalUserInfo(result)
 
   const usersCollection = collection(db, 'users')
+
   if (additionalInfo.isNewUser === true) {
     await setDoc(doc(usersCollection, result.user.uid), {
       firstName: additionalInfo.profile.first_name,
@@ -99,7 +102,6 @@ export async function signInWithFacebook() {
 
   return result.user
 }
-
 // Log Out
 export async function logOut() {
   await signOut(auth)
