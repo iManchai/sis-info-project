@@ -7,3 +7,4 @@ export function useUser() {
   const user = useContext(UserContext);
   return user
 }
+
