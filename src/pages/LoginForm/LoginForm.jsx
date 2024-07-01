@@ -18,7 +18,6 @@ export default function LoginForm({ navigate }) {
   const [errorMessage, setErrorMessage] = useState('')
 
   function getCustomErrorMessage(errorCode) {
-    console.log(errorCode)
     // Step 2: Use a switch statement or an object mapping for known error codes
     switch (errorCode) {
       case 'Firebase: Error (auth/invalid-email).':
