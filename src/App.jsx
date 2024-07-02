@@ -1,4 +1,4 @@
-import Menu from './Components/Menu';
+import Menu from './components/Menu';
 import Contacto from './pages/ContactPage/Contacto';
 import React from 'react';
 import Menu from './pages/Menu/Menu';
