@@ -26,6 +26,7 @@ export async function registerWithCredentials(email, password, name) {
       email: user.email,
       picture: "",
       telephone: "",
+      location: "",
       userTastes: "",
       isAdmin: false
     })
@@ -52,6 +53,7 @@ export async function signInWithGoogle() {
         email: result.user.email,
         picture: result.user.photoURL,
         telephone: result.user.phoneNumber,
+        location: "",
         userTastes: "",
         isAdmin: false
       })
@@ -84,6 +86,7 @@ export async function signInWithFacebook() {
       email: result.user.email,
       picture: result.user.photoURL,
       telephone: result.user.phoneNumber,
+      location: "",
       userTastes: "",
       isAdmin: false
     })

@@ -6,21 +6,27 @@
   width: 300px;
   text-align: center;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .menu-item-image {
   width: 100%;
   border-radius: 8px;
+  margin: 0;
 }
 
 .menu-item h3 {
   font-size: 1.5rem;
   color: #2f6a9f;
+  margin: 0;
 }
 
 .menu-item p {
   font-size: 1.2rem;
   color: #666;
+  margin: 0;
 }
 
 .view-button {
