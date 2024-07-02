@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { auth, db, facebookProvider, googleProvider } from '../firebase'
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 
 // Login with Credentials
 export async function loginWithCredentials(email, password) {
@@ -26,7 +26,8 @@ export async function registerWithCredentials(email, password, name) {
       email: user.email,
       picture: "",
       telephone: "",
-      userTastes: ""
+      userTastes: "",
+      isAdmin: false
     })
 
     return user
@@ -42,21 +43,29 @@ export async function signInWithGoogle() {
     const result = await signInWithPopup(auth, googleProvider)
     const additionalInfo = getAdditionalUserInfo(result)
   
-    console.log(result)
-    console.log(additionalInfo)
-  
     const usersCollection = collection(db, 'users')
 
-    await setDoc(doc(usersCollection, result.user.uid), {
-      firstName: additionalInfo.profile.given_name,
-      lastName: additionalInfo.profile.family_name,
-      email: result.user.email,
-      picture: result.user.photoURL,
-      telephone: result.user.phoneNumber,
-      userTastes: ""
-    })
+    if (additionalInfo.isNewUser === true) {
+      await setDoc(doc(usersCollection, result.user.uid), {
+        firstName: additionalInfo.profile.given_name,
+        lastName: additionalInfo.profile.family_name,
+        email: result.user.email,
+        picture: result.user.photoURL,
+        telephone: result.user.phoneNumber,
+        userTastes: "",
+        isAdmin: false
+      })
+    } else {
+      await updateDoc(doc(usersCollection, result.user.uid), {
+        firstName: additionalInfo.profile.given_name,
+        lastName: additionalInfo.profile.family_name,
+        email: result.user.email,
+        picture: result.user.photoURL,
+        telephone: result.user.phoneNumber,
+      })
+    }
   
-      return result.user
+    return result.user
   } catch (e) {
     console.error(e)
     return null
@@ -68,14 +77,25 @@ export async function signInWithFacebook() {
   const additionalInfo = getAdditionalUserInfo(result)
 
   const usersCollection = collection(db, 'users')
-  await setDoc(doc(usersCollection, result.user.uid), {
-    firstName: additionalInfo.profile.first_name,
-    lastName: additionalInfo.profile.last_name,
-    email: result.user.email,
-    picture: result.user.photoURL,
-    telephone: result.user.phoneNumber,
-    userTastes: ""
-  })
+  if (additionalInfo.isNewUser === true) {
+    await setDoc(doc(usersCollection, result.user.uid), {
+      firstName: additionalInfo.profile.first_name,
+      lastName: additionalInfo.profile.last_name,
+      email: result.user.email,
+      picture: result.user.photoURL,
+      telephone: result.user.phoneNumber,
+      userTastes: "",
+      isAdmin: false
+    })
+  } else {
+    await updateDoc(doc(usersCollection, result.user.uid), {
+      firstName: additionalInfo.profile.first_name,
+      lastName: additionalInfo.profile.last_name,
+      email: result.user.email,
+      picture: result.user.photoURL,
+      telephone: result.user.phoneNumber,
+    })
+  }
 
   return result.user
 }
