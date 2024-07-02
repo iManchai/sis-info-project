@@ -6,6 +6,7 @@ import OrderItem from '../../components/Order/Order_item';
 import Paybutton from '../../components/Paypalbutton';
 import PropTypes from 'prop-types';
 import Footer from '../../components/Footer/Footer';
+
 // Datos de prueba
 const mockOrderItems = [
   {
@@ -80,11 +81,10 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
             <div className="total">
               <p>TOTAL:</p> <div>${total.toFixed(2)}</div>
             </div>
-            <Paybutton />
+            <Paybutton totalAmount={total} />
           </div>
         </div>
       </section>
-
       <Footer className="Footer" />
     </Box>
   );
