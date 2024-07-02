@@ -16,7 +16,7 @@ export async function getPlates() {
 export async function getPlate(id) {
   const plateCollections = collection(db, 'plates');
 
-  const plateDocs = await getDoc(plateCollections, id);
+  const plateDocs = await getDoc(doc(plateCollections, id));
   const plate = plateDocs.data()
 
   return plate

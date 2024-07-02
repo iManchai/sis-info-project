@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import '../CreateYourOwn/CreateYourOwn.css';
+import { useParams } from 'react-router-dom';
+import { usePlate } from '../../hooks/plate';
+
 
 const SeePlate = () => {
+
+  let { id } = useParams()
+  const plate = usePlate(id)
+
   const [bowl, setBowl] = useState('bowl');
   const [base, setBase] = useState('');
   const [protein, setProtein] = useState([]);
@@ -54,14 +61,14 @@ const SeePlate = () => {
       <h2>Personaliza tu bowl</h2>
       <Box className="create-your-own-content">
         <Box className="create-your-own-images">
-          <img src="https://via.placeholder.com/300" alt="Bowl" />
+          <img src={plate && plate.image} alt="Bowl" />
         </Box>
         <Box className="create-your-own-text">
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Tipo de Plato</FormLabel>
             <RadioGroup row value={bowl} onChange={(e) => setBowl(e.target.value)}>
-              <FormControlLabel value="bowl" control={<Radio />} label="Bowl" />
-              <FormControlLabel value="burrito" control={<Radio />} label="Burrito" />
+              <FormControlLabel value="Poke Bowl" control={<Radio />} label="Bowl" />
+              <FormControlLabel value="Poke Burrito" control={<Radio />} label="Burrito" />
             </RadioGroup>
           </FormControl>
 
