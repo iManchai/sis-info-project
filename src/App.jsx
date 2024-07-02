@@ -1,6 +1,6 @@
+import Contacto from './pages/ContactPage/Contacto';
 import React from 'react';
 import Menu from './pages/Menu/Menu';
-import Contacto from './components/Contacto';
 import LoginForm from './pages/LoginForm/LoginForm';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import CreateYourOwn from './pages/CreateYourOwn/CreateYourOwn';

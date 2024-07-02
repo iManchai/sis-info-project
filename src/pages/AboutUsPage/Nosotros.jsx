@@ -2,8 +2,8 @@ import foto1 from "../../images/image14.png";
 import foto2 from "../../images/image15.png";
 import foto3 from "../../images/image16.png";
 import { useTheme } from "@emotion/react";
-import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer.jsx";
+import Navbar from "../../components/Navbar/Navbar.jsx";
 import { Box, Divider, Typography } from "@mui/material";
 
 const Nosotros=()=>{
