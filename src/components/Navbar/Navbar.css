@@ -22,6 +22,11 @@
   align-items: center;
 }
 
+.right-buttons {
+  display: flex;
+  align-items: center;
+}
+
 .flex-grow {
   flex-grow: 1;
 }
@@ -40,6 +45,7 @@
   border-radius: 4px;
   padding: 6px 16px;
   margin-left: 20px;
+  white-space: nowrap; /* Mantener el texto en una línea */
 }
 
 .register-button {
@@ -48,6 +54,7 @@
   background-color: #f2565b !important;
   border-radius: 4px;
   padding: 6px 16px;
+  white-space: nowrap; /* Mantener el texto en una línea */
 }
 
 .login-button:hover {
@@ -70,12 +77,22 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+.drawer-item .MuiListItemText-root {
+  color: #f2565b !important;
+}
+
+@media (max-width: 1024px) {
   .left-buttons {
     display: none;
   }
 
   .menu-icon {
     display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .right-buttons {
+    display: none;
   }
 }

@@ -20,6 +20,7 @@ const Navbar = () => {
 
   const [currentUser, setCurrentUser] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -29,6 +30,13 @@ const Navbar = () => {
       }
     };
     fetchUserData();
+
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [user]);
 
   const toggleDrawer = (open) => (event) => {
@@ -44,6 +52,9 @@ const Navbar = () => {
     { text: 'Contacto', onClick: () => navigate('/contact') },
   ];
 
+  const showFullButtons = windowWidth > 1024;
+  const showPartialButtons = windowWidth > 768;
+
   return (
     <>
       <AppBar position="fixed" sx={{ backgroundColor: '#ffffff', color: '#f2565b' }} className="navbar">
@@ -51,32 +62,33 @@ const Navbar = () => {
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => navigate('/')}>
             <img src={molokaiLogo} alt="Logo" className="logo" />
           </IconButton>
-          <div className="left-buttons">
-            {menuItems.map((item, index) => (
-              <Button key={index} color="inherit" onClick={item.onClick} className="nav-button">{item.text}</Button>
-            ))}
-          </div>
-          {user ? (
-            <>
-              <Typography variant="h6" component="div" className="flex-grow"></Typography>
-              <Box sx={{
-                display: 'flex',
-                gap: '1rem',
-                alignItems: 'center'
-              }}>
-                {currentUser && currentUser.isAdmin && <Button color="inherit" onClick={() => navigate('/admin')}>Admin</Button>}
-                <IconButton color="inherit" onClick={() => navigate('/order')} className="order-button"><ShoppingCartIcon /></IconButton>
-                <Avatar src={user.photoURL} onClick={() => navigate('/profile')} />
-                <Button onClick={async () => await logOut()}>Log out</Button>
-              </Box>
-            </>
-          ) : (
-            <>
-              <Typography variant="h6" component="div" className="flex-grow"></Typography>
-              <Button color="inherit" onClick={() => navigate('/login')} className="nav-button login-button">Iniciar Sesión</Button>
-              <Button color="inherit" onClick={() => navigate('/register')} className="nav-button register-button">Registrarse</Button>
-            </>
+          {showFullButtons && (
+            <div className="left-buttons">
+              {menuItems.map((item, index) => (
+                <Button key={index} color="inherit" onClick={item.onClick} className="nav-button">{item.text}</Button>
+              ))}
+            </div>
           )}
+          <Typography variant="h6" component="div" className="flex-grow"></Typography>
+          <div className="right-buttons">
+            {user ? (
+              <>
+                {currentUser && currentUser.isAdmin && showFullButtons && <Button color="inherit" onClick={() => navigate('/admin')}>Admin</Button>}
+                {showPartialButtons && (
+                  <>
+                    <IconButton color="inherit" onClick={() => navigate('/order')} className="order-button"><ShoppingCartIcon /></IconButton>
+                    <Avatar src={user.photoURL} onClick={() => navigate('/profile')} />
+                  </>
+                )}
+                <Button onClick={async () => await logOut()}>Log out</Button>
+              </>
+            ) : (
+              <>
+                <Button color="inherit" onClick={() => navigate('/login')} className="nav-button login-button">Iniciar Sesión</Button>
+                <Button color="inherit" onClick={() => navigate('/register')} className="nav-button register-button">Registrarse</Button>
+              </>
+            )}
+          </div>
           <IconButton
             edge="end"
             color="inherit"
@@ -97,35 +109,35 @@ const Navbar = () => {
         >
           <List>
             {menuItems.map((item, index) => (
-              <ListItem button key={index} onClick={item.onClick}>
+              <ListItem button key={index} onClick={item.onClick} className="drawer-item">
                 <ListItemText primary={item.text} />
               </ListItem>
             ))}
             {user ? (
               <>
                 {currentUser && currentUser.isAdmin && (
-                  <ListItem button onClick={() => navigate('/admin')}>
+                  <ListItem button onClick={() => navigate('/admin')} className="drawer-item">
                     <ListItemText primary="Admin" />
                   </ListItem>
                 )}
-                <ListItem button onClick={() => navigate('/order')}>
+                <ListItem button onClick={() => navigate('/order')} className="drawer-item">
                   <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
                   <ListItemText primary="Orden" />
                 </ListItem>
-                <ListItem button onClick={() => navigate('/profile')}>
+                <ListItem button onClick={() => navigate('/profile')} className="drawer-item">
                   <ListItemIcon><Avatar src={user.photoURL} /></ListItemIcon>
                   <ListItemText primary="Perfil" />
                 </ListItem>
-                <ListItem button onClick={async () => await logOut()}>
+                <ListItem button onClick={async () => await logOut()} className="drawer-item">
                   <ListItemText primary="Log out" />
                 </ListItem>
               </>
             ) : (
               <>
-                <ListItem button onClick={() => navigate('/login')}>
+                <ListItem button onClick={() => navigate('/login')} className="drawer-item">
                   <ListItemText primary="Iniciar Sesión" />
                 </ListItem>
-                <ListItem button onClick={() => navigate('/register')}>
+                <ListItem button onClick={() => navigate('/register')} className="drawer-item">
                   <ListItemText primary="Registrarse" />
                 </ListItem>
               </>
