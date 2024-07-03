@@ -17,15 +17,15 @@ export default function AdminPage() {
 
   const plateTypes = [
     {
-      value: 'bowl',
+      value: 'Poke Bowl',
       label: 'Poke Bowl'
     },
     {
-      value: 'burrito',
+      value: 'Poke Burrito',
       label: 'Poke Burrito'
     },
     {
-      value: 'entrada',
+      value: 'Entrada',
       label: 'Entrada'
     }
   ]
