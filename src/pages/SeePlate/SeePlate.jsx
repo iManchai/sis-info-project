@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
-import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material';
 import '../CreateYourOwn/CreateYourOwn.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { usePlate } from '../../hooks/plate';
+import { useTheme } from '@emotion/react';
+import { ShoppingCartContext } from '../../context/shoppingCart';
+import { doc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 
 const SeePlate = () => {
 
   let { id } = useParams()
   const plate = usePlate(id)
+  const theme = useTheme()
+  const navigate = useNavigate()
+  const { state, dispatch } = useContext(ShoppingCartContext);
 
-  const [bowl, setBowl] = useState('bowl');
   const [base, setBase] = useState('');
-  const [protein, setProtein] = useState([]);
   const [mixIns, setMixIns] = useState([]);
   const [sauce, setSauce] = useState('');
   const [extraSauce, setExtraSauce] = useState('');
@@ -41,9 +46,7 @@ const SeePlate = () => {
   const handleSubmit = () => {
     // Envío del formulario
     console.log({
-      bowl,
       base,
-      protein,
       mixIns,
       sauce,
       extraSauce,
@@ -54,23 +57,39 @@ const SeePlate = () => {
       extraToppings,
       quantity,
     });
+    dispatch({ type: 'ADD_ITEM', payload: { plate: doc(db, 'plates', id), quantity, specifications: { base, mixIns, sauce, extraSauce, toppings, crunchies, extraProteins, extraMixIns, extraToppings }}})
+    navigate('/menu')
   };
 
   return (
     <div className="create-your-own">
-      <h2>Personaliza tu bowl</h2>
       <Box className="create-your-own-content">
         <Box className="create-your-own-images">
           <img src={plate && plate.image} alt="Bowl" />
         </Box>
         <Box className="create-your-own-text">
-          <FormControl component="fieldset" className="form-control">
-            <FormLabel component="legend">Tipo de Plato</FormLabel>
-            <RadioGroup row value={bowl} onChange={(e) => setBowl(e.target.value)}>
-              <FormControlLabel value="Poke Bowl" control={<Radio />} label="Bowl" />
-              <FormControlLabel value="Poke Burrito" control={<Radio />} label="Burrito" />
-            </RadioGroup>
-          </FormControl>
+
+          <Box sx={{
+            marginBottom: '1rem'
+          }}>
+            <Typography variant="h3" sx={{
+              color: theme.palette.secondary.main,
+              fontWeight: 'bold'
+            }}>
+              {plate && plate.name}
+            </Typography>
+            <Typography variant="body1" sx={{
+              color: '#7B7B7B',
+              fontWeight: 'bold'
+            }}>
+              {plate && plate.type}
+              </Typography>
+            <Typography variant="body1" sx={{
+              color: '#7B7B7B',
+            }}>
+              {plate && plate.description}
+            </Typography>
+          </Box>
 
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Base (Escoger 1)</FormLabel>
@@ -79,19 +98,6 @@ const SeePlate = () => {
               <FormControlLabel value="quinoa" control={<Radio />} label="Quinoa (+1$)" />
               <FormControlLabel value="lechuga" control={<Radio />} label="Lechuga Miz" />
             </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" className="form-control">
-            <FormLabel component="legend">Proteína (Escoger 2)</FormLabel>
-            <Box className="checkbox-group">
-              {['Atún', 'Salmón', 'Camarón', 'Atún Spicy', 'Camarón Acevichado'].map((item) => (
-                <FormControlLabel
-                  key={item}
-                  control={<Checkbox checked={protein.includes(item)} onChange={handleCheckboxChange(setProtein, 2)} value={item} />}
-                  label={item}
-                />
-              ))}
-            </Box>
           </FormControl>
 
           <FormControl component="fieldset" className="form-control">

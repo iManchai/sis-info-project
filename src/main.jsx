@@ -5,6 +5,7 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import UserProvider from './Provider/UserProvider.jsx';
+import { ShoppingCartProvider } from './Provider/ShoppingCartProvider.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -13,11 +14,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         "clientId": "AQtiepL_BIPJBzvsnsFmyOv3iwdFs3AukIJzwi2LTe_s-UWrklqr2yldQOQG2P9yvztdmkKAnQEIXA4O"
       }}
     >
-      <UserProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </UserProvider>
+      <ShoppingCartProvider>
+        <UserProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </UserProvider>
+      </ShoppingCartProvider>
     </PayPalScriptProvider>
   </React.StrictMode>
 );
