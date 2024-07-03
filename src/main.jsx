@@ -9,18 +9,18 @@ import { ShoppingCartProvider } from './Provider/ShoppingCartProvider.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <PayPalScriptProvider
-      options={{
-        "clientId": "AQtiepL_BIPJBzvsnsFmyOv3iwdFs3AukIJzwi2LTe_s-UWrklqr2yldQOQG2P9yvztdmkKAnQEIXA4O"
-      }}
-    >
-      <ShoppingCartProvider>
-        <UserProvider>
+    <ShoppingCartProvider>
+      <UserProvider>  
+        <PayPalScriptProvider
+          options={{
+            "clientId": "AQtiepL_BIPJBzvsnsFmyOv3iwdFs3AukIJzwi2LTe_s-UWrklqr2yldQOQG2P9yvztdmkKAnQEIXA4O"
+          }}
+        >
           <BrowserRouter>
             <App />
           </BrowserRouter>
-        </UserProvider>
-      </ShoppingCartProvider>
-    </PayPalScriptProvider>
+        </PayPalScriptProvider>
+      </UserProvider>
+    </ShoppingCartProvider>
   </React.StrictMode>
 );
