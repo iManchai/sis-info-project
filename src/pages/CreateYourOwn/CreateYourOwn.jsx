@@ -1,14 +1,39 @@
-import React, { useState } from 'react';
-import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
+import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import './CreateYourOwn.css';
+import { useNavigate } from 'react-router';
+import { ShoppingCartContext } from '../../context/shoppingCart';
+import { ToastContainer, toast } from 'react-toastify';
+import { nanoid } from 'nanoid';
 
 const CreateYourOwn = () => {
-  const [bowl, setBowl] = useState([]);
-  const [base, setBase] = useState([]);
+  const navigate = useNavigate()
+  const { state, dispatch } = useContext(ShoppingCartContext);
+
+  const [isError, setError] = useState(false)
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Faltan campos por llenar", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => setError(false)
+      });
+    }
+  }, [isError]);
+
+  // Form Data
+  const [bowl, setBowl] = useState('Poke Bowl');
+  const [base, setBase] = useState('');
   const [protein, setProtein] = useState([]);
   const [mixIns, setMixIns] = useState([]);
-  const [sauce, setSauce] = useState([]);
-  const [extraSauce, setExtraSauce] = useState([]);
+  const [sauce, setSauce] = useState('');
+  const [extraSauce, setExtraSauce] = useState('');
   const [toppings, setToppings] = useState([]);
   const [crunchies, setCrunchies] = useState([]);
   const [extraProteins, setExtraProteins] = useState([]);
@@ -27,46 +52,44 @@ const CreateYourOwn = () => {
     });
   };
 
-  const handleSingleCheckboxChange = (setter) => (event) => {
-    const value = event.target.value;
-    setter([value]);
-  };
-
   const handleQuantityChange = (amount) => {
     setQuantity((prev) => Math.max(1, prev + amount));
   };
 
-  const isValid = () => {
-    return (
-      bowl.length === 1 &&
-      base.length === 1 &&
-      protein.length === 2 &&
-      mixIns.length === 4 &&
-      sauce.length === 1 &&
-      extraSauce.length === 1 &&
-      toppings.length === 1 &&
-      crunchies.length === 1
-    );
-  };
-
   const handleSubmit = () => {
-    if (isValid()) {
-      console.log({
-        bowl,
-        base,
-        protein,
-        mixIns,
-        sauce,
-        extraSauce,
-        toppings,
-        crunchies,
-        extraProteins,
-        extraMixIns,
-        extraToppings,
-        quantity,
-      });
-    } else {
-      alert("Por favor, completa todas las selecciones necesarias.");
+    // Envío del formulario
+    try {
+      if (!base || !protein.length || !mixIns.length || !sauce || !toppings.length || !crunchies.length) {
+        throw new Error('Faltan campos por llenar')
+      }
+
+      const item = {
+        id: nanoid(),
+        plate: {
+          type: 'Build it yourself',
+          name: 'Build it yourself',
+          price: 16
+        },
+        quantity: quantity,
+        specifications: {
+          base,
+          protein,
+          mixIns,
+          sauce,
+          extraSauce,
+          toppings,
+          crunchies,
+          extraProteins,
+          extraMixIns,
+          extraToppings,
+        },
+      };
+
+      dispatch({ type: 'ADD_ITEM', payload: item });
+      navigate('/menu');
+    } catch (error) {
+      setError(true)
+      console.error(error);
     }
   };
 
@@ -75,39 +98,24 @@ const CreateYourOwn = () => {
       <h2>CONSTRUYE TU PROPIO BOWL O BURRITO</h2>
       <Box className="create-your-own-content">
         <Box className="create-your-own-images">
-          <img src="https://via.placeholder.com/300" alt="Bowl" />
+          <img src={bowl === 'Poke Bowl' ? "https://poke-house.com/wp-content/uploads/2022/10/SUNNY-SALMON-RGB-_500KB.jpg" : "https://pokeworks.com/wp-content/uploads/2022/01/PYW-Poke-Burrito-Reg-V2-005-cropped-960x960.jpg"} alt="Bowl" />
         </Box>
         <Box className="create-your-own-text">
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Tipo de Plato</FormLabel>
-            <Box className="checkbox-group">
-              <FormControlLabel
-                control={<Checkbox checked={bowl.includes('bowl')} onChange={handleSingleCheckboxChange(setBowl)} value="bowl" />}
-                label="Bowl"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={bowl.includes('burrito')} onChange={handleSingleCheckboxChange(setBowl)} value="burrito" />}
-                label="Burrito"
-              />
-            </Box>
+            <RadioGroup row value={bowl} onChange={(e) => setBowl(e.target.value)}>
+              <FormControlLabel value="Poke Bowl" control={<Radio />} label="Bowl" />
+              <FormControlLabel value="Poke Burrito" control={<Radio />} label="Burrito" />
+            </RadioGroup>
           </FormControl>
 
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Base (Escoger 1)</FormLabel>
-            <Box className="checkbox-group">
-              <FormControlLabel
-                control={<Checkbox checked={base.includes('arroz')} onChange={handleSingleCheckboxChange(setBase)} value="arroz" />}
-                label="Arroz"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={base.includes('quinoa')} onChange={handleSingleCheckboxChange(setBase)} value="quinoa" />}
-                label="Quinoa (+1$)"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={base.includes('lechuga')} onChange={handleSingleCheckboxChange(setBase)} value="lechuga" />}
-                label="Lechuga Miz"
-              />
-            </Box>
+            <RadioGroup row value={base} onChange={(e) => setBase(e.target.value)}>
+              <FormControlLabel value="arroz" control={<Radio />} label="Arroz" />
+              <FormControlLabel value="quinoa" control={<Radio />} label="Quinoa (+1$)" />
+              <FormControlLabel value="lechuga" control={<Radio />} label="Lechuga Miz" />
+            </RadioGroup>
           </FormControl>
 
           <FormControl component="fieldset" className="form-control">
@@ -138,58 +146,25 @@ const CreateYourOwn = () => {
 
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Salsa para Resolver (Escoger 1)</FormLabel>
-            <Box className="checkbox-group">
-              <FormControlLabel
-                control={<Checkbox checked={sauce.includes('soya')} onChange={handleSingleCheckboxChange(setSauce)} value="soya" />}
-                label="Soya"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={sauce.includes('ponzu')} onChange={handleSingleCheckboxChange(setSauce)} value="ponzu" />}
-                label="Ponzu"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={sauce.includes('molokai')} onChange={handleSingleCheckboxChange(setSauce)} value="molokai" />}
-                label="Moloka'i (Recomendado)"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={sauce.includes('anguila')} onChange={handleSingleCheckboxChange(setSauce)} value="anguila" />}
-                label="Anguila"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={sauce.includes('mayo_spicy')} onChange={handleSingleCheckboxChange(setSauce)} value="mayo_spicy" />}
-                label="Mayo Spicy"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={sauce.includes('sin_salsa')} onChange={handleSingleCheckboxChange(setSauce)} value="sin_salsa" />}
-                label="Sin Salsa"
-              />
-            </Box>
+            <RadioGroup row value={sauce} onChange={(e) => setSauce(e.target.value)}>
+              <FormControlLabel value="soya" control={<Radio />} label="Soya" />
+              <FormControlLabel value="ponzu" control={<Radio />} label="Ponzu" />
+              <FormControlLabel value="molokai" control={<Radio />} label="Moloka'i (Recomendado)" />
+              <FormControlLabel value="anguila" control={<Radio />} label="Anguila" />
+              <FormControlLabel value="mayo_spicy" control={<Radio />} label="Mayo Spicy" />
+              <FormControlLabel value="sin_salsa" control={<Radio />} label="Sin Salsa" />
+            </RadioGroup>
           </FormControl>
 
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Salsa Aparte (Escoger 1)</FormLabel>
-            <Box className="checkbox-group">
-              <FormControlLabel
-                control={<Checkbox checked={extraSauce.includes('soya')} onChange={handleSingleCheckboxChange(setExtraSauce)} value="soya" />}
-                label="Soya"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={extraSauce.includes('ponzu')} onChange={handleSingleCheckboxChange(setExtraSauce)} value="ponzu" />}
-                label="Ponzu"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={extraSauce.includes('anguila')} onChange={handleSingleCheckboxChange(setExtraSauce)} value="anguila" />}
-                label="Anguila"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={extraSauce.includes('mayo_spicy')} onChange={handleSingleCheckboxChange(setExtraSauce)} value="mayo_spicy" />}
-                label="Mayo Spicy"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={extraSauce.includes('sin_salsa')} onChange={handleSingleCheckboxChange(setExtraSauce)} value="sin_salsa" />}
-                label="Sin Salsa"
-              />
-            </Box>
+            <RadioGroup row value={extraSauce} onChange={(e) => setExtraSauce(e.target.value)}>
+              <FormControlLabel value="soya" control={<Radio />} label="Soya" />
+              <FormControlLabel value="ponzu" control={<Radio />} label="Ponzu" />
+              <FormControlLabel value="anguila" control={<Radio />} label="Anguila" />
+              <FormControlLabel value="mayo_spicy" control={<Radio />} label="Mayo Spicy" />
+              <FormControlLabel value="sin_salsa" control={<Radio />} label="Sin Salsa" />
+            </RadioGroup>
           </FormControl>
 
           <FormControl component="fieldset" className="form-control">
@@ -263,11 +238,12 @@ const CreateYourOwn = () => {
             <Button variant="outlined" onClick={() => handleQuantityChange(1)}>+</Button>
           </Box>
 
-          <Button variant="contained" color="primary" onClick={handleSubmit} disabled={!isValid()}>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
             Añadir al Pedido
           </Button>
         </Box>
       </Box>
+      <ToastContainer />
     </div>
   );
 };

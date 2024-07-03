@@ -5,9 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { usePlate } from '../../hooks/plate';
 import { useTheme } from '@emotion/react';
 import { ShoppingCartContext } from '../../context/shoppingCart';
-import { doc } from 'firebase/firestore';
-import { db } from '../../firebase';
 import { ToastContainer, toast } from 'react-toastify';
+import { nanoid } from "nanoid";
 
 
 const SeePlate = () => {
@@ -69,10 +68,10 @@ const SeePlate = () => {
         throw new Error('Faltan campos por llenar')
       }
       if (plate.type === 'Poke Bowl' || plate.type === 'Poke Burrito') {
-        dispatch({ type: 'ADD_ITEM', payload: { plate: doc(db, 'plates', id), quantity, specifications: { base, mixIns, sauce, extraSauce, toppings, crunchies, extraProteins, extraMixIns, extraToppings }}})
+        dispatch({ type: 'ADD_ITEM', payload: { id: nanoid(), plate, quantity, specifications: { base, mixIns, sauce, extraSauce, toppings, crunchies, extraProteins, extraMixIns, extraToppings }}})
         navigate('/menu')
       } else {
-        dispatch({ type: 'ADD_ITEM', payload: { plate: doc(db, 'plates', id), quantity }})
+        dispatch({ type: 'ADD_ITEM', payload: { id: nanoid(), plate, quantity }})
       }
     } catch (err) {
       setError(true)

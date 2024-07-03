@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import IMG from '../../assets/Imagen.png';
 import './Order.css';
 import Button from '@mui/material/Button';
@@ -6,7 +6,11 @@ import Amount from './Amount';
 import PropTypes from 'prop-types';
 
 export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
-  const { id, name, description, price, quantity } = item;
+
+  useEffect(() => {
+    console.log(item)
+  }, [])
+  const { id, plate, quantity } = item;
 
   const handleQuantityChange = (newQuantity) => {
     onUpdateQuantity(id, newQuantity);
@@ -14,10 +18,9 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
 
   return (
     <div className="FoodItem">
-      <img src={IMG} alt={name} className='image_fooditem'/>
+      <img src={IMG} alt={plate.name} className='image_fooditem'/>
       <div className="content">
-        <p className='name_food'>{name}</p>
-        <p className='description'>{description}</p>
+        <p className='name_food'>{plate.name}</p>
         <Button
           variant="contained"
           className="remove-button"
@@ -29,7 +32,7 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
       <div className='price_container'>
       <div className='price'>
         <p>Precio</p>
-        <div>{`$${price}`}</div>
+        <div>{`$${plate.price}`}</div>
       </div>
 
       <div className="price">
@@ -39,7 +42,7 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
 
       <div className="price">
         <p>Total</p>
-        <div>{`$${price * quantity}`}</div>
+        <div>{`$${plate.price * quantity}`}</div>
       </div>
       </div>
     </div>
