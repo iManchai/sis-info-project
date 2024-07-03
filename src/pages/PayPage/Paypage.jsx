@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext, useEffect } from 'react';
 import './Paypage.css';
 import Navbar from '../../components/Navbar/Navbar';
 import { Box } from '@mui/material';
@@ -6,6 +6,7 @@ import OrderItem from '../../components/Order/Order_item';
 import Paybutton from '../../components/Paypalbutton';
 import PropTypes from 'prop-types';
 import Footer from '../../components/Footer/Footer';
+import { ShoppingCartContext } from '../../context/shoppingCart';
 // Datos de prueba
 const mockOrderItems = [
   {
@@ -33,6 +34,14 @@ const mockOrderItems = [
 
 export default function Paypage({ initialOrderItems = mockOrderItems }) {
   const [orderItems, setOrderItems] = useState(initialOrderItems);
+  const { state, dispatch } = useContext(ShoppingCartContext)
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    setItems(state.items)
+    console.log(state)
+    console.log(items)
+  }, [])
 
   const handleRemoveItem = (itemId) => {
     setOrderItems(orderItems.filter(item => item.id !== itemId));
@@ -58,7 +67,7 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
         <div className="pedido">
           <h1 className="pedi">PEDIDO</h1>
           <div className="divider" style={{ paddingRight: '5rem' }}></div>
-          {orderItems && orderItems.map((item) => (
+          {items && items.map((item) => (
             <OrderItem
               key={item.id}
               item={item}

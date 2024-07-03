@@ -29,8 +29,6 @@ export const ShoppingCartProvider = ({ children }) => {
     }
   }, [state]); // Run this effect on state change
 
-  console.log(state)
-
   return (
     <ShoppingCartContext.Provider value={{ state, dispatch }}>
       {children}
