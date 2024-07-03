@@ -15,8 +15,6 @@ export default function Paypage() {
 
   useEffect(() => {
     setItems(state.items)
-    console.log(state)
-    console.log(items)
   }, [state])
 
   const handleRemoveItem = (itemId) => {

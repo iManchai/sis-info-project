@@ -11,12 +11,13 @@ export default function Paybutton({ totalAmount }) {
     <>
       {checkout ? (
         <PayPalButtons
+          key={totalAmount}
           style={{ layout: 'vertical' }}
           createOrder={(data, actions) => {
             return actions.order.create({
               purchase_units: [{
                 amount: {
-                  value: totalAmount.toFixed(2) // Usar la prop totalAmount
+                  value: totalAmount // Usar la prop totalAmount
                 },
               }],
             });
