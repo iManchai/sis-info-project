@@ -68,11 +68,10 @@ export default function Paypage() {
             <div className="total">
               <p>TOTAL:</p> <div>${total.toFixed(2)}</div>
             </div>
-            <Paybutton />
+            <Paybutton totalAmount={total} />
           </div>
         </div>
       </section>
-
       <Footer className="Footer" />
     </Box>
   );
