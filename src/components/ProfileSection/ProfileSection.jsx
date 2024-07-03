@@ -24,9 +24,12 @@ export default function ProfileSection() {
       }
     }}>
         <Avatar sx={{
+
           height: '200px',
           width: '200px',
-        }}/>
+        }}
+        src={user.photoURL}
+        />
 
         
 

@@ -1,10 +1,10 @@
 import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { auth, db, facebookProvider, googleProvider } from '../firebase'
-<<<<<<< HEAD
-import { addDoc, collection, doc, setDoc, getDoc } from "firebase/firestore";
-=======
 import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
->>>>>>> 21a31ec55350f71b9dba58a7074176866511806e
+import { useEffect, useState } from "react";
+import { useUser } from "./../context/user";
+
+
 
 // Login with Credentials
 export async function loginWithCredentials(email, password) {
@@ -45,21 +45,7 @@ export async function registerWithCredentials(email, password, name) {
 export async function signInWithGoogle() {
   try {
     const result = await signInWithPopup(auth, googleProvider)
-<<<<<<< HEAD
-    console.log(result)
-    console.log(additionalInfo)
-  
-    const usersCollection = collection(db, 'users')
- 
-    await setDoc(doc(usersCollection, result.user.uid), {
-      firstName : additionalInfo.profile.given_name,
-      lastName: additionalInfo.profile.family_name,
-      email: result.user.email,
-      picture: result.user.photoURL,
-      telephone: result.user.phoneNumber,
-      userTastes: ""
-    })
-=======
+
     const additionalInfo = getAdditionalUserInfo(result)
   
     const usersCollection = collection(db, 'users')
@@ -83,7 +69,6 @@ export async function signInWithGoogle() {
         telephone: result.user.phoneNumber,
       })
     }
->>>>>>> 21a31ec55350f71b9dba58a7074176866511806e
   
     return result.user
   } catch (e) {
@@ -124,9 +109,13 @@ export async function signInWithFacebook() {
 //export async function 
 //lo que hace set es que cambia el documento con todas las propiedades.
 
-export async function changeProfile(nombre, apellido, correo, telefono, gustospersonales){
+
+
+
+
+
+export async function changeProfile(nombre, apellido, correo, telefono=auth.currentUser.phoneNumber, gustospersonales=auth.currentUser.userTastes){ //aqui quería que gustos tambien fuese opcional, no obsttante no aparece.
   try{
-  const uid=auth.currentUser.uid;
   const userCollection=collection(db, 'users');
   const userDocRef=doc(usersCollection, uid);
   await setDoc(userDocRef,{
@@ -135,7 +124,7 @@ export async function changeProfile(nombre, apellido, correo, telefono, gustospe
     lastName:apellido,
     email:correo,
     telephone:telefono,
-    userTastes:gustospersonales}, //ojo no esta la ubicacion
+    userTastes:gustospersonales},
   {merge:true});
 
   

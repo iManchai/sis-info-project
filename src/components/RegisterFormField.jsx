@@ -75,7 +75,7 @@ export default function RegisterFormField() {
         required={true} 
         value={email} 
         setValue={setEmail} 
-        helperText="Correo invalido. Ejemplo: johndoe@gmail.com"
+        helperText="Correo invalido. Ejemplo: johndoe@gmail.com."
         isValid={isEmailValid}
         setIsValid={setIsEmailValid}
         />

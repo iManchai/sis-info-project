@@ -2,12 +2,93 @@ import { Box, Button } from "@mui/material";
 import ProfileFormField from "../ProfileFormField/ProfileFormField";
 import { useTheme } from "@emotion/react";
 import { changeProfile } from "../../controllers/auth";
+import { useState } from "react";
+import { auth } from "../../firebase";
+import ProfileSection from "../ProfileSection/ProfileSection";
+import { useUser } from "../../context/user";
+import { useEffect } from "react";
 
 //cambiar perfil
 
 export default function ProfileForm() {
 
   const theme = useTheme()
+
+  const [name, setNameProf]=useState('')
+  const [surname, setSurnameProf]=useState('')
+  const [email, setEmailProf]=useState('')
+  const [telefono, setTelefonoProf]=useState('')
+  const [gustospersonales, setTastesProf]=useState('')
+
+  
+  const [isNameValidProf, setIsNameValidProf]=useState(true)
+  const [isSurnameValidProf, setIsSurnameValidProf]=useState(true)
+  const [isEmailValidProf, setIsEmailValidProf]=useState(true)
+  const[isPhoneNumberValidProf, setIsPhoneNumberValidProf]=useState(true)
+  const[isTastesValidProf, setIsTastesValidProf]=useState(true)
+
+  function checkNameValidProf(name) {
+    return /^[a-zA-Z\s]*$/.test(name)
+  }
+
+  function checkSurnameValidProf(surname) {
+    return /^[a-zA-Z\s]*$/.test(surname)
+  }
+
+
+  function checkEmailValidProf(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
+
+  function checkTastesValidProf(gustospersonales){
+    if (/^(atún|salmon|tofu|pulpo|camarón|proteína)[\s,]+(arroz|quinoa|vegetales)[\s,]+(pepino|zanahoria|cebolla|edamame|wakame)[\s,]*(semillas de sesamo)?[\s,]*(poke bowl|poke burrito)$/i.test(gustospersonales)){
+    return true;
+  }else{
+    return false; 
+    }}
+
+
+  function checkPhoneValidProf(phoneNumber){
+  return phoneNumber.length>=7;
+  }
+
+
+
+  async function handleSubmitProf(name, surname, email) {
+    if (!checkNameValidProf(name)) {
+      setIsNameValidProf(false)
+    }
+
+    if (!checkSurnameValidProf(surname)){
+      setIsSurnameValidProf(false)
+    }
+
+    if (!checkEmailValidProf(email)) {
+      setIsEmailValidProf(false)
+    }
+
+    if (checkNameValidProf(name) && checkSurnameValidProf(surname) && checkEmailValidProf(email)) {
+      await changeProfile(name, surname, email, telefono, gustospersonales)
+    }
+  }
+
+   async function fetchUser(){
+    const user=useUser()
+    const[currentUser, setCurrentUser]=useState(null)
+  
+    useEffect(()=>{
+      const fetchUserData=async()=>{
+        if(user){
+          const userData=await getUser(user.uid)
+          setCurrentUser(userData)
+        }
+      }
+      fetchUserData()
+    },[user])
+    return currentUser
+  }
+
+
 
   return (
     <Box sx={{
@@ -22,7 +103,17 @@ export default function ProfileForm() {
           flexBasis: 'calc(50% - 0.5rem)'
         }
       }}>
-      <ProfileFormField label="Nombre" type="text"/>
+      <ProfileFormField label="Nombre" 
+      type="text"
+      required={true}
+      value={name}
+      setValue={setNameProf}
+      helperText='Nombre invalido. Ejemplo: John'
+      isValid={isNameValidProf}
+      setIsValidProf={setIsNameValidProf}
+      />
+
+
       </Box>
       <Box sx={{
         flexBasis: '100%',
@@ -30,7 +121,17 @@ export default function ProfileForm() {
           flexBasis: 'calc(50% - 0.5rem)'
         }
       }}>
-      <ProfileFormField label="Apellido" type="text"/>
+      <ProfileFormField label="Apellido" 
+      type="text"
+      required={true}
+      value={surname}
+      setValue={setSurnameProf}
+      helperText='Apellido invalido. Ejemplo: Gonzalez.'
+      isValid={isSurnameValidProf}
+      setIsValidProf={setIsSurnameValidProf}
+      />
+
+
       </Box>
       <Box sx={{
         flexBasis: '100%',
@@ -38,7 +139,19 @@ export default function ProfileForm() {
           flexBasis: 'calc(50% - 0.5rem)'
         }
       }}>
-      <ProfileFormField label="Correo electronico" type="email"/>
+      <ProfileFormField 
+      label="Correo electronico" 
+      type="email"
+      required={true}
+      value={email}
+      setValue={setEmailProf}
+      helperText='Correo invalido, Ejemplo: janedoe@gmail.com.'
+      isValid={isEmailValidProf}
+      setIsValidProf={setIsEmailValidProf}
+      REQUIRED
+      />
+
+
       </Box>
       <Box sx={{
         flexBasis: '100%',
@@ -46,17 +159,37 @@ export default function ProfileForm() {
           flexBasis: 'calc(50% - 0.5rem)'
         }
       }}>
-      <ProfileFormField label="Telefono" type="text"/>
+      <ProfileFormField 
+      label="Telefono" 
+      type="text"
+      required={true}
+      value={telefono}
+      setValue={setTelefonoProf}
+      helperText="Telefono invalido. Ejemplo: 02172222."
+      isValid={isPhoneNumberValidProf}
+      setIsValidProf={setIsPhoneNumberValidProf}
+      />
       </Box>
       <Box sx={{
         flexBasis: '100%',
       }}>
-      <ProfileFormField label="Ubicacion" type="text"/>
+      <ProfileFormField 
+      label="Ubicacion" 
+      type="text"/>
       </Box>
       <Box sx={{
         flexBasis: '100%',
       }}>
-      <ProfileFormField label="Gustos personales" type="text" multiline={true} maxRows={4}/>
+      <ProfileFormField label="Gustos personales" 
+      type="text" 
+      multiline={true} 
+      maxRows={4}
+      value={gustospersonales}
+      setValue={setTastesProf}
+      helperText="Introduce un gusto personal valido. Ejemplo: Poke Bowl o Poke Burrito."
+      isValid={isTastesValidProf}
+      setIsValidProf={setIsTastesValidProf}
+      /> 
       </Box>
       <Box sx={{
         display: 'flex',
@@ -79,10 +212,12 @@ export default function ProfileForm() {
           backgroundColor: '#30AF4C',
         }
       }}
-      onClick={async()=>
-        await changeProfile(nombre, apellido, correo, telefono, gustospersonales).then(()=>{profileSection();}) //arreglar, debería cambiar perfil pero no aparece en el profile section
-      } //auth.js, profileForm.js, registerButtonSection, ProfileSection, RegisterFormField es lo modificado para modificar usuario.
-      >
+      onClick={async()=>{
+        const uid=auth.currentUser.uid;
+        const resultado=fetchUser()
+        await handleSubmitProf(name, surname, email); 
+      } 
+      }>
         Guardar
       </Button>
       </Box>
