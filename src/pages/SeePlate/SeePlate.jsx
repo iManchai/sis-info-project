@@ -68,8 +68,12 @@ const SeePlate = () => {
       if (!base || mixIns.length !== 4 || !sauce || !extraSauce || toppings.length !== 1 || crunchies.length !== 1) {
         throw new Error('Faltan campos por llenar')
       }
-      dispatch({ type: 'ADD_ITEM', payload: { plate: doc(db, 'plates', id), quantity, specifications: { base, mixIns, sauce, extraSauce, toppings, crunchies, extraProteins, extraMixIns, extraToppings }}})
-      navigate('/menu')
+      if (plate.type === 'Poke Bowl' || plate.type === 'Poke Burrito') {
+        dispatch({ type: 'ADD_ITEM', payload: { plate: doc(db, 'plates', id), quantity, specifications: { base, mixIns, sauce, extraSauce, toppings, crunchies, extraProteins, extraMixIns, extraToppings }}})
+        navigate('/menu')
+      } else {
+        dispatch({ type: 'ADD_ITEM', payload: { plate: doc(db, 'plates', id), quantity }})
+      }
     } catch (err) {
       setError(true)
       console.error(err)
@@ -106,6 +110,8 @@ const SeePlate = () => {
             </Typography>
           </Box>
 
+          {(plate && plate.type === 'Poke Bowl' || plate && plate.type === 'Poke Burrito') ?
+          <>
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Base (Escoger 1)</FormLabel>
             <RadioGroup row value={base} onChange={(e) => setBase(e.target.value)}>
@@ -215,6 +221,10 @@ const SeePlate = () => {
               ))}
             </Box>
           </FormControl>
+          </> 
+          : 
+          null
+          }
 
           <Box className="quantity-selector">
             <Button variant="outlined" onClick={() => handleQuantityChange(-1)}>-</Button>
