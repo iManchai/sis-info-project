@@ -3,6 +3,7 @@ import './Order.css';
 import Button from '@mui/material/Button';
 import Amount from './Amount';
 import PropTypes from 'prop-types';
+import { calculatePrice } from '../../hooks/plate';
 
 export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
 
@@ -14,20 +15,6 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
   const handleQuantityChange = (newQuantity) => {
     onUpdateQuantity(id, newQuantity);
   };
-
-  function calculatePrice(specifications) {
-    let price = Number(plate.price);
-
-    if (specifications.base === 'quinoa') {
-      price += 1;
-    }
-
-    price += (specifications?.extraProteins?.length ?? 0)* 2;
-    price += (specifications?.extraMixIns?.length ?? 0) * 1.5;
-    price += (specifications?.extraToppings?.length ?? 0) * 1;
-
-    return price
-  }
 
   return (
     <div className="FoodItem">
@@ -45,7 +32,7 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
       <div className='price_container'>
       <div className='price'>
         <p>Precio</p>
-        <div>{`$${calculatePrice(specifications)}`}</div>
+        <div>{`$${calculatePrice(plate, specifications)}`}</div>
       </div>
 
       <div className="price">
@@ -55,7 +42,7 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
 
       <div className="price">
         <p>Total</p>
-        <div>{`$${calculatePrice(specifications) * quantity}`}</div>
+        <div>{`$${calculatePrice(plate, specifications) * quantity}`}</div>
       </div>
       </div>
     </div>

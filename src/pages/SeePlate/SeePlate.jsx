@@ -110,9 +110,7 @@ const SeePlate = () => {
             </Typography>
           </Box>
 
-          {(plate && plate.type === 'Poke Bowl' || plate && plate.type === 'Poke Burrito') ?
-          <>
-          <FormControl component="fieldset" className="form-control">
+          <FormControl component="fieldset" className="form-control" disabled={plate && plate.type === 'Entrada'}>
             <FormLabel component="legend">Base (Escoger 1)</FormLabel>
             <RadioGroup row value={base} onChange={(e) => setBase(e.target.value)}>
               <FormControlLabel value="arroz" control={<Radio />} label="Arroz" />
@@ -121,7 +119,7 @@ const SeePlate = () => {
             </RadioGroup>
           </FormControl>
 
-          <FormControl component="fieldset" className="form-control">
+          <FormControl component="fieldset" className="form-control" disabled={plate && plate.type === 'Entrada'}>
             <FormLabel component="legend">Mix-ins (Escoger 4)</FormLabel>
             <Box className="checkbox-group">
               {['Piña', 'Maíz', 'Pepino', 'Mango', 'Rábano', 'Cebollín', 'Edamame', 'Zanahoria', 'Melocotón', 'Tomate Cherry', 'Cebolla Morada', 'Repollo Morado'].map((item) => (
@@ -134,7 +132,7 @@ const SeePlate = () => {
             </Box>
           </FormControl>
 
-          <FormControl component="fieldset" className="form-control">
+          <FormControl component="fieldset" className="form-control" disabled={plate && plate.type === 'Entrada'}>
             <FormLabel component="legend">Salsa para Resolver (Escoger 1)</FormLabel>
             <RadioGroup row value={sauce} onChange={(e) => setSauce(e.target.value)}>
               <FormControlLabel value="soya" control={<Radio />} label="Soya" />
@@ -146,7 +144,7 @@ const SeePlate = () => {
             </RadioGroup>
           </FormControl>
 
-          <FormControl component="fieldset" className="form-control">
+          <FormControl component="fieldset" className="form-control" disabled={plate && plate.type === 'Entrada'}>
             <FormLabel component="legend">Salsa Aparte (Escoger 1)</FormLabel>
             <RadioGroup row value={extraSauce} onChange={(e) => setExtraSauce(e.target.value)}>
               <FormControlLabel value="soya" control={<Radio />} label="Soya" />
@@ -157,7 +155,7 @@ const SeePlate = () => {
             </RadioGroup>
           </FormControl>
 
-          <FormControl component="fieldset" className="form-control">
+          <FormControl component="fieldset" className="form-control" disabled={plate && plate.type === 'Entrada'}>
             <FormLabel component="legend">Toppings (Escoger 1)</FormLabel>
             <Box className="checkbox-group">
               {['Masago', 'Wakame', 'Aguacate', 'Kani Dinamita'].map((item) => (
@@ -170,7 +168,7 @@ const SeePlate = () => {
             </Box>
           </FormControl>
 
-          <FormControl component="fieldset" className="form-control">
+          <FormControl component="fieldset" className="form-control" disabled={plate && plate.type === 'Entrada'}>
             <FormLabel component="legend">Crunchies (Escoger 1)</FormLabel>
             <Box className="checkbox-group">
               {['Wasabi peas', 'Batata frita', 'Maíz Tostado', 'Cebolla Frita', 'Tostoncito', 'Ramen crunch', 'Almendra fileteada'].map((item) => (
@@ -183,7 +181,7 @@ const SeePlate = () => {
             </Box>
           </FormControl>
 
-          <FormControl component="fieldset" className="form-control">
+          <FormControl component="fieldset" className="form-control" disabled={plate && plate.type === 'Entrada'}>
             <FormLabel component="legend">Extra de Proteínas (Max 5) (+2$ por c/u)</FormLabel>
             <Box className="checkbox-group">
               {['Atún', 'Salmón', 'Camarón', 'Atún Spicy', 'Camarón Acevichado'].map((item) => (
@@ -196,7 +194,7 @@ const SeePlate = () => {
             </Box>
           </FormControl>
 
-          <FormControl component="fieldset" className="form-control">
+          <FormControl component="fieldset" className="form-control" disabled={plate && plate.type === 'Entrada'}>
             <FormLabel component="legend">Extra de Mix-ins (Max 12) (+1.5$ por c/u)</FormLabel>
             <Box className="checkbox-group">
               {['Piña', 'Maíz', 'Pepino', 'Mango', 'Rábano', 'Cebollín', 'Edamame', 'Zanahoria', 'Melocotón', 'Tomate Cherry', 'Cebolla Morada', 'Repollo Morado'].map((item) => (
@@ -209,7 +207,7 @@ const SeePlate = () => {
             </Box>
           </FormControl>
 
-          <FormControl component="fieldset" className="form-control">
+          <FormControl component="fieldset" className="form-control" disabled={plate && plate.type === 'Entrada'}>
             <FormLabel component="legend">Extra de Toppings (Max 4) (+1$ por c/u)</FormLabel>
             <Box className="checkbox-group">
               {['Masago', 'Wakame', 'Aguacate', 'Kani Dinamita'].map((item) => (
@@ -221,10 +219,6 @@ const SeePlate = () => {
               ))}
             </Box>
           </FormControl>
-          </> 
-          : 
-          null
-          }
 
           <Box className="quantity-selector">
             <Button variant="outlined" onClick={() => handleQuantityChange(-1)}>-</Button>
