@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material';
 import '../CreateYourOwn/CreateYourOwn.css';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { useTheme } from '@emotion/react';
 import { ShoppingCartContext } from '../../context/shoppingCart';
 import { doc } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const SeePlate = () => {
@@ -17,6 +18,24 @@ const SeePlate = () => {
   const navigate = useNavigate()
   const { state, dispatch } = useContext(ShoppingCartContext);
 
+  const [isError, setError] = useState(false)
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Faltan campos por llenar", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => setError(false)
+      });
+    }
+  }, [isError]);
+
+  // Form data
   const [base, setBase] = useState('');
   const [mixIns, setMixIns] = useState([]);
   const [sauce, setSauce] = useState('');
@@ -45,20 +64,16 @@ const SeePlate = () => {
 
   const handleSubmit = () => {
     // Envío del formulario
-    console.log({
-      base,
-      mixIns,
-      sauce,
-      extraSauce,
-      toppings,
-      crunchies,
-      extraProteins,
-      extraMixIns,
-      extraToppings,
-      quantity,
-    });
-    dispatch({ type: 'ADD_ITEM', payload: { plate: doc(db, 'plates', id), quantity, specifications: { base, mixIns, sauce, extraSauce, toppings, crunchies, extraProteins, extraMixIns, extraToppings }}})
-    navigate('/menu')
+    try {
+      if (!base || mixIns.length !== 4 || !sauce || !extraSauce || toppings.length !== 1 || crunchies.length !== 1) {
+        throw new Error('Faltan campos por llenar')
+      }
+      dispatch({ type: 'ADD_ITEM', payload: { plate: doc(db, 'plates', id), quantity, specifications: { base, mixIns, sauce, extraSauce, toppings, crunchies, extraProteins, extraMixIns, extraToppings }}})
+      navigate('/menu')
+    } catch (err) {
+      setError(true)
+      console.error(err)
+    }
   };
 
   return (
@@ -212,6 +227,7 @@ const SeePlate = () => {
           </Button>
         </Box>
       </Box>
+      <ToastContainer />
     </div>
   );
 };
