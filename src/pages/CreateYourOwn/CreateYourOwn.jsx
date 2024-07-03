@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
+import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel } from '@mui/material';
 import './CreateYourOwn.css';
 
 const CreateYourOwn = () => {
-  const [bowl, setBowl] = useState('bowl');
-  const [base, setBase] = useState('');
+  const [bowl, setBowl] = useState([]);
+  const [base, setBase] = useState([]);
   const [protein, setProtein] = useState([]);
   const [mixIns, setMixIns] = useState([]);
-  const [sauce, setSauce] = useState('');
-  const [extraSauce, setExtraSauce] = useState('');
+  const [sauce, setSauce] = useState([]);
+  const [extraSauce, setExtraSauce] = useState([]);
   const [toppings, setToppings] = useState([]);
   const [crunchies, setCrunchies] = useState([]);
   const [extraProteins, setExtraProteins] = useState([]);
@@ -27,26 +27,47 @@ const CreateYourOwn = () => {
     });
   };
 
+  const handleSingleCheckboxChange = (setter) => (event) => {
+    const value = event.target.value;
+    setter([value]);
+  };
+
   const handleQuantityChange = (amount) => {
     setQuantity((prev) => Math.max(1, prev + amount));
   };
 
+  const isValid = () => {
+    return (
+      bowl.length === 1 &&
+      base.length === 1 &&
+      protein.length === 2 &&
+      mixIns.length === 4 &&
+      sauce.length === 1 &&
+      extraSauce.length === 1 &&
+      toppings.length === 1 &&
+      crunchies.length === 1
+    );
+  };
+
   const handleSubmit = () => {
-    // Envío del formulario
-    console.log({
-      bowl,
-      base,
-      protein,
-      mixIns,
-      sauce,
-      extraSauce,
-      toppings,
-      crunchies,
-      extraProteins,
-      extraMixIns,
-      extraToppings,
-      quantity,
-    });
+    if (isValid()) {
+      console.log({
+        bowl,
+        base,
+        protein,
+        mixIns,
+        sauce,
+        extraSauce,
+        toppings,
+        crunchies,
+        extraProteins,
+        extraMixIns,
+        extraToppings,
+        quantity,
+      });
+    } else {
+      alert("Por favor, completa todas las selecciones necesarias.");
+    }
   };
 
   return (
@@ -59,19 +80,34 @@ const CreateYourOwn = () => {
         <Box className="create-your-own-text">
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Tipo de Plato</FormLabel>
-            <RadioGroup row value={bowl} onChange={(e) => setBowl(e.target.value)}>
-              <FormControlLabel value="bowl" control={<Radio />} label="Bowl" />
-              <FormControlLabel value="burrito" control={<Radio />} label="Burrito" />
-            </RadioGroup>
+            <Box className="checkbox-group">
+              <FormControlLabel
+                control={<Checkbox checked={bowl.includes('bowl')} onChange={handleSingleCheckboxChange(setBowl)} value="bowl" />}
+                label="Bowl"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={bowl.includes('burrito')} onChange={handleSingleCheckboxChange(setBowl)} value="burrito" />}
+                label="Burrito"
+              />
+            </Box>
           </FormControl>
 
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Base (Escoger 1)</FormLabel>
-            <RadioGroup row value={base} onChange={(e) => setBase(e.target.value)}>
-              <FormControlLabel value="arroz" control={<Radio />} label="Arroz" />
-              <FormControlLabel value="quinoa" control={<Radio />} label="Quinoa (+1$)" />
-              <FormControlLabel value="lechuga" control={<Radio />} label="Lechuga Miz" />
-            </RadioGroup>
+            <Box className="checkbox-group">
+              <FormControlLabel
+                control={<Checkbox checked={base.includes('arroz')} onChange={handleSingleCheckboxChange(setBase)} value="arroz" />}
+                label="Arroz"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={base.includes('quinoa')} onChange={handleSingleCheckboxChange(setBase)} value="quinoa" />}
+                label="Quinoa (+1$)"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={base.includes('lechuga')} onChange={handleSingleCheckboxChange(setBase)} value="lechuga" />}
+                label="Lechuga Miz"
+              />
+            </Box>
           </FormControl>
 
           <FormControl component="fieldset" className="form-control">
@@ -102,25 +138,58 @@ const CreateYourOwn = () => {
 
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Salsa para Resolver (Escoger 1)</FormLabel>
-            <RadioGroup row value={sauce} onChange={(e) => setSauce(e.target.value)}>
-              <FormControlLabel value="soya" control={<Radio />} label="Soya" />
-              <FormControlLabel value="ponzu" control={<Radio />} label="Ponzu" />
-              <FormControlLabel value="molokai" control={<Radio />} label="Moloka'i (Recomendado)" />
-              <FormControlLabel value="anguila" control={<Radio />} label="Anguila" />
-              <FormControlLabel value="mayo_spicy" control={<Radio />} label="Mayo Spicy" />
-              <FormControlLabel value="sin_salsa" control={<Radio />} label="Sin Salsa" />
-            </RadioGroup>
+            <Box className="checkbox-group">
+              <FormControlLabel
+                control={<Checkbox checked={sauce.includes('soya')} onChange={handleSingleCheckboxChange(setSauce)} value="soya" />}
+                label="Soya"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={sauce.includes('ponzu')} onChange={handleSingleCheckboxChange(setSauce)} value="ponzu" />}
+                label="Ponzu"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={sauce.includes('molokai')} onChange={handleSingleCheckboxChange(setSauce)} value="molokai" />}
+                label="Moloka'i (Recomendado)"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={sauce.includes('anguila')} onChange={handleSingleCheckboxChange(setSauce)} value="anguila" />}
+                label="Anguila"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={sauce.includes('mayo_spicy')} onChange={handleSingleCheckboxChange(setSauce)} value="mayo_spicy" />}
+                label="Mayo Spicy"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={sauce.includes('sin_salsa')} onChange={handleSingleCheckboxChange(setSauce)} value="sin_salsa" />}
+                label="Sin Salsa"
+              />
+            </Box>
           </FormControl>
 
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Salsa Aparte (Escoger 1)</FormLabel>
-            <RadioGroup row value={extraSauce} onChange={(e) => setExtraSauce(e.target.value)}>
-              <FormControlLabel value="soya" control={<Radio />} label="Soya" />
-              <FormControlLabel value="ponzu" control={<Radio />} label="Ponzu" />
-              <FormControlLabel value="anguila" control={<Radio />} label="Anguila" />
-              <FormControlLabel value="mayo_spicy" control={<Radio />} label="Mayo Spicy" />
-              <FormControlLabel value="sin_salsa" control={<Radio />} label="Sin Salsa" />
-            </RadioGroup>
+            <Box className="checkbox-group">
+              <FormControlLabel
+                control={<Checkbox checked={extraSauce.includes('soya')} onChange={handleSingleCheckboxChange(setExtraSauce)} value="soya" />}
+                label="Soya"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={extraSauce.includes('ponzu')} onChange={handleSingleCheckboxChange(setExtraSauce)} value="ponzu" />}
+                label="Ponzu"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={extraSauce.includes('anguila')} onChange={handleSingleCheckboxChange(setExtraSauce)} value="anguila" />}
+                label="Anguila"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={extraSauce.includes('mayo_spicy')} onChange={handleSingleCheckboxChange(setExtraSauce)} value="mayo_spicy" />}
+                label="Mayo Spicy"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={extraSauce.includes('sin_salsa')} onChange={handleSingleCheckboxChange(setExtraSauce)} value="sin_salsa" />}
+                label="Sin Salsa"
+              />
+            </Box>
           </FormControl>
 
           <FormControl component="fieldset" className="form-control">
@@ -194,7 +263,7 @@ const CreateYourOwn = () => {
             <Button variant="outlined" onClick={() => handleQuantityChange(1)}>+</Button>
           </Box>
 
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button variant="contained" color="primary" onClick={handleSubmit} disabled={!isValid()}>
             Añadir al Pedido
           </Button>
         </Box>

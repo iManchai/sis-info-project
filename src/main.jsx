@@ -8,7 +8,6 @@ import UserProvider from './Provider/UserProvider.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-
     <PayPalScriptProvider
       options={{
         "clientId": "AQtiepL_BIPJBzvsnsFmyOv3iwdFs3AukIJzwi2LTe_s-UWrklqr2yldQOQG2P9yvztdmkKAnQEIXA4O"
@@ -20,12 +19,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </BrowserRouter>
       </UserProvider>
     </PayPalScriptProvider>
-  </React.StrictMode>,
-    <UserProvider>  
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </UserProvider>
   </React.StrictMode>
-
 );
