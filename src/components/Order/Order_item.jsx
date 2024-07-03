@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import IMG from '../../assets/Imagen.png';
 import './Order.css';
 import Button from '@mui/material/Button';
 import Amount from './Amount';
@@ -10,15 +9,29 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
   useEffect(() => {
     console.log(item)
   }, [])
-  const { id, plate, quantity } = item;
+  const { id, plate, quantity, specifications } = item;
 
   const handleQuantityChange = (newQuantity) => {
     onUpdateQuantity(id, newQuantity);
   };
 
+  function calculatePrice(specifications) {
+    let price = Number(plate.price);
+
+    if (specifications.base === 'quinoa') {
+      price += 1;
+    }
+
+    price += (specifications?.extraProteins?.length ?? 0)* 2;
+    price += (specifications?.extraMixIns?.length ?? 0) * 1.5;
+    price += (specifications?.extraToppings?.length ?? 0) * 1;
+
+    return price
+  }
+
   return (
     <div className="FoodItem">
-      <img src={IMG} alt={plate.name} className='image_fooditem'/>
+      <img src={plate.image} alt={plate.name} className='image_fooditem'/>
       <div className="content">
         <p className='name_food'>{plate.name}</p>
         <Button
@@ -32,7 +45,7 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
       <div className='price_container'>
       <div className='price'>
         <p>Precio</p>
-        <div>{`$${plate.price}`}</div>
+        <div>{`$${calculatePrice(specifications)}`}</div>
       </div>
 
       <div className="price">
@@ -42,7 +55,7 @@ export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
 
       <div className="price">
         <p>Total</p>
-        <div>{`$${plate.price * quantity}`}</div>
+        <div>{`$${calculatePrice(specifications) * quantity}`}</div>
       </div>
       </div>
     </div>

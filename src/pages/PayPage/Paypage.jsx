@@ -41,7 +41,7 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
     setItems(state.items)
     console.log(state)
     console.log(items)
-  }, [])
+  }, [state])
 
   const handleRemoveItem = (itemId) => {
     setOrderItems(orderItems.filter(item => item.id !== itemId));

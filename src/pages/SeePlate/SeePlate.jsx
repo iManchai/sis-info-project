@@ -64,14 +64,15 @@ const SeePlate = () => {
   const handleSubmit = () => {
     // Envío del formulario
     try {
-      if (!base || mixIns.length !== 4 || !sauce || !extraSauce || toppings.length !== 1 || crunchies.length !== 1) {
-        throw new Error('Faltan campos por llenar')
-      }
       if (plate.type === 'Poke Bowl' || plate.type === 'Poke Burrito') {
+        if (!base || mixIns.length !== 4 || !sauce || !extraSauce || toppings.length !== 1 || crunchies.length !== 1) {
+          throw new Error('Faltan campos por llenar')
+        }
         dispatch({ type: 'ADD_ITEM', payload: { id: nanoid(), plate, quantity, specifications: { base, mixIns, sauce, extraSauce, toppings, crunchies, extraProteins, extraMixIns, extraToppings }}})
         navigate('/menu')
       } else {
-        dispatch({ type: 'ADD_ITEM', payload: { id: nanoid(), plate, quantity }})
+        dispatch({ type: 'ADD_ITEM', payload: { id: nanoid(), plate, quantity, specifications: { base: '', mixIns: [], sauce: '', extraSauce: '', toppings: [], crunchies: [], extraProteins: [], extraMixIns: [], extraProteins: [] } }})
+        navigate('/menu')
       }
     } catch (err) {
       setError(true)

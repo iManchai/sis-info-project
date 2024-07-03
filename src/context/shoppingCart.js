@@ -10,12 +10,7 @@ export const cartReducer = (state, action) => {
       return { ...state, items: [...state.items, action.payload] };
     case 'REMOVE_ITEM':
       // Logic to remove an item from the cart
-      return {
-        ...state,
-        items: state.items.filter(item =>
-          !(item.plate.name === action.payload.name && item.plate.type === action.payload.type)
-        )
-      };
+      return { ...state, items: state.items.filter(item => item.id !== action.payload.id) };
     // Add more cases as needed
     default:
       return state;
