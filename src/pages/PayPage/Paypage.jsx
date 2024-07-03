@@ -7,33 +7,9 @@ import Paybutton from '../../components/Paypalbutton';
 import PropTypes from 'prop-types';
 import Footer from '../../components/Footer/Footer';
 import { ShoppingCartContext } from '../../context/shoppingCart';
-// Datos de prueba
-const mockOrderItems = [
-  {
-    id: 1,
-    name: 'Molove',
-    description: 'POKE BURRITO',
-    price: 15,
-    quantity: 2,
-  },
-  {
-    id: 2,
-    name: 'Salmon',
-    description: 'Sushi Roll',
-    price: 12,
-    quantity: 10,
-  },
-  {
-    id: 3,
-    name: 'Salmon ',
-    description: 'Sushi Roll',
-    price: 12,
-    quantity: 10,
-  }
-];
+import { calculatePrice } from '../../hooks/plate';
 
-export default function Paypage({ initialOrderItems = mockOrderItems }) {
-  const [orderItems, setOrderItems] = useState(initialOrderItems);
+export default function Paypage() {
   const { state, dispatch } = useContext(ShoppingCartContext)
   const [items, setItems] = useState([])
 
@@ -44,20 +20,23 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
   }, [state])
 
   const handleRemoveItem = (itemId) => {
-    setOrderItems(orderItems.filter(item => item.id !== itemId));
+    dispatch({ type: 'REMOVE_ITEM', payload: itemId })
   };
 
   const handleUpdateQuantity = (itemId, newQuantity) => {
-    setOrderItems(orderItems.map(item => 
+    setItems(items.map(item => 
       item.id === itemId ? { ...item, quantity: newQuantity } : item
     ));
   };
 
   const subtotal = useMemo(() => {
-    return orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  }, [orderItems]);
+    return items.reduce((sum, item) => {
+      const itemPrice = calculatePrice(item.plate, item.specifications);
+      return sum + itemPrice * item.quantity;
+    }, 0)
+  }, [items])
 
-  const delivery = 50;
+  const delivery = subtotal * 0.03;
   const total = subtotal + delivery;
 
   return (

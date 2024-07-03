@@ -40,3 +40,17 @@ export function usePlate(id) {
 
   return plate
 }
+
+export function calculatePrice(plate, specifications) {
+  let price = Number(plate.price);
+
+  if (specifications.base === 'quinoa') {
+    price += 1;
+  }
+
+  price += (specifications?.extraProteins?.length ?? 0) * 2;
+  price += (specifications?.extraMixIns?.length ?? 0) * 1.5;
+  price += (specifications?.extraToppings?.length ?? 0) * 1;
+
+  return price;
+}
