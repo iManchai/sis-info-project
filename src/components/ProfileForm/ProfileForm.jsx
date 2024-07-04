@@ -2,11 +2,12 @@ import { Box, Button } from "@mui/material";
 import ProfileFormField from "../ProfileFormField/ProfileFormField";
 import { useTheme } from "@emotion/react";
 import { changeProfile } from "../../controllers/auth";
-import { useState } from "react";
-import { auth } from "../../firebase";
+import { useContext, useState } from "react";
+import { auth,db, facebookProvider, googleProvider  } from "../../firebase";
 import ProfileSection from "../ProfileSection/ProfileSection";
-import { useUser } from "../../context/user";
+import { UserContext, useUser } from "../../context/user";
 import { useEffect } from "react";
+import { addDoc, collection, doc, getDoc, or, setDoc, updateDoc } from "firebase/firestore";
 
 //cambiar perfil
 
@@ -37,7 +38,7 @@ export default function ProfileForm() {
 
 
   function checkEmailValidProf(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    return /^[^\s@]+@[^\s@]+.[^\s@]+$/.test(email)
   }
 
   function checkTastesValidProf(gustospersonales){
@@ -71,6 +72,38 @@ export default function ProfileForm() {
       await changeProfile(name, surname, email, telefono, gustospersonales)
     }
   }
+
+  function ProfileSectionMod(nombre, apellido, email, telefono) {
+
+    const user = useUser()
+  
+    return (
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.5rem',
+        alignItems: 'center',
+  
+        [theme.breakpoints.up('md')]: {
+          flexBasis: '30%',
+        }
+      }}>
+          <Avatar sx={{
+  
+            height: '200px',
+            width: '200px',
+          }}
+          src={user.photoURL}
+          />
+  
+          <Typography fontSize={"1.25rem"}>{nombre}</Typography> 
+          <Typography fontSize={"1.25rem"}>{apellido}</Typography>
+          <Typography fontSize={"1.25rem"}>{email}</Typography> 
+          <Typography fontSize={"1.25rem"}>{telefono}</Typography>
+      </Box>
+    );
+  }
+
 
    async function fetchUser(){
     const user=useUser()
@@ -214,7 +247,14 @@ export default function ProfileForm() {
       }}
       onClick={async()=>{
         const uid=auth.currentUser.uid;
+        const userUID=auth.currentUser.uid
+        const userCollection=collection(db, 'users');
+        const userDocRef=doc(userCollection, userUID);
         await handleSubmitProf(name, surname, email, telefono, gustospersonales); 
+        console.log(auth.currentUser)
+        const currentUsername=auth.currentUser.displayName[0]
+        const currentUsersurname=auth.currentUser.displayName[1]
+        await ProfileSection()
       } 
       }>
         Guardar

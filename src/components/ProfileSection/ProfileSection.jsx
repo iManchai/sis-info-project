@@ -31,10 +31,6 @@ export default function ProfileSection() {
         src={user.photoURL}
         />
 
-        
-
-
-
         <Typography fontSize={"1.25rem"}>{name1}</Typography> 
         <Typography fontSize={"1.25rem"}>{surname}</Typography>
         <Typography fontSize={"1.25rem"}>{user ? user.email:String}</Typography> 

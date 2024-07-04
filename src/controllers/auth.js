@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup, signOut, updateEmail, updateProfile } from "firebase/auth";
 import { auth, db, facebookProvider, googleProvider } from '../firebase'
 import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -117,7 +117,7 @@ export async function signInWithFacebook() {
 
 
 
-export async function changeProfile(nombre, apellido, correo, telefono=auth.currentUser.phoneNumber, gustospersonales=auth.currentUser.userTastes){ //aqui quería que gustos tambien fuese opcional, no obsttante no aparece.
+export async function changeProfile(nombre, apellido, correo, telefono=auth.currentUser.phoneNumber, gustospersonales=auth.currentUser.userTastes){ 
   try{
   const userUID=auth.currentUser.uid
   const userCollection=collection(db, 'users');
@@ -130,8 +130,12 @@ export async function changeProfile(nombre, apellido, correo, telefono=auth.curr
     telephone:telefono,
     userTastes:gustospersonales},
   {merge:true});
-
   
+  await updateProfile(auth.currentUser,{
+    displayName:nombre+" "+apellido,
+  })
+
+  await updateEmail(auth.currentUser, correo)
 
 
 
