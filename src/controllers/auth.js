@@ -132,7 +132,7 @@ export async function changeProfile(nombre, apellido, correo, telefono=auth.curr
   {merge:true});
   
   await updateProfile(auth.currentUser,{
-    displayName:nombre+" "+apellido,
+    displayName:nombre+" "+apellido, //modificar userrrr
   })
 
   await updateEmail(auth.currentUser, correo)
