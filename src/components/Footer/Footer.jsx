@@ -33,9 +33,10 @@ const Footer = () => {
         component="footer"
         sx={{  
             py: 2, 
-            px: 3,  
+            px: 3, 
             mt: 'auto', 
-            backgroundColor: '#F2565B',  
+            backgroundColor: '#F2565B',
+            width: '100%'  
         }}
         >
         <Container maxWidth="vw" sx={{ display: 'flex', flexDirection: 'row' , justifyContent: 'space-between'}}>
