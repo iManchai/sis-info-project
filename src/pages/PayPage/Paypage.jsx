@@ -13,7 +13,9 @@ export default function Paypage() {
   const { state, dispatch } = useContext(ShoppingCartContext)
   const [items, setItems] = useState([])
 
+
   useEffect(() => {
+    console.log(items)
     setItems(state.items)
   }, [state])
 
@@ -66,7 +68,7 @@ export default function Paypage() {
             <div className="total">
               <p>TOTAL:</p> <div>${total.toFixed(2)}</div>
             </div>
-            <Paybutton totalAmount={total} />
+            <Paybutton totalAmount={total} items={items}/>
           </div>
         </div>
       </section>

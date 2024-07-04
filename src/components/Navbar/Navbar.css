@@ -25,6 +25,7 @@
 .right-buttons {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .flex-grow {
@@ -74,7 +75,7 @@
 }
 
 .menu-icon {
-  display: none;
+  display: none !important;
 }
 
 .drawer-item .MuiListItemText-root {
@@ -87,7 +88,7 @@
   }
 
   .menu-icon {
-    display: block;
+    display: block !important;
   }
 }
 
