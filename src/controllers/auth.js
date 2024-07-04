@@ -116,8 +116,9 @@ export async function signInWithFacebook() {
 
 export async function changeProfile(nombre, apellido, correo, telefono=auth.currentUser.phoneNumber, gustospersonales=auth.currentUser.userTastes){ //aqui quería que gustos tambien fuese opcional, no obsttante no aparece.
   try{
+  const userUID=auth.currentUser.uid
   const userCollection=collection(db, 'users');
-  const userDocRef=doc(usersCollection, uid);
+  const userDocRef=doc(userCollection, userUID);
   await setDoc(userDocRef,{
 
     firstName:nombre,

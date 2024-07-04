@@ -54,7 +54,7 @@ export default function ProfileForm() {
 
 
 
-  async function handleSubmitProf(name, surname, email) {
+  async function handleSubmitProf(name, surname, email, telefono, gustospersonales) {
     if (!checkNameValidProf(name)) {
       setIsNameValidProf(false)
     }
@@ -214,8 +214,7 @@ export default function ProfileForm() {
       }}
       onClick={async()=>{
         const uid=auth.currentUser.uid;
-        const resultado=fetchUser()
-        await handleSubmitProf(name, surname, email); 
+        await handleSubmitProf(name, surname, email, telefono, gustospersonales); 
       } 
       }>
         Guardar
