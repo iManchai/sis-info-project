@@ -1,9 +1,34 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import './CreateYourOwn.css';
+import { useNavigate } from 'react-router';
+import { ShoppingCartContext } from '../../context/shoppingCart';
+import { ToastContainer, toast } from 'react-toastify';
+import { nanoid } from 'nanoid';
 
 const CreateYourOwn = () => {
-  const [bowl, setBowl] = useState('bowl');
+  const navigate = useNavigate()
+  const { state, dispatch } = useContext(ShoppingCartContext);
+
+  const [isError, setError] = useState(false)
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Faltan campos por llenar", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => setError(false)
+      });
+    }
+  }, [isError]);
+
+  // Form Data
+  const [bowl, setBowl] = useState('Poke Bowl');
   const [base, setBase] = useState('');
   const [protein, setProtein] = useState([]);
   const [mixIns, setMixIns] = useState([]);
@@ -33,20 +58,39 @@ const CreateYourOwn = () => {
 
   const handleSubmit = () => {
     // Envío del formulario
-    console.log({
-      bowl,
-      base,
-      protein,
-      mixIns,
-      sauce,
-      extraSauce,
-      toppings,
-      crunchies,
-      extraProteins,
-      extraMixIns,
-      extraToppings,
-      quantity,
-    });
+    try {
+      if (!base || !protein.length || !mixIns.length || !sauce || !toppings.length || !crunchies.length) {
+        throw new Error('Faltan campos por llenar')
+      }
+
+      const item = {
+        id: nanoid(),
+        plate: {
+          type: 'Build it yourself',
+          name: 'Build it yourself',
+          price: 16
+        },
+        quantity: quantity,
+        specifications: {
+          base,
+          protein,
+          mixIns,
+          sauce,
+          extraSauce,
+          toppings,
+          crunchies,
+          extraProteins,
+          extraMixIns,
+          extraToppings,
+        },
+      };
+
+      dispatch({ type: 'ADD_ITEM', payload: item });
+      navigate('/menu');
+    } catch (error) {
+      setError(true)
+      console.error(error);
+    }
   };
 
   return (
@@ -54,14 +98,14 @@ const CreateYourOwn = () => {
       <h2>CONSTRUYE TU PROPIO BOWL O BURRITO</h2>
       <Box className="create-your-own-content">
         <Box className="create-your-own-images">
-          <img src="https://via.placeholder.com/300" alt="Bowl" />
+          <img src={bowl === 'Poke Bowl' ? "https://poke-house.com/wp-content/uploads/2022/10/SUNNY-SALMON-RGB-_500KB.jpg" : "https://pokeworks.com/wp-content/uploads/2022/01/PYW-Poke-Burrito-Reg-V2-005-cropped-960x960.jpg"} alt="Bowl" />
         </Box>
         <Box className="create-your-own-text">
           <FormControl component="fieldset" className="form-control">
             <FormLabel component="legend">Tipo de Plato</FormLabel>
             <RadioGroup row value={bowl} onChange={(e) => setBowl(e.target.value)}>
-              <FormControlLabel value="bowl" control={<Radio />} label="Bowl" />
-              <FormControlLabel value="burrito" control={<Radio />} label="Burrito" />
+              <FormControlLabel value="Poke Bowl" control={<Radio />} label="Bowl" />
+              <FormControlLabel value="Poke Burrito" control={<Radio />} label="Burrito" />
             </RadioGroup>
           </FormControl>
 
@@ -199,6 +243,7 @@ const CreateYourOwn = () => {
           </Button>
         </Box>
       </Box>
+      <ToastContainer />
     </div>
   );
 };

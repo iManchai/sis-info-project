@@ -1,6 +1,6 @@
+import Contacto from './pages/ContactPage/Contacto';
 import React from 'react';
 import Menu from './pages/Menu/Menu';
-import Contacto from './components/Contacto';
 import LoginForm from './pages/LoginForm/LoginForm';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import CreateYourOwn from './pages/CreateYourOwn/CreateYourOwn';
@@ -61,7 +61,7 @@ const App = () => {
             <Route path="/login" element={<Navigate replace to="/"/>} />
             <Route path="/register" element={<Navigate replace to="/"/>} />
             <Route path='/order' element={<Paypage navigate={navigate}/>}/>
-            <Route path='/SeePLate' element={<SeePlate navigate={navigate} />} />
+            <Route path='/plate/:id' element={<SeePlate navigate={navigate} />} />
             {currentUser && currentUser.isAdmin && <Route path="/admin" element={<AdminPage />} />}
           </> :
           <>
