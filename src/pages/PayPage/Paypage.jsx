@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import './Paypage.css';
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from '../../Components/Navbar/Navbar';
 import { Box } from '@mui/material';
-import OrderItem from '../../components/Order/Order_item';
-import Paybutton from '../../components/Paypalbutton';
+import OrderItem from '../../Components/Order/Order_item';
+import Paybutton from '../../Components/Paypalbutton';
 import PropTypes from 'prop-types';
-import Footer from '../../components/Footer/Footer';
+import Footer from '../../Components/Footer/Footer';
 
 // Datos de prueba
 const mockOrderItems = [
