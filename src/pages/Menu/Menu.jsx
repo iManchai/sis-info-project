@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase'; // Ruta por definir
-import MenuItem from '../../Components/MenuSection/MenuItem';
+import MenuItem from '../../components/MenuSection/MenuItem';
 import './Menu.css';
 import BuildYourOwn from './BuildYourOwn';
 import { usePlates } from '../../hooks/plate';
