@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { Button } from '@mui/material';
 import Logo from '../../assets/Logo.svg'; 
@@ -31,16 +30,20 @@ const Footer = () => {
     return (
         <Box
         component="footer"
-        sx={{  
-            py: 2, 
-            px: 3, 
+        sx={{   
             mt: 'auto', 
             backgroundColor: '#F2565B',
-            width: '100%'  
+            width: '100%',     
         }}
         >
-        <Container maxWidth="vw" sx={{ display: 'flex', flexDirection: 'row' , justifyContent: 'space-between'}}>
-                <Box component= 'div1' sx={{  display: 'flex', flexDirection: 'column'}} > 
+        <Box 
+            sx={{  
+            padding: '1rem', 
+            display: 'flex', 
+            flexDirection: 'row' , 
+            justifyContent: 'space-between', 
+            }}>
+                <Box sx={{  display: 'flex', flexDirection: 'column'}} > 
                     <div class = 'container_footer_1'>
                     <img src={Logo} alt='' width='50' height='50' />
                     <p> MOLOKA'I </p>
@@ -64,7 +67,7 @@ const Footer = () => {
                         <Copyright />
                     </div>
                 </Box> 
-            </Container>
+            </Box>
         </Box>
     );
 };  
