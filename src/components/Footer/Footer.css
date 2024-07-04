@@ -1,0 +1,31 @@
+.container_footer_1 { 
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: left;
+}
+
+.container_footer_2 { 
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    justify-content: right;
+    
+}
+
+.footer-button { 
+    color: white !important; 
+    font-weight: bold;
+}
+
+.container_footer_1 p{ 
+    color: white;
+    font-family: 'Kulim Park';
+    margin-left: 5px;
+    padding-top: 10px;
+}
+
+.img-1 { 
+    margin-right: 15px;
+    margin-left: 5px;
+}

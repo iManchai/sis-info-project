@@ -1,6 +1,10 @@
-import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+
+import { createUserWithEmailAndPassword, getAdditionalUserInfo, signInWithEmailAndPassword, signInWithPopup, signOut, updateEmail, updateProfile } from "firebase/auth";
 import { auth, db, facebookProvider, googleProvider } from '../firebase'
-import { addDoc, collection, doc, setDoc, getDoc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useUser } from "./../context/user";
+ 
 
 // Login with Credentials
 export async function loginWithCredentials(email, password) {
@@ -26,7 +30,9 @@ export async function registerWithCredentials(email, password, name) {
       email: user.email,
       picture: "",
       telephone: "",
-      userTastes: ""
+      location: "",
+      userTastes: "",
+      isAdmin: false
     })
 
     return user
@@ -40,21 +46,34 @@ export async function registerWithCredentials(email, password, name) {
 export async function signInWithGoogle() {
   try {
     const result = await signInWithPopup(auth, googleProvider)
-    console.log(result)
-    console.log(additionalInfo)
+
+
+    const additionalInfo = getAdditionalUserInfo(result)
   
     const usersCollection = collection(db, 'users')
- 
-    await setDoc(doc(usersCollection, result.user.uid), {
-      firstName : additionalInfo.profile.given_name,
-      lastName: additionalInfo.profile.family_name,
-      email: result.user.email,
-      picture: result.user.photoURL,
-      telephone: result.user.phoneNumber,
-      userTastes: ""
-    })
+
+    if (additionalInfo.isNewUser === true) {
+      await setDoc(doc(usersCollection, result.user.uid), {
+        firstName: additionalInfo.profile.given_name,
+        lastName: additionalInfo.profile.family_name,
+        email: result.user.email,
+        picture: result.user.photoURL,
+        telephone: result.user.phoneNumber,
+        location: "",
+        userTastes: "",
+        isAdmin: false
+      })
+    } else {
+      await updateDoc(doc(usersCollection, result.user.uid), {
+        firstName: additionalInfo.profile.given_name,
+        lastName: additionalInfo.profile.family_name,
+        email: result.user.email,
+        picture: result.user.photoURL,
+        telephone: result.user.phoneNumber,
+      })
+    }
   
-      return result.user
+    return result.user
   } catch (e) {
     console.error(e)
     return null
@@ -66,15 +85,26 @@ export async function signInWithFacebook() {
   const additionalInfo = getAdditionalUserInfo(result)
 
   const usersCollection = collection(db, 'users')
-  await setDoc(doc(usersCollection, result.user.uid), {
-    firstName: additionalInfo.profile.first_name,
-    lastName: additionalInfo.profile.last_name,
-    email: result.user.email,
-    picture: result.user.photoURL,
-    telephone: result.user.phoneNumber,
-    userTastes: ""
-  })
-
+  if (additionalInfo.isNewUser === true) {
+    await setDoc(doc(usersCollection, result.user.uid), {
+      firstName: additionalInfo.profile.first_name,
+      lastName: additionalInfo.profile.last_name,
+      email: result.user.email,
+      picture: result.user.photoURL,
+      telephone: result.user.phoneNumber,
+      location: "",
+      userTastes: "",
+      isAdmin: false
+    })
+  } else {
+    await updateDoc(doc(usersCollection, result.user.uid), {
+      firstName: additionalInfo.profile.first_name,
+      lastName: additionalInfo.profile.last_name,
+      email: result.user.email,
+      picture: result.user.photoURL,
+      telephone: result.user.phoneNumber,
+    })
+  }
   return result.user
 }
 
@@ -82,21 +112,32 @@ export async function signInWithFacebook() {
 //export async function 
 //lo que hace set es que cambia el documento con todas las propiedades.
 
-export async function changeProfile(nombre, apellido, correo, telefono, gustospersonales){
+
+
+
+
+
+
+export async function changeProfile(nombre, apellido, correo, telefono=auth.currentUser.phoneNumber, gustospersonales=auth.currentUser.userTastes){ 
   try{
-  const uid=auth.currentUser.uid;
+  const userUID=auth.currentUser.uid
   const userCollection=collection(db, 'users');
-  const userDocRef=doc(usersCollection, uid);
+  const userDocRef=doc(userCollection, userUID);
   await setDoc(userDocRef,{
 
     firstName:nombre,
     lastName:apellido,
     email:correo,
     telephone:telefono,
-    userTastes:gustospersonales}, //ojo no esta la ubicacion
+    userTastes:gustospersonales},
   {merge:true});
-
   
+  await updateProfile(auth.currentUser,{
+    displayName:nombre+" "+apellido, //modificar userrrr
+  })
+
+  await updateEmail(auth.currentUser, correo)
+
 
 
 

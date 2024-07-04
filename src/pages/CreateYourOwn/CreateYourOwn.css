@@ -1,0 +1,58 @@
+.create-your-own {
+  margin-top: 64px;
+  padding: 20px;
+}
+
+.create-your-own h2 {
+  text-align: center;
+  color: #f2565b;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.create-your-own-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.create-your-own-images {
+  margin-right: 40px;
+}
+
+.create-your-own-images img {
+  width: 300px;
+  height: 300px;
+}
+
+.create-your-own-text {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkbox-group .MuiFormControlLabel-root {
+  width: 200px;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.quantity-display {
+  margin: 0 10px;
+  font-size: 1.5rem;
+}

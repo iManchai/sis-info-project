@@ -1,0 +1,149 @@
+#root {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  margin: auto;
+  margin: 0 auto;
+  padding: 0rem;
+}
+
+.navbar-brand img.logo {
+  height: 80px;
+  width: auto;
+}
+
+.navbar-nav .nav-link {
+  color: #120505;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #81734a;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%287, 7, 7, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Sección 1 */
+.section1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #e39396, #ffffff);
+  margin-top: 2rem;
+}
+
+.text-container {
+  flex: 1;
+  padding: 20px;
+  text-align: left;
+}
+
+.section1 h1 {
+  font-size: 7rem;
+  color: #f2565b;
+}
+
+.section1 p {
+  font-size: 1.25rem;
+  color: #2f6a9f;
+}
+
+.image-container {
+  flex: 1;
+  padding: 20px;
+}
+
+.image-container img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  height: auto;
+}
+
+
+/* Sección 2 */
+.section2 {
+  background: linear-gradient(to right, #f2565b, #8f607d);
+  padding: 2rem;
+  text-align: center;
+}
+
+.section2 h2 {
+  font-size: 2.5rem;
+  color: #ffffff;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  width: 30%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 0.25rem;
+}
+
+.card h3 {
+  font-size: 2rem;
+  color: #2f6a9f;
+}
+
+.card p {
+  font-size: 1.25rem;
+  color: #2f6a9f;
+}
+
+.menu-button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff;
+  color: #2f6a9f;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menu-button:hover {
+  background-color: #e3cfd0;
+}
+
+/* Section 3 */ 
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+
+  .section1 {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .text-container, .image-container {
+    text-align: center;
+  }
+
+  .text-container {
+    margin-bottom: 1rem;
+  }
+}
