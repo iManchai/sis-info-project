@@ -1,55 +1,42 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext, useEffect } from 'react';
 import './Paypage.css';
 import Navbar from '../../Components/Navbar/Navbar';
 import { Box } from '@mui/material';
 import OrderItem from '../../Components/Order/Order_item';
 import Paybutton from '../../Components/Paypalbutton';
 import PropTypes from 'prop-types';
-import Footer from '../../Components/Footer/Footer';
+import Footer from '../../components/Footer/Footer';
+import { ShoppingCartContext } from '../../context/shoppingCart';
+import { calculatePrice } from '../../hooks/plate';
 
-// Datos de prueba
-const mockOrderItems = [
-  {
-    id: 1,
-    name: 'Molove',
-    description: 'POKE BURRITO',
-    price: 15,
-    quantity: 2,
-  },
-  {
-    id: 2,
-    name: 'Salmon',
-    description: 'Sushi Roll',
-    price: 12,
-    quantity: 10,
-  },
-  {
-    id: 3,
-    name: 'Salmon ',
-    description: 'Sushi Roll',
-    price: 12,
-    quantity: 10,
-  }
-];
+export default function Paypage() {
+  const { state, dispatch } = useContext(ShoppingCartContext)
+  const [items, setItems] = useState([])
 
-export default function Paypage({ initialOrderItems = mockOrderItems }) {
-  const [orderItems, setOrderItems] = useState(initialOrderItems);
+
+  useEffect(() => {
+    console.log(items)
+    setItems(state.items)
+  }, [state])
 
   const handleRemoveItem = (itemId) => {
-    setOrderItems(orderItems.filter(item => item.id !== itemId));
+    dispatch({ type: 'REMOVE_ITEM', payload: itemId })
   };
 
   const handleUpdateQuantity = (itemId, newQuantity) => {
-    setOrderItems(orderItems.map(item => 
+    setItems(items.map(item => 
       item.id === itemId ? { ...item, quantity: newQuantity } : item
     ));
   };
 
   const subtotal = useMemo(() => {
-    return orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  }, [orderItems]);
+    return items.reduce((sum, item) => {
+      const itemPrice = calculatePrice(item.plate, item.specifications);
+      return sum + itemPrice * item.quantity;
+    }, 0)
+  }, [items])
 
-  const delivery = 50;
+  const delivery = subtotal * 0.03;
   const total = subtotal + delivery;
 
   return (
@@ -59,7 +46,7 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
         <div className="pedido">
           <h1 className="pedi">PEDIDO</h1>
           <div className="divider" style={{ paddingRight: '5rem' }}></div>
-          {orderItems && orderItems.map((item) => (
+          {items && items.map((item) => (
             <OrderItem
               key={item.id}
               item={item}
@@ -81,7 +68,7 @@ export default function Paypage({ initialOrderItems = mockOrderItems }) {
             <div className="total">
               <p>TOTAL:</p> <div>${total.toFixed(2)}</div>
             </div>
-            <Paybutton totalAmount={total} />
+            <Paybutton totalAmount={total} items={items}/>
           </div>
         </div>
       </section>

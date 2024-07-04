@@ -17,24 +17,25 @@ export default function AdminPage() {
 
   const plateTypes = [
     {
-      value: 'bowl',
+      value: 'Poke Bowl',
       label: 'Poke Bowl'
     },
     {
-      value: 'burrito',
+      value: 'Poke Burrito',
       label: 'Poke Burrito'
     },
     {
-      value: 'entrada',
+      value: 'Entrada',
       label: 'Entrada'
     }
   ]
 
+  async function fetchPlates() {
+    const plates = await getPlates()
+    setPlates(plates)
+  }
+
   useEffect(() => {
-    const fetchPlates = async () => {
-      const plates = await getPlates()
-      setPlates(plates)
-    }
     fetchPlates()
   }, [])
 
@@ -179,6 +180,7 @@ async function handleSubmit() {
   } finally {
     setIsLoading(false); // Stop loading regardless of outcome
     setOpen(false);
+    await fetchPlates()
   }
 }
 
@@ -195,6 +197,7 @@ async function handleDelete() {
   } finally {
     setIsLoading(false); // Stop loading regardless of outcome
     setOpen(false);
+    await fetchPlates()
   }
 }
 

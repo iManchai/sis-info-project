@@ -23,7 +23,7 @@ export default function Amount({ initialAmount, onAmountChange }) {
         minWidth:"0.1rem",
         borderRadius:"150px",
       }}
-      
+      disabled = {quantity === 1}
       >-</Button>
       <Box className="quantity-display">{quantity}</Box>
       <Button variant="outlined" onClick={() => handleQuantityChange(1)} 
