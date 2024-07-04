@@ -1,9 +1,9 @@
 import { Box, Divider, IconButton, Typography } from '@mui/material';
-import RegisterFormField from '../../Components/RegisterFormField';
+import RegisterFormField from '../../components/RegisterFormField';
 import Logo from '../../assets/Logo.svg';
 import BackIcon from '../../assets/Vector.svg';
 import { useTheme } from '@emotion/react';
-import RegisterButtonsSection from '../../Components/RegisterButtonsSection';
+import RegisterButtonsSection from '../../components/RegisterButtonsSection';
 
 export default function RegisterPage({ navigate }) {
 

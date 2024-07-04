@@ -1,29 +1,49 @@
 import { Button } from '@mui/material';
 import Mysv from "../assets/pay_paypal.svg";
-import React, { useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { PayPalButtons } from '@paypal/react-paypal-js';
 import PropTypes from 'prop-types';
+import { ShoppingCartContext } from '../context/shoppingCart';
+import { createOrder } from '../controllers/orders';
+import { doc } from 'firebase/firestore';
+import { useUser } from '../context/user';
 
-export default function Paybutton({ totalAmount }) {
+export default function Paybutton({ totalAmount, items }) {
   const [checkout, setCheckout] = useState(false);
+  const user = useUser()
+
+  const totalAmountRef = useRef(totalAmount)
 
   return (
     <>
       {checkout ? (
         <PayPalButtons
+          key={totalAmount}
           style={{ layout: 'vertical' }}
           createOrder={(data, actions) => {
             return actions.order.create({
               purchase_units: [{
                 amount: {
-                  value: totalAmount.toFixed(2) // Usar la prop totalAmount
+                  value: totalAmountRef.current // Usar la prop totalAmount
                 },
               }],
             });
           }}
-          onApprove={(data, actions) => {
-            return actions.order.capture().then(details => {
+          onApprove={async (data, actions) => {
+            return actions.order.capture().then(async details => {
               alert('Transaction completed by ' + details.payer.name.given_name);
+              await createOrder({
+                date: details.create_time,
+                user: doc(db, 'users', user.uid),
+                items: items.map((item) => {
+                  return {
+                    plate: doc(db, 'plates', item.plate.id),
+                    quantity: item.quantity,
+                    specifications: item.specifications
+                }}),
+                totalPrice: totalAmountRef.current,
+              })
+              localStorage.clear()
             });
           }}
         />

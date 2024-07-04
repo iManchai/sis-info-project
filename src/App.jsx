@@ -15,7 +15,7 @@ import Nosotros from './pages/AboutUsPage/Nosotros';
 import getUser from './controllers/users';
 import { useEffect, useState } from 'react';
 import AdminPage from './pages/AdminPage/AdminPage';
-import Navbar from './Components/Navbar/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import Paypage from './pages/PayPage/Paypage';
 import SeePlate from './pages/SeePlate/SeePlate';
 
@@ -61,7 +61,7 @@ const App = () => {
             <Route path="/login" element={<Navigate replace to="/"/>} />
             <Route path="/register" element={<Navigate replace to="/"/>} />
             <Route path='/order' element={<Paypage navigate={navigate}/>}/>
-            <Route path='/SeePLate' element={<SeePlate navigate={navigate} />} />
+            <Route path='/plate/:id' element={<SeePlate navigate={navigate} />} />
             {currentUser && currentUser.isAdmin && <Route path="/admin" element={<AdminPage />} />}
           </> :
           <>
