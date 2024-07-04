@@ -31,7 +31,8 @@ export function usePlate(id) {
       const plateData = await getPlate(id)
       const plateWithImage = {
         ...plateData,
-        image: plateData.image && await getImageUrl(plateData.image)
+        image: plateData.image && await getImageUrl(plateData.image),
+        id
       }
       setPlate(plateWithImage)
     }
