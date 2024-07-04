@@ -13,9 +13,11 @@ import { Avatar, Box, Drawer, List, ListItem, ListItemText, ListItemIcon } from 
 import { logOut } from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import getUser from '../../controllers/users';
+import { useTheme } from '@emotion/react';
 
 const Navbar = () => {
   const user = useUser();
+  const theme = useTheme()
   const navigate = useNavigate();
 
   const [currentUser, setCurrentUser] = useState(null);
@@ -94,7 +96,7 @@ const Navbar = () => {
             color="inherit"
             aria-label="menu"
             onClick={toggleDrawer(true)}
-            className="menu-icon"
+            className='menu-icon'
           >
             <MenuIcon />
           </IconButton>
