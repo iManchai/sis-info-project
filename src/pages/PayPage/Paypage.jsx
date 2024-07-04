@@ -1,9 +1,9 @@
 import React, { useState, useMemo, useContext, useEffect } from 'react';
 import './Paypage.css';
-import Navbar from '../../Components/Navbar/Navbar';
+import Navbar from '../../components/Navbar/Navbar';
 import { Box } from '@mui/material';
-import OrderItem from '../../Components/Order/Order_item';
-import Paybutton from '../../Components/Paypalbutton';
+import OrderItem from '../../components/Order/Order_item';
+import Paybutton from '../../components/Paypalbutton';
 import PropTypes from 'prop-types';
 import Footer from '../../components/Footer/Footer';
 import { ShoppingCartContext } from '../../context/shoppingCart';
