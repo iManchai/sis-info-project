@@ -4,7 +4,7 @@ import { auth, db, facebookProvider, googleProvider } from '../firebase'
 import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useUser } from "./../context/user";
- 
+
 
 // Login with Credentials
 export async function loginWithCredentials(email, password) {
@@ -30,7 +30,6 @@ export async function registerWithCredentials(email, password, name) {
       email: user.email,
       picture: "",
       telephone: "",
-      location: "",
       userTastes: "",
       isAdmin: false
     })
@@ -46,8 +45,6 @@ export async function registerWithCredentials(email, password, name) {
 export async function signInWithGoogle() {
   try {
     const result = await signInWithPopup(auth, googleProvider)
-
-
     const additionalInfo = getAdditionalUserInfo(result)
   
     const usersCollection = collection(db, 'users')
@@ -105,6 +102,16 @@ export async function signInWithFacebook() {
       telephone: result.user.phoneNumber,
     })
   }
+
+  await setDoc(doc(usersCollection, result.user.uid), {
+    firstName: additionalInfo.profile.first_name,
+    lastName: additionalInfo.profile.last_name,
+    email: result.user.email,
+    picture: result.user.photoURL,
+    telephone: result.user.phoneNumber,
+    userTastes: ""
+  })
+
   return result.user
 }
 
@@ -112,32 +119,21 @@ export async function signInWithFacebook() {
 //export async function 
 //lo que hace set es que cambia el documento con todas las propiedades.
 
-
-
-
-
-
-
-export async function changeProfile(nombre, apellido, correo, telefono=auth.currentUser.phoneNumber, gustospersonales=auth.currentUser.userTastes){ 
+export async function changeProfile(nombre, apellido, correo, telefono, gustospersonales){
   try{
-  const userUID=auth.currentUser.uid
+  const uid=auth.currentUser.uid;
   const userCollection=collection(db, 'users');
-  const userDocRef=doc(userCollection, userUID);
+  const userDocRef=doc(usersCollection, uid);
   await setDoc(userDocRef,{
 
     firstName:nombre,
     lastName:apellido,
     email:correo,
     telephone:telefono,
-    userTastes:gustospersonales},
+    userTastes:gustospersonales}, //ojo no esta la ubicacion
   {merge:true});
+
   
-  await updateProfile(auth.currentUser,{
-    displayName:nombre+" "+apellido, //modificar userrrr
-  })
-
-  await updateEmail(auth.currentUser, correo)
-
 
 
 
@@ -147,6 +143,7 @@ export async function changeProfile(nombre, apellido, correo, telefono=auth.curr
   }
 
 }
+
 
 
 // Log Out
