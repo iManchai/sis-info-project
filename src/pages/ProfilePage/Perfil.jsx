@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, TextField, Avatar, Typography, Box, Divider } from '@mui/material';
-import Navbar from '../../components/Navbar/Navbar';
-import ProfileForm from '../../components/ProfileForm/ProfileForm';
+import Navbar from '../../Components/Navbar/Navbar';
+import ProfileForm from '../../Components/ProfileForm/ProfileForm';
 import { useTheme } from '@emotion/react';
-import ProfileSection from '../../components/ProfileSection/ProfileSection';
-import Footer from '../../components/Footer/Footer';
+import ProfileSection from '../../Components/ProfileSection/ProfileSection';
+import Footer from '../../Components/Footer/Footer';
 
 const Perfil = () => {
 

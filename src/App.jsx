@@ -15,7 +15,7 @@ import Nosotros from './pages/AboutUsPage/Nosotros';
 import getUser from './controllers/users';
 import { useEffect, useState } from 'react';
 import AdminPage from './pages/AdminPage/AdminPage';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './Components/Navbar/Navbar';
 import Paypage from './pages/PayPage/Paypage';
 import SeePlate from './pages/SeePlate/SeePlate';
 

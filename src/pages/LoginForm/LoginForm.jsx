@@ -5,7 +5,7 @@ import Back from "../../assets/Vector.svg";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {Link, Typography } from "@mui/material"
-import LogginButtons from "../../components/LoginButtons";
+import LogginButtons from "../../Components/LoginButtons";
 import { useState } from "react";
 import { loginWithCredentials } from "../../controllers/auth";
 

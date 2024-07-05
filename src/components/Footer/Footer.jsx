@@ -33,7 +33,7 @@ const Footer = () => {
         sx={{   
             mt: 'auto', 
             backgroundColor: '#F2565B',
-            width: '100%',     
+            width: '100vw',     
         }}
         >
         <Box 
@@ -57,7 +57,12 @@ const Footer = () => {
                         </div>
                     </div>
                 </Box>
-                <Box component= 'div2' sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
+                <Box 
+                sx={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    justifyContent: 'flex-start'
+                    }}>
                     <div class = 'container_footer_2'> 
                         <Button color="inherit" onClick={() => navigate('/menu')} className="footer-button">Menú</Button>
                         <Button color="inherit" onClick={() => navigate('/about')} className="footer-button">Nosotros</Button>
