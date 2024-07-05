@@ -71,7 +71,7 @@ const SeePlate = () => {
         dispatch({ type: 'ADD_ITEM', payload: { id: nanoid(), plate, quantity, specifications: { base, mixIns, sauce, extraSauce, toppings, crunchies, extraProteins, extraMixIns, extraToppings }}})
         navigate('/menu')
       } else {
-        dispatch({ type: 'ADD_ITEM', payload: { id: nanoid(), plate, quantity, specifications: { base: '', mixIns: [], sauce: '', extraSauce: '', toppings: [], crunchies: [], extraProteins: [], extraMixIns: [], extraProteins: [] } }})
+        dispatch({ type: 'ADD_ITEM', payload: { id: nanoid(), plate, quantity, specifications: { base: '', mixIns: [], sauce: '', extraSauce: '', toppings: [], crunchies: [], extraProteins: [], extraMixIns: [], extraToppings: []} }})
         navigate('/menu')
       }
     } catch (err) {
