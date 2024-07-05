@@ -251,7 +251,6 @@ export default function ProfileForm() {
         const userCollection=collection(db, 'users');
         const userDocRef=doc(userCollection, userUID);
         await handleSubmitProf(name, surname, email, telefono, gustospersonales); 
-        console.log(auth.currentUser)
         const currentUsername=auth.currentUser.displayName[0]
         const currentUsersurname=auth.currentUser.displayName[1]
         await ProfileSection()

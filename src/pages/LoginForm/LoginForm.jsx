@@ -106,7 +106,12 @@ export default function LoginForm({ navigate }) {
             <h2>Iniciar sesión</h2>
           </Button>
 
-          <Typography>
+          <Typography sx={{
+            color: 'black',
+            fontSize: '1rem',
+            textAlign: 'center',
+            marginTop: '0.5rem'
+          }}>
           {"Aun no tienes cuenta?" + " "}
           <Link href="/register">Haz click aqui para registrase</Link>
           </Typography>

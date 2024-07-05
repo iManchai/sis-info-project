@@ -7,9 +7,6 @@ import { calculatePrice } from '../../hooks/plate';
 
 export default function OrderItem({ item, onRemoveItem, onUpdateQuantity }) {
 
-  useEffect(() => {
-    console.log(item)
-  }, [])
   const { id, plate, quantity, specifications } = item;
 
   const handleQuantityChange = (newQuantity) => {

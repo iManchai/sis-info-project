@@ -31,9 +31,11 @@ return(
           margin: 0,
           textTransform: 'uppercase',
           textAlign: 'center',
+          fontSize: '2rem',
 
           [theme.breakpoints.up('lg')]: {
-            textAlign: 'left'
+            textAlign: 'left',
+            fontSize: '4rem'
           }
         }}>
           Acerca de Nosotros
@@ -124,8 +126,10 @@ return(
               gap: '2rem',
               flexBasis: '50%',
               justifyContent: 'center',
+              flexDirection: 'column',
               [theme.breakpoints.up('lg')]: {
-                justifyContent: 'flex-start'
+                justifyContent: 'flex-start',
+                flexDirection: 'row'
               }
             }}>
               <img src={foto2} style={{
