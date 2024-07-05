@@ -15,7 +15,6 @@ export default function Paypage() {
 
 
   useEffect(() => {
-    console.log(items)
     setItems(state.items)
   }, [state])
 

@@ -74,6 +74,7 @@
 }
 
 @media (max-width: 824px) {
+    
     .price_container{
         display: flex;
     }

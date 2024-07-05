@@ -222,9 +222,11 @@ async function handleDelete() {
             margin: 0,
             textTransform: 'uppercase',
             textAlign: 'center',
+            fontSize: '2rem',
 
             [theme.breakpoints.up('lg')]: {
-              textAlign: 'left'
+              textAlign: 'left',
+              fontSize: '4rem',
             }
           }}>
             Panel de Administrador

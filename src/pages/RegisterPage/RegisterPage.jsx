@@ -57,7 +57,11 @@ export default function RegisterPage({ navigate }) {
           <Typography sx={{
             color: theme.palette.primary.main,
             fontWeight: 'bold',
-            fontSize: '3rem',
+            fontSize: '2rem',
+
+            [theme.breakpoints.up('md')]: {
+              fontSize: '2.5rem',
+            }
           }}
           variant="h2"
           >
